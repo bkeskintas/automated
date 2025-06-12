@@ -1,5 +1,9 @@
-.venv/*
-.vscode/*
-.idea/*
+venv/
+.venv/
+.vscode/
+.idea/
+runs/
 .env
-PasswordManagerAPI/*
+logs/
+PasswordManagerAPI/
+*.xml
