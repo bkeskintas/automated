@@ -1,0 +1,25 @@
+input_first_v1_temp0.3_top1.0: Risk order: CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > ScopeServiceTest > ScopeRepositoryIntegrationTest
+
+Related modules:
+CompanyServiceTest: CompanyRepositoryIntegrationTest
+ClientServiceTest: ClientRepositoryIntegrationTest
+ScopeServiceTest: ScopeRepositoryIntegrationTest
+input_first_v2_temp0.7_top0.9: Risk order: CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > ScopeServiceTest > ScopeRepositoryIntegrationTest 
+
+CompanyServiceTest: CompanyRepositoryIntegrationTest
+ClientServiceTest: ClientRepositoryIntegrationTest
+ScopeServiceTest: ScopeRepositoryIntegrationTest
+
+Expanded risk order: CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > ScopeServiceTest > ScopeRepositoryIntegrationTest
+input_first_v3_temp1.0_top0.85: CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > ScopeServiceTest > ScopeRepositoryIntegrationTest: 
+CompanyServiceTest: CompanyRepositoryIntegrationTest, 
+ClientServiceTest: ClientRepositoryIntegrationTest, 
+ScopeServiceTest: ScopeRepositoryIntegrationTest > 
+AuthenticationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthorizationServiceTest > JwtServiceTest > RefreshTokenRepositoryIntegrationTest > RefreshTokenServiceTest > RedirectUriRepositoryIntegrationTest > RedirectUriServiceTest > UserServiceTest.
+relation_first_v1_temp0.3_top1.0: CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > ScopeServiceTest > ScopeRepositoryIntegrationTest
+relation_first_v2_temp0.7_top0.9: CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > ScopeServiceTest > ScopeRepositoryIntegrationTest
+relation_first_v3_temp1.0_top0.85: Risk order: CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > ScopeServiceTest > ScopeRepositoryIntegrationTest
+
+CompanyServiceTest: CompanyRepositoryIntegrationTest
+ClientServiceTest: ClientRepositoryIntegrationTest
+ScopeServiceTest: ScopeRepositoryIntegrationTest

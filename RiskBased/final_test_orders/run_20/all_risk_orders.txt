@@ -1,0 +1,22 @@
+input_first_v1_temp0.3_top1.0: Given risk order: CompanyServiceTest > ClientServiceTest > ScopeServiceTest
+
+Expanded risk order: 
+
+CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > JwtServiceTest > RefreshTokenServiceTest > RedirectUriServiceTest > ScopeServiceTest > ScopeRepositoryIntegrationTest > UserServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest
+input_first_v2_temp0.7_top0.9: Given risk order: CompanyServiceTest > ClientServiceTest > ScopeServiceTest
+
+Expanded risk order: CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientServiceTest#testCheckClientSecret_ValidSecret > ClientServiceTest#testCheckClientSecret_InvalidSecret > ClientServiceTest#testCheckClientSecret_ClientNotFound > ClientServiceTest#testAuthorizeClient_InvalidRedirectUri > ClientServiceTest#testAuthorizeClient_InvalidResponseType > ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest > ClientServiceTest#testAuthorizeClient_InvalidScope > ClientServiceTest#testAuthorizeClient_StoresSessionAttributes > ClientServiceTest#testAuthorizeClient_ValidRequest > ClientServiceTest#testSaveClient_CompanyNotFound > ClientServiceTest#testSaveClient_Successful > ScopeServiceTest > ScopeRepositoryIntegrationTest > ScopeServiceTest#testSaveAll_SavesNewScopes > ScopeServiceTest#testGetAllScopesByUserAndClient > ScopeServiceTest#testGetAllScopesByUserAndClientId > ScopeServiceTest#testGenerateScope_ValidScope > ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException > ScopeServiceTest#testIsScopeValid > ScopeServiceTest#testDeleteAllScopesByUserAndClient > AuthenticationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthorizationServiceTest > JwtServiceTest > RefreshTokenRepositoryIntegrationTest > RefreshTokenServiceTest > RedirectUriRepositoryIntegrationTest > RedirectUriServiceTest > UserServiceTest.
+
+Please note that the risk order above includes all modules related to the base modules (CompanyServiceTest, ClientServiceTest, ScopeServiceTest) listed directly after them. The unrelated modules are listed at the end.
+input_first_v3_temp1.0_top0.85: Given risk order: 
+CompanyServiceTest > ClientServiceTest > ScopeServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > ScopeServiceTest > ScopeRepositoryIntegrationTest > UserServiceTest
+relation_first_v1_temp0.3_top1.0: Risk order: CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > ScopeServiceTest > ScopeRepositoryIntegrationTest > AuthenticationServiceTest > AuthorizationServiceTest > JwtServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > UserServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest
+relation_first_v2_temp0.7_top0.9: The expanded risk order is:
+
+CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > ScopeServiceTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > AuthenticationServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest
+relation_first_v3_temp1.0_top0.85: Risk order with associated tests: 
+
+CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > ScopeServiceTest > ScopeRepositoryIntegrationTest > AuthenticationServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > JwtServiceTest > RefreshTokenRepositoryIntegrationTest > RefreshTokenServiceTest > RedirectUriRepositoryIntegrationTest > RedirectUriServiceTest > UserServiceTest

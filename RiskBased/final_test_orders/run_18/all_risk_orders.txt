@@ -1,0 +1,26 @@
+input_first_v1_temp0.3_top1.0: Risk order: CompanyService > CompanyRepositoryIntegrationTest > CompanyServiceTest > ScopeService > ScopeRepositoryIntegrationTest > ScopeServiceTest > ClientService > ClientServiceTest > RedirectUriRepositoryIntegrationTest > RedirectUriServiceTest
+
+Related modules: 
+CompanyService: CompanyRepositoryIntegrationTest, CompanyServiceTest
+ScopeService: ScopeRepositoryIntegrationTest, ScopeServiceTest
+ClientService: ClientServiceTest, RedirectUriRepositoryIntegrationTest, RedirectUriServiceTest
+input_first_v2_temp0.7_top0.9: Risk order: CompanyService > CompanyServiceTest > CompanyRepositoryIntegrationTest > ScopeService > ScopeServiceTest > ScopeRepositoryIntegrationTest > ClientService > ClientServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest
+input_first_v3_temp1.0_top0.85: Risk Order: CompanyService > CompanyServiceTest > CompanyRepositoryIntegrationTest > ScopeService > ScopeServiceTest > ScopeRepositoryIntegrationTest > ClientService > ClientServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest
+
+CompanyService: CompanyServiceTest, CompanyRepositoryIntegrationTest
+ScopeService: ScopeServiceTest, ScopeRepositoryIntegrationTest
+ClientService: ClientServiceTest, RedirectUriServiceTest, RedirectUriRepositoryIntegrationTest
+relation_first_v1_temp0.3_top1.0: Risk order: CompanyService > CompanyRepositoryIntegrationTest > CompanyServiceTest > ScopeService > ScopeRepositoryIntegrationTest > ScopeServiceTest > ClientService > ClientServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest
+
+CompanyService: CompanyRepositoryIntegrationTest, CompanyServiceTest
+ScopeService: ScopeRepositoryIntegrationTest, ScopeServiceTest
+ClientService: ClientServiceTest, RedirectUriServiceTest, RedirectUriRepositoryIntegrationTest
+relation_first_v2_temp0.7_top0.9: Risk order: CompanyService > CompanyRepositoryIntegrationTest > CompanyServiceTest > ScopeService > ScopeRepositoryIntegrationTest > ScopeServiceTest > ClientService > ClientServiceTest > RedirectUriRepositoryIntegrationTest > RedirectUriServiceTest
+
+CompanyService: CompanyRepositoryIntegrationTest, CompanyServiceTest
+ScopeService: ScopeRepositoryIntegrationTest, ScopeServiceTest
+ClientService: ClientServiceTest, RedirectUriRepositoryIntegrationTest, RedirectUriServiceTest
+relation_first_v3_temp1.0_top0.85: CompanyService > CompanyRepositoryIntegrationTest > CompanyServiceTest > ScopeService > ScopeRepositoryIntegrationTest > ScopeServiceTest > ClientService > ClientServiceTest > RedirectUriRepositoryIntegrationTest > RedirectUriServiceTest
+CompanyService: CompanyRepositoryIntegrationTest, CompanyServiceTest
+ScopeService: ScopeRepositoryIntegrationTest, ScopeServiceTest
+ClientService: ClientServiceTest, RedirectUriRepositoryIntegrationTest, RedirectUriServiceTest

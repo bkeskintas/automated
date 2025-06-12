@@ -1,0 +1,24 @@
+[TOKENS] input_first_temp0.3_top1.0 - Prompt estimated tokens: 2561
+[OK] input_first_temp0.3_top1.0 - Risk Order: Scope > ScopeServiceTest > ScopeRepositoryIntegrationTest > Company > CompanyServiceTest > CompanyRepositoryIntegrationTest > Jwt > JwtServiceTest
+[TOKENS] input_first_temp0.3_top1.0#TestOrder - Prompt estimated tokens: 1285
+[OK] input_first_temp0.3_top1.0 - Test Order Generated
+[TOKENS] input_first_temp0.7_top0.9 - Prompt estimated tokens: 2561
+[OK] input_first_temp0.7_top0.9 - Risk Order: Scope > ScopeService > ScopeRepositoryIntegration > Company > CompanyService > CompanyRepositoryIntegration > ClientService > Jwt > JwtService > AuthenticationService > AuthorizationService > RedirectUriService > RedirectUriRepositoryIntegration > UserService > RefreshTokenService > RefreshTokenRepositoryIntegration > AuthorizationCodeRepositoryIntegration
+[TOKENS] input_first_temp0.7_top0.9#TestOrder - Prompt estimated tokens: 1313
+[OK] input_first_temp0.7_top0.9 - Test Order Generated
+[TOKENS] input_first_temp1.0_top0.85 - Prompt estimated tokens: 2561
+[OK] input_first_temp1.0_top0.85 - Risk Order: Scope > ScopeServiceTest > ScopeRepositoryIntegrationTest > Company > CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > Jwt > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > UserServiceTest
+[TOKENS] input_first_temp1.0_top0.85#TestOrder - Prompt estimated tokens: 1304
+[OK] input_first_temp1.0_top0.85 - Test Order Generated
+[TOKENS] relation_first_temp0.3_top1.0 - Prompt estimated tokens: 2561
+[OK] relation_first_temp0.3_top1.0 - Risk Order: Scope > Authorization > Client > Jwt > Company > AuthenticationService > UserService > RefreshTokenService > RedirectUriService
+[TOKENS] relation_first_temp0.3_top1.0#TestOrder - Prompt estimated tokens: 1279
+[OK] relation_first_temp0.3_top1.0 - Test Order Generated
+[TOKENS] relation_first_temp0.7_top0.9 - Prompt estimated tokens: 2561
+[OK] relation_first_temp0.7_top0.9 - Risk Order: Scope > Company > Client > Jwt > Authorization > AuthenticationService > UserService > RefreshToken > RedirectUri
+[TOKENS] relation_first_temp0.7_top0.9#TestOrder - Prompt estimated tokens: 1277
+[OK] relation_first_temp0.7_top0.9 - Test Order Generated
+[TOKENS] relation_first_temp1.0_top0.85 - Prompt estimated tokens: 2561
+[OK] relation_first_temp1.0_top0.85 - Risk Order: Scope > ScopeService > AuthorizationService > RefreshTokenService > JwtService > Company > CompanyService > ClientService > AuthenticationService > Jwt
+[TOKENS] relation_first_temp1.0_top0.85#TestOrder - Prompt estimated tokens: 1284
+[OK] relation_first_temp1.0_top0.85 - Test Order Generated

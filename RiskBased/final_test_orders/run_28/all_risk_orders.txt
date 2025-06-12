@@ -1,0 +1,11 @@
+input_first_v1_temp0.3_top1.0: Given the risk order: CompanyServiceTest > ClientServiceTest > ScopeServiceTest
+
+The related modules are as follows:
+
+CompanyServiceTest: CompanyRepositoryIntegrationTest
+ClientServiceTest: RedirectUriServiceTest, RedirectUriRepositoryIntegrationTest
+ScopeServiceTest: ScopeRepositoryIntegrationTest
+
+So, the expanded risk order is:
+
+CompanyServiceTest > ClientServiceTest > ScopeServiceTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthenticationServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > JwtServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > UserServiceTest

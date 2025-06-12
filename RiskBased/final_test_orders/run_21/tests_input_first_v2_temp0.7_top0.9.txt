@@ -1,0 +1,1 @@
+The test cases are already ordered according to the risk order: CompanyServiceTest > ClientServiceTest > ScopeServiceTest. The test cases for each service are grouped together, starting with CompanyServiceTest, followed by ClientServiceTest, and finally ScopeServiceTest. Therefore, no reordering is necessary.

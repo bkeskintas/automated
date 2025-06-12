@@ -1,0 +1,59 @@
+input_first_v1_temp0.3_top1.0: Risk order: Company > Scope > Client
+
+Related modules:
+Company: CompanyRepositoryIntegrationTest, CompanyServiceTest
+Scope: ScopeRepositoryIntegrationTest, ScopeServiceTest
+Client: ClientServiceTest, RedirectUriRepositoryIntegrationTest, RedirectUriServiceTest
+
+Expanded risk order: Company > CompanyRepositoryIntegrationTest > CompanyServiceTest > Scope > ScopeRepositoryIntegrationTest > ScopeServiceTest > Client > ClientServiceTest > RedirectUriRepositoryIntegrationTest > RedirectUriServiceTest
+input_first_v2_temp0.7_top0.9: Company > Scope > Client
+
+Company: CompanyRepositoryIntegrationTest, CompanyServiceTest
+Scope: ScopeRepositoryIntegrationTest, ScopeServiceTest
+Client: ClientServiceTest, RedirectUriRepositoryIntegrationTest, RedirectUriServiceTest
+
+Therefore, the expanded risk order is:
+
+Company > CompanyRepositoryIntegrationTest > CompanyServiceTest > Scope > ScopeRepositoryIntegrationTest > ScopeServiceTest > Client > ClientServiceTest > RedirectUriRepositoryIntegrationTest > RedirectUriServiceTest
+input_first_v3_temp1.0_top0.85: Company > Client > Scope
+
+Company: CompanyRepositoryIntegrationTest, CompanyServiceTest
+Client: ClientServiceTest, RedirectUriRepositoryIntegrationTest, RedirectUriServiceTest
+Scope: ScopeRepositoryIntegrationTest, ScopeServiceTest, UserServiceTest
+
+Expanded risk order: Company > CompanyRepositoryIntegrationTest > CompanyServiceTest > Client > ClientServiceTest > RedirectUriRepositoryIntegrationTest > RedirectUriServiceTest > Scope > ScopeRepositoryIntegrationTest > ScopeServiceTest > UserServiceTest
+relation_first_v1_temp0.3_top1.0: Risk order: Company > Scope > Client > Authorization > Authentication > RedirectUri > RefreshToken > JwtService > UserService
+
+Related modules:
+Company: CompanyRepositoryIntegrationTest, CompanyServiceTest
+Scope: ScopeRepositoryIntegrationTest, ScopeServiceTest
+Client: ClientServiceTest
+Authorization: AuthorizationServiceTest, AuthorizationCodeRepositoryIntegrationTest
+Authentication: AuthenticationServiceTest
+RedirectUri: RedirectUriRepositoryIntegrationTest, RedirectUriServiceTest
+RefreshToken: RefreshTokenRepositoryIntegrationTest, RefreshTokenServiceTest
+JwtService: JwtServiceTest
+UserService: UserServiceTest
+relation_first_v2_temp0.7_top0.9: Risk order: Company > Client > Scope > Authorization > Authentication > RefreshToken > RedirectUri > JwtService > UserService
+
+Related modules:
+- Company: CompanyRepositoryIntegrationTest, CompanyServiceTest
+- Client: ClientServiceTest
+- Scope: ScopeRepositoryIntegrationTest, ScopeServiceTest
+- Authorization: AuthorizationServiceTest, AuthorizationCodeRepositoryIntegrationTest
+- Authentication: AuthenticationServiceTest
+- RefreshToken: RefreshTokenRepositoryIntegrationTest, RefreshTokenServiceTest
+- RedirectUri: RedirectUriRepositoryIntegrationTest, RedirectUriServiceTest
+- JwtService: JwtServiceTest
+- UserService: UserServiceTest
+relation_first_v3_temp1.0_top0.85: Risk order: Company > Scope > Client > Authorization > AuthenticationService > JwtService > UserService > RefreshToken > RedirectUri
+
+Company: CompanyRepositoryIntegrationTest, CompanyServiceTest
+Scope: ScopeRepositoryIntegrationTest, ScopeServiceTest
+Client: ClientServiceTest
+Authorization: AuthorizationCodeRepositoryIntegrationTest, AuthorizationServiceTest
+AuthenticationService: AuthenticationServiceTest
+JwtService: JwtServiceTest
+UserService: UserServiceTest
+RefreshToken: RefreshTokenRepositoryIntegrationTest, RefreshTokenServiceTest
+RedirectUri: RedirectUriRepositoryIntegrationTest, RedirectUriServiceTest

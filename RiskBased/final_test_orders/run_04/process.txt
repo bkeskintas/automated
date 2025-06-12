@@ -1,0 +1,81 @@
+=== PROCESS LOG ===
+Generating risk orders with Agent2...
+Evaluating risk orders with Agent1...
+[Agent1 Evaluation]
+The following orders do not match the intended structure:
+
+1. relation_first_temp0.7_top0.9: The module 'Authentication' should be 'AuthenticationService' to maintain consistency with the other orders.
+2. relation_first_temp1.0_top0.85: The module 'AuthorizationService' should be 'Authorization' to maintain consistency with the other orders.
+Agent1 rejected risk orders. Looping back with updated prompts.
+Generating risk orders with Agent2...
+Evaluating risk orders with Agent1...
+[Agent1 Evaluation]
+The following orders do not match the intended structure:
+
+input_first_temp0.7_top0.9: Company > Client > Jwt > Scope > RedirectUri > Authorization > RefreshToken > Authentication > User
+- The related modules do not follow directly. For example, Jwt should be followed by AuthenticationService and AuthorizationService, but it is followed by Scope.
+
+input_first_temp1.0_top0.85: Company > Client > RedirectUri > Jwt > AuthenticationService > Authorization > RefreshToken > Scope > UserService
+- The related modules do not follow directly. For example, Jwt should be followed by AuthenticationService and AuthorizationService, but it is followed by AuthenticationService and Authorization.
+
+relation_first_temp0.3_top1.0: Company > Jwt > Scope > Client > Authorization > RedirectUri > RefreshToken > AuthenticationService > UserService
+- The related modules are not appended logically. For example, Jwt should be followed by AuthenticationService and AuthorizationService, but it is followed by Scope.
+
+relation_first_temp0.7_top0.9: Company > Jwt > Scope > Client > AuthenticationService > AuthorizationService > UserService > RedirectUri > RefreshToken > AuthorizationCode
+- The related modules are not appended logically. For example, Jwt should be followed by AuthenticationService and AuthorizationService, but it is followed by Scope.
+
+relation_first_temp1.0_top0.85: Company > Jwt > Scope > AuthenticationService > AuthorizationService > ClientService > UserService > RefreshTokenService > RedirectUriService
+- The related modules are not appended logically. For example, Jwt should be followed by AuthenticationService and AuthorizationService, but it is followed by Scope.
+Agent1 rejected risk orders. Looping back with updated prompts.
+Generating risk orders with Agent2...
+Evaluating risk orders with Agent1...
+[Agent1 Evaluation]
+The orders do not match the intended structure. 
+
+In the input_first orders, related modules do not follow directly. For example, in the first order, "Jwt" should be followed by "Authorization", but it is followed by "Client". 
+
+In the relation_first orders, related modules are not logically appended. For example, in the first order, "Jwt" should be followed by "Authorization", but it is followed by "Scope".
+Agent1 rejected risk orders. Looping back with updated prompts.
+Generating risk orders with Agent2...
+Evaluating risk orders with Agent1...
+[Agent1 Evaluation]
+The third input_first order does not follow the intended structure. The related modules do not follow directly. The module 'RedirectUri' should be placed after 'UserService'. 
+
+The second relation_first order does not follow the intended structure. The module 'User' should be 'UserService' to maintain logical consistency.
+Agent1 rejected risk orders. Looping back with updated prompts.
+Generating risk orders with Agent2...
+Evaluating risk orders with Agent1...
+[Agent1 Evaluation]
+The first three orders are not valid. In the input_first structure, related modules must follow directly, but in these orders, they don't. For example, in the first order, "RedirectUri" should follow "Client" directly, but "Jwt" is in between. Similarly, in the second order, "Jwt" should follow "Client" directly, but "Authorization" is in between. In the third order, "AuthenticationService" should follow "Client" directly, but "Jwt" is in between.
+
+The last three orders are also not valid. In the relation_first structure, related modules should be appended but logical. However, in these orders, the modules are not logically related. For example, in the fourth order, "Jwt" should not follow "Company" directly as they are not logically related. Similarly, in the fifth order, "Jwt" should not follow "Company" directly. In the sixth order, "Jwt" should not follow "Company" directly, and the "RepositoryIntegrationTest" modules are not logically related to the preceding modules.
+Agent1 rejected risk orders. Looping back with updated prompts.
+Generating risk orders with Agent2...
+Evaluating risk orders with Agent1...
+[Agent1 Evaluation]
+The orders do not match the intended structure. 
+
+In the input_first orders, related modules do not follow directly. For example, in the first order, Jwt and AuthenticationService are not directly followed by AuthorizationService. 
+
+In the relation_first orders, related modules are not logically appended. For example, in the first order, Jwt and Scope are not logically followed by Client and Authorization.
+Agent1 rejected risk orders. Looping back with updated prompts.
+Generating risk orders with Agent2...
+Evaluating risk orders with Agent1...
+[Agent1 Evaluation]
+All risk orders are OK.
+Agent1 rejected risk orders. Looping back with updated prompts.
+Generating risk orders with Agent2...
+Evaluating risk orders with Agent1...
+[Agent1 Evaluation]
+The third input_first order is incorrect. It should be "AuthorizationService" instead of "Authorization". The third relation_first order is also incorrect. It should be "AuthenticationService" instead of "Authentication".
+Agent1 rejected risk orders. Looping back with updated prompts.
+Generating risk orders with Agent2...
+Evaluating risk orders with Agent1...
+[Agent1 Evaluation]
+The second input_first order is incorrect. The AuthenticationService should come before the Authorization in the sequence. The rest are OK.
+Agent1 rejected risk orders. Looping back with updated prompts.
+Generating risk orders with Agent2...
+Evaluating risk orders with Agent1...
+[Agent1 Evaluation]
+OK
+Agent1 approved risk orders. Proceeding to Agent3.

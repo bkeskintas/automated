@@ -1,0 +1,162 @@
+All unit tests:
+AuthenticationServiceTest#testRegister_Success - Tests that a user can successfully register with valid credentials.
+AuthenticationServiceTest#testRegister_UsernameExists_ThrowsException - Ensures an exception is thrown when the username is already in use.
+AuthenticationServiceTest#testRegister_EmailExists_ThrowsException - Validates exception is raised for duplicate email registration.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeExists - Verifies finding an existing authorization code works correctly.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeNotExists - Ensures null is returned for non-existent code lookup.
+AuthorizationCodeRepositoryIntegrationTest#testFindAllByUserAndClient - Checks retrieval of all codes for a given user and client.
+AuthorizationServiceTest#testProcessAuthorization_NoClientInSession_InvalidSession - Confirms authorization fails when client is missing from session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeMethodInSession_InvalidSession - Ensures failure when challenge method is missing in session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeInSession_InvalidSession - Verifies authorization fails without a challenge present.
+AuthorizationServiceTest#testProcessAuthorization_NoRedirectUriInSession_InvalidSession - Tests for failure when redirect URI is not in session.
+AuthorizationServiceTest#testProcessAuthorization_CouldNotCreateUniqueCode_InternalError - Checks internal error handling for code generation failure.
+AuthorizationServiceTest#testProcessAuthorization_NoStateInSession_InvalidSession - Ensures state absence in session results in failure.
+AuthorizationServiceTest#testProcessAuthorization_Successful - Tests complete authorization process when session is valid.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidGrantType - Validates error handling for unsupported grant type.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidAuthorizationCode - Tests behavior for invalid authorization code usage.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidClientCredentials - Ensures proper handling of invalid client credentials.
+AuthorizationServiceTest#testGenerateAccessToken_ExpiredCode - Checks failure when using an expired authorization code.
+AuthorizationServiceTest#testGenerateAccessToken_UsedCode - Ensures used code cannot be reused for token generation.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidChallengeCode - Validates behavior for invalid challenge code.
+AuthorizationServiceTest#testGenerateAccessToken_OnlyAccessToken - Confirms only an access token is generated in certain scenarios.
+AuthorizationServiceTest#testGenerateAccessToken_WithRefreshToken - Ensures both access and refresh tokens are generated.
+AuthorizationServiceTest#testGenerateAccessToken_WithIdToken - Checks generation of ID token along with access token.
+AuthorizationServiceTest#testGenerateAccessTokenViaRefreshToken - Tests token refresh mechanism using a refresh token.
+AuthorizationServiceTest#testProcessAuthorization_Successful_WithSecurityContext - Ensures successful authorization with security context present.
+JwtServiceTest#testCreateHexadecimalEncodedRandomBytes - Tests creation of secure random byte sequences in hex format.
+JwtServiceTest#testGenerateAccessToken - Confirms generation of valid JWT access tokens.
+JwtServiceTest#testGenerateIdToken - Validates creation of ID tokens used in OpenID Connect.
+RefreshTokenRepositoryIntegrationTest#testSaveAndFindByCode - Tests saving and retrieving refresh tokens by code.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue - Ensures retrieval of active refresh tokens for a user and client.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue_NoActiveTokens - Confirms null returned when no active tokens are found.
+RefreshTokenServiceTest#testFindByCode_TokenExistsAndActive - Checks retrieval of an active refresh token by its code.
+RefreshTokenServiceTest#testFindByCode_TokenNotFound - Ensures token retrieval fails when token is not found.
+RefreshTokenServiceTest#testFindByCode_TokenInactive - Validates behavior when the token is inactive.
+RefreshTokenServiceTest#testCreateRefreshToken - Tests the creation of a new refresh token.
+RefreshTokenServiceTest#testSaveRefreshToken - Ensures refresh token is saved successfully.
+RefreshTokenServiceTest#testDisableRefreshToken - Tests disabling (deactivation) of a refresh token.
+ScopeRepositoryIntegrationTest#testSaveAndFindByUserAndClient - Tests saving and retrieving scopes for a given user and client.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClientId - Checks retrieval of all scopes by user and client ID.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_NoScopesFound - Ensures empty list is returned when no scopes exist.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_ClientId_NoScopesFound - Ensures null is returned if no client scopes found.
+ScopeServiceTest#testSaveAll_SavesNewScopes - Tests saving of multiple new scope entries.
+ScopeServiceTest#testGetAllScopesByUserAndClient - Retrieves all scopes associated with a user and client.
+ScopeServiceTest#testGetAllScopesByUserAndClientId - Retrieves scopes using client ID and user info.
+ScopeServiceTest#testGenerateScope_ValidScope - Validates that valid scopes are generated correctly.
+ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException - Ensures invalid scopes trigger exceptions.
+ScopeServiceTest#testIsScopeValid - Confirms if a scope string is valid.
+ScopeServiceTest#testDeleteAllScopesByUserAndClient - Tests deletion of all scopes for a user and client.
+ClientServiceTest#testFindClientById_ClientExists - Finds a client by ID when it exists.
+ClientServiceTest#testFindClientById_ClientNotFound - Returns null when client is not found.
+ClientServiceTest#testCheckClientSecret_ValidSecret - Verifies correct validation of client secret.
+ClientServiceTest#testCheckClientSecret_InvalidSecret - Ensures invalid secret results in failure.
+ClientServiceTest#testCheckClientSecret_ClientNotFound - Handles secret check when client does not exist.
+ClientServiceTest#testAuthorizeClient_InvalidRedirectUri - Validates behavior for an invalid redirect URI.
+ClientServiceTest#testAuthorizeClient_InvalidResponseType - Ensures invalid response type leads to failure.
+ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest - Handles bad request for OpenID without nonce.
+ClientServiceTest#testAuthorizeClient_InvalidScope - Checks validation failure for incorrect scope values.
+ClientServiceTest#testAuthorizeClient_StoresSessionAttributes - Ensures session data is stored during client authorization.
+ClientServiceTest#testAuthorizeClient_ValidRequest - Verifies full client authorization path for valid request.
+ClientServiceTest#testSaveClient_CompanyNotFound - Fails to save client if company does not exist.
+ClientServiceTest#testSaveClient_Successful - Successfully saves client with correct data.
+RedirectUriRepositoryIntegrationTest#testSaveAndFindById - Saves and retrieves redirect URI by ID.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriExists - Looks up redirect URI that exists.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriNotFound - Handles missing URI gracefully.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_Exists - Verifies URI exists for given client.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_NotExists - Returns false when URI not tied to client.
+RedirectUriServiceTest#testValidate_ValidUriForServerApp - Validates acceptable redirect URI for server app.
+RedirectUriServiceTest#testValidate_InvalidUriWithFragment - Fails validation for URI containing a fragment.
+RedirectUriServiceTest#testValidate_InvalidUriForServerApp - Rejects invalid URI structure for server application.
+RedirectUriServiceTest#testFindByUri_UriExists - Retrieves redirect URI when found.
+RedirectUriServiceTest#testFindByUri_UriNotFound - Returns null for non-existent URI.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_Exists - Confirms if URI is registered for client.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_NotExists - Verifies false for unregistered URI.
+CompanyRepositoryIntegrationTest#testSaveAndFindById - Tests saving and retrieving a company by ID.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyExists - Finds enabled company by username.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyNotFound - Returns null when no company matches.
+CompanyServiceTest#testLoadUserByUsername_CompanyExists - Loads user details from company when user exists.
+CompanyServiceTest#testLoadUserByUsername_CompanyNotFound - Returns exception when user is missing.
+CompanyServiceTest#testSaveCompany_Success - Successfully saves new company.
+UserServiceTest#testGetAllowedScopes_Success - Gets all scopes user is allowed to access.
+UserServiceTest#testGetAllowedScopesPerClient_Success - Gets allowed scopes for a user per client.
+UserServiceTest#testLoadUserByUsername_UserFound - Loads user details by username.
+UserServiceTest#testLoadUserByUsername_UserNotFound - Throws exception when user is missing.
+UserServiceTest#testRevokeClientPermissions_Success - Revokes access permissions for a client.
+UserServiceTest#testRevokeClientPermissions_ClientNotFound - Handles permission revoke when client not found.
+
+Regression test cases:
+1. User Registration & Login
+1.1. Successful registration with valid credentials
+1.2. Attempt to register with an already taken username (should fail)
+1.3. Successful login with correct username and password
+1.4. Login attempt with incorrect username or password
+1.5. Reject registration if the password is too short
+1.6. Reject registration if the password lacks complexity (e.g., only letters)
+
+2. Add Password Entry
+2.1. Successfully add a password with valid inputs
+2.2. Add a password for the same website and username (check if it updates or fails)
+2.3. Attempt to add with missing fields (e.g., empty website)
+2.4. Add with a very long note field
+2.5. Add with special characters in username/password
+
+3. Retrieve Passwords
+3.1. Retrieve all passwords for a logged-in user
+3.2. Return an empty list for a user with no passwords
+3.3. Attempt to retrieve passwords without authentication (expect unauthorized)
+
+4. Update Password Entry
+4.1. Fully update an existing password entry
+4.2. Try to update a non-existent password ID (expect 404)
+4.3. Update only one field (e.g., just the note)
+4.4. Try to update another user’s password (expect forbidden/unauthorized)
+
+5. Delete Password Entry
+5.1. Successfully delete an existing password
+5.2. Ensure deleted password no longer appears in the list
+5.3. Attempt to delete using a non-existent ID (expect 404)
+5.4. Attempt to delete another user’s password (expect forbidden)
+
+6. Session and Authentication
+6.1. Perform authenticated operations after login
+6.2. Ensure token expiration ends session
+6.3. Try password operations without a token (should fail)
+6.4. Attempt access with a tampered JWT token (should fail)
+
+7. Data Integrity and Security
+7.1. Ensure concurrent users don’t conflict with each other’s data
+7.2. Prevent XSS attacks via note, website, or username inputs
+7.3. Ensure resistance to SQL injection in all endpoints
+7.4. Verify passwords are stored hashed in the database
+
+8. Performance and Edge Cases
+8.1. Test performance with 1000+ password entries
+8.2. Test with very long notes, usernames, and passwords
+8.3. Handle concurrent API calls without crashing
+8.4. Ensure malformed requests don’t affect overall performance
+
+9. API Response & Status Codes
+9.1. Correct status codes for successful requests (200, 201)
+9.2. Return 401 for unauthorized access attempts
+9.3. Return 404 when resources are not found
+9.4. Return 400 for invalid input or malformed requests
+
+10. Database Consistency
+10.1. Validate database state after each CRUD operation
+10.2. Simulate database disconnect and ensure graceful error handling
+10.3. Ensure all user data is removed upon account deletion
+
+
+
+
+
+Given risk order: Company > Scope > Client
+
+You must only use module names that exist in the provided unit test list.
+Do NOT invent or include module names that do not appear.
+Respond in format: A > B > C > D
+
+Expand the risk order by inserting related modules immediately after their base modules.
+Determine relationships from how unit and regression tests group them.
+Example: input 'A > C' must become 'A > C > B > D' if B relates to A and D to C.
+Make sure input modules are kept in the front, others at the end.

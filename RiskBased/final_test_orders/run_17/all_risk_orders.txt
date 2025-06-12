@@ -1,0 +1,50 @@
+input_first_v1_temp0.3_top1.0: CompanyService > CompanyRepositoryIntegrationTest > ScopeService > ScopeRepositoryIntegrationTest > ScopeServiceTest > ClientService > ClientServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest
+
+CompanyService: CompanyRepositoryIntegrationTest
+ScopeService: ScopeRepositoryIntegrationTest, ScopeServiceTest
+ClientService: ClientServiceTest, RedirectUriServiceTest, RedirectUriRepositoryIntegrationTest
+input_first_v2_temp0.7_top0.9: CompanyService > CompanyRepositoryIntegrationTest > ScopeService > ScopeRepositoryIntegrationTest > ScopeServiceTest > ClientService > ClientServiceTest > AuthorizationServiceTest > AuthenticationServiceTest
+
+CompanyService: CompanyRepositoryIntegrationTest
+ScopeService: ScopeRepositoryIntegrationTest, ScopeServiceTest
+ClientService: ClientServiceTest, AuthorizationServiceTest, AuthenticationServiceTest
+input_first_v3_temp1.0_top0.85: Risk order: CompanyService > CompanyRepositoryIntegrationTest > ScopeService > ScopeRepositoryIntegrationTest > ClientService > ClientRepositoryIntegrationTest
+
+Related Modules: 
+- CompanyService: CompanyRepositoryIntegrationTest
+- ScopeService: ScopeRepositoryIntegrationTest
+- ClientService: ClientRepositoryIntegrationTest
+relation_first_v1_temp0.3_top1.0: Risk order: CompanyService > ScopeService > ClientService > AuthorizationService > UserService > AuthenticationService > JwtService > RefreshTokenService > RedirectUriService
+
+Related modules:
+CompanyService: CompanyRepositoryIntegrationTest
+ScopeService: ScopeRepositoryIntegrationTest
+ClientService: ClientServiceTest
+AuthorizationService: AuthorizationCodeRepositoryIntegrationTest, AuthorizationServiceTest
+UserService: UserServiceTest
+AuthenticationService: AuthenticationServiceTest
+JwtService: JwtServiceTest
+RefreshTokenService: RefreshTokenRepositoryIntegrationTest, RefreshTokenServiceTest
+RedirectUriService: RedirectUriRepositoryIntegrationTest, RedirectUriServiceTest
+relation_first_v2_temp0.7_top0.9: Risk order: CompanyService > ScopeService > ClientService > AuthorizationService > AuthenticationService > RedirectUriService > UserService
+
+Related modules:
+CompanyService: CompanyRepositoryIntegrationTest
+ScopeService: ScopeRepositoryIntegrationTest
+ClientService: ClientServiceTest
+AuthorizationService: AuthorizationCodeRepositoryIntegrationTest, AuthorizationServiceTest
+AuthenticationService: AuthenticationServiceTest
+RedirectUriService: RedirectUriRepositoryIntegrationTest, RedirectUriServiceTest
+UserService: UserServiceTest
+relation_first_v3_temp1.0_top0.85: Risk order: CompanyService > ScopeService > ClientService > UserService > AuthorizationService > AuthenticationService > JwtService > RefreshTokenService > RedirectUriService
+
+Related modules: 
+CompanyService: CompanyRepositoryIntegrationTest
+ScopeService: ScopeRepositoryIntegrationTest
+ClientService: ClientServiceTest
+UserService: UserServiceTest
+AuthorizationService: AuthorizationServiceTest
+AuthenticationService: AuthenticationServiceTest
+JwtService: JwtServiceTest
+RefreshTokenService: RefreshTokenServiceTest
+RedirectUriService: RedirectUriServiceTest

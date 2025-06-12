@@ -1,0 +1,7 @@
+Generated Risk Orders:
+input_first_temp0.3_top1.0: Scope > ScopeServiceTest > ScopeRepositoryIntegrationTest > Company > CompanyServiceTest > CompanyRepositoryIntegrationTest > Jwt > JwtServiceTest
+input_first_temp0.7_top0.9: Scope > ScopeService > ScopeRepositoryIntegration > Company > CompanyService > CompanyRepositoryIntegration > ClientService > Jwt > JwtService > AuthenticationService > AuthorizationService > RedirectUriService > RedirectUriRepositoryIntegration > UserService > RefreshTokenService > RefreshTokenRepositoryIntegration > AuthorizationCodeRepositoryIntegration
+input_first_temp1.0_top0.85: Scope > ScopeServiceTest > ScopeRepositoryIntegrationTest > Company > CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest > Jwt > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > UserServiceTest
+relation_first_temp0.3_top1.0: Scope > Authorization > Client > Jwt > Company > AuthenticationService > UserService > RefreshTokenService > RedirectUriService
+relation_first_temp0.7_top0.9: Scope > Company > Client > Jwt > Authorization > AuthenticationService > UserService > RefreshToken > RedirectUri
+relation_first_temp1.0_top0.85: Scope > ScopeService > AuthorizationService > RefreshTokenService > JwtService > Company > CompanyService > ClientService > AuthenticationService > Jwt
