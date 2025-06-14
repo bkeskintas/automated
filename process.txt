@@ -6843,3 +6843,179 @@ UserServiceTest#testLoadUserByUsername_UserNotFound
 UserServiceTest#testRevokeClientPermissions_Success
 UserServiceTest#testRevokeClientPermissions_ClientNotFound
 
+===== Invalid risk order detected =====
+Based on the provided risk order (ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests), related test modules and unrelated test modules, the expanded risk order would be:
+
+1. ClinicServiceTests
+2. PetControllerTests
+3. OwnerControllerTests
+4. PetValidatorTests
+5. PetTypeFormatterTests
+6. CrashControllerIntegrationTests
+7. CrashControllerTests
+8. I18nPropertiesSyncTest
+9. VisitControllerTests
+10. PetClinicIntegrationTests
+11. MySqlIntegrationTests
+12. PostgresIntegrationTests
+13. ValidatorTests
+14. VetControllerTests
+15. VetTests
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Based on the provided risk order (ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests), related test modules and unrelated test modules, the expanded risk order would be:
+
+1. ClinicServiceTests
+2. PetControllerTests
+3. OwnerControllerTests
+4. PetValidatorTests
+5. PetTypeFormatterTests
+6. CrashControllerIntegrationTests
+7. CrashControllerTests
+8. I18nPropertiesSyncTest
+9. VisitControllerTests
+10. PetClinicIntegrationTests
+11. MySqlIntegrationTests
+12. PostgresIntegrationTests
+13. ValidatorTests
+14. VetControllerTests
+15. VetTests
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Based on the provided risk order (ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests), related test modules and unrelated test modules, the expanded risk order would be:
+
+1. ClinicServiceTests
+2. PetControllerTests
+3. OwnerControllerTests
+4. PetValidatorTests
+5. PetTypeFormatterTests
+6. CrashControllerIntegrationTests
+7. CrashControllerTests
+8. I18nPropertiesSyncTest
+9. VisitControllerTests
+10. PetClinicIntegrationTests
+11. MySqlIntegrationTests
+12. PostgresIntegrationTests
+13. ValidatorTests
+14. VetControllerTests
+15. VetTests
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Based on the provided risk order (ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests), related test modules and unrelated test modules, the expanded risk order would be:
+
+1. ClinicServiceTests
+2. PetControllerTests
+3. OwnerControllerTests
+4. PetValidatorTests
+5. PetTypeFormatterTests
+6. CrashControllerIntegrationTests
+7. CrashControllerTests
+8. I18nPropertiesSyncTest
+9. VisitControllerTests
+10. PetClinicIntegrationTests
+11. MySqlIntegrationTests
+12. PostgresIntegrationTests
+13. ValidatorTests
+14. VetControllerTests
+15. VetTests
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+The expanded risk order would be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
+Validator response: The risk order does not match the intended structure.
+

@@ -1,0 +1,56 @@
+input_first_v1_temp0.3_top1.0: Given risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests
+
+Expanded risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > OwnerControllerTests > PetControllerTests > VisitControllerTests > VetControllerTests > MySqlIntegrationTests > PetClinicIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > I18nPropertiesSyncTest > VetTests
+input_first_v2_temp0.7_top0.9: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > OwnerControllerTests > PetControllerTests > VetControllerTests > PetTypeFormatterTests > PetValidatorTests > VisitControllerTests > MySqlIntegrationTests > PetClinicIntegrationTests > PostgresIntegrationTests > ValidatorTests > I18nPropertiesSyncTest > VetTests
+input_first_v3_temp1.0_top0.85: Given the risk order of ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests, the related modules would be as follows:
+
+ClinicServiceTests:
+- MySqlIntegrationTests
+- PostgresIntegrationTests
+- PetClinicIntegrationTests
+- ValidatorTests
+- OwnerControllerTests
+- PetControllerTests
+- PetTypeFormatterTests
+- PetValidatorTests
+- VisitControllerTests
+
+CrashControllerIntegrationTests:
+- I18nPropertiesSyncTest
+- VetControllerTests
+- VetTests
+
+CrashControllerTests:
+- I18nPropertiesSyncTest
+- VetControllerTests
+- VetTests
+
+The final risk order would then be:
+
+ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > MySqlIntegrationTests > PostgresIntegrationTests > PetClinicIntegrationTests > ValidatorTests > OwnerControllerTests > PetControllerTests > PetTypeFormatterTests > PetValidatorTests > VisitControllerTests > I18nPropertiesSyncTest > VetControllerTests > VetTests.
+relation_first_v1_temp0.3_top1.0: Given risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests
+
+Risk order with related modules:
+ClinicServiceTests > PetControllerTests > PetValidatorTests > PetTypeFormatterTests > OwnerControllerTests > ValidatorTests > MySqlIntegrationTests > PostgresIntegrationTests > PetClinicIntegrationTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VetControllerTests > VetTests > VisitControllerTests > unrelated modules
+
+Related modules:
+ClinicServiceTests: PetControllerTests, PetValidatorTests, PetTypeFormatterTests, OwnerControllerTests, ValidatorTests, MySqlIntegrationTests, PostgresIntegrationTests, PetClinicIntegrationTests
+CrashControllerIntegrationTests: CrashControllerTests
+CrashControllerTests: I18nPropertiesSyncTest, VetControllerTests, VetTests, VisitControllerTests
+relation_first_v2_temp0.7_top0.9: Given risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests
+
+Risk order with related modules:
+ClinicServiceTests > PetControllerTests > PetValidatorTests > PetTypeFormatterTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > OwnerControllerTests > ValidatorTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VetControllerTests > VetTests
+
+Related modules:
+- ClinicServiceTests: PetControllerTests, PetValidatorTests, PetTypeFormatterTests, PetClinicIntegrationTests, MySqlIntegrationTests, PostgresIntegrationTests, OwnerControllerTests, ValidatorTests
+- CrashControllerIntegrationTests: CrashControllerTests, I18nPropertiesSyncTest
+- CrashControllerTests: VetControllerTests, VetTests
+relation_first_v3_temp1.0_top0.85: Given risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests
+
+Expanded risk order: ClinicServiceTests > PetControllerTests > PetValidatorTests > PetTypeFormatterTests > OwnerControllerTests > ValidatorTests > MySqlIntegrationTests > PetClinicIntegrationTests > PostgresIntegrationTests > CrashControllerIntegrationTests > I18nPropertiesSyncTest > CrashControllerTests > VetControllerTests > VetTests
+
+Related modules:
+- ClinicServiceTests: PetControllerTests, PetValidatorTests, PetTypeFormatterTests, OwnerControllerTests, ValidatorTests, MySqlIntegrationTests, PetClinicIntegrationTests, PostgresIntegrationTests
+- CrashControllerIntegrationTests: I18nPropertiesSyncTest
+- CrashControllerTests: VetControllerTests, VetTests

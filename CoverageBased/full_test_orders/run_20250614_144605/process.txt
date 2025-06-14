@@ -1,0 +1,1346 @@
+
+=== STRATEGY #1 - Prioritize tests with the most important terms based on TF-IDF scores. ===
+
+🔹 Prompt:
+You are a test optimization assistant.
+
+Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative code coverage.
+
+Each test is in the format:
+ClassName#testMethod - short description
+
+⚙️ Input Parameters:
+- Total number of tests: 84
+- You must return exactly 84 test names.
+- All returned test names must come from the provided list.
+- Do NOT add, remove, rename, or duplicate any tests.
+
+⚠️ Important Instruction:
+You must reorder exactly the test names I provide. Do not add anything. Do not change anything.
+Just return the same test names in a better order to get higher line coverage.
+
+🚫 Strict Format Rules:
+- DO NOT include:
+  • Descriptions
+  • Explanations or comments
+  • Markdown (e.g., **bold**, code)
+  • Category headings
+  • Numbering, bullets, or blank lines
+
+✅ Output format:
+AuthenticationServiceTest#testRegister_Success  
+JwtServiceTest#testGenerateAccessToken
+
+🧠 Strategy: Prioritize tests with the most important terms based on TF-IDF scores.
+
+🔹 User input:
+Now I will give you the full test list.
+
+Here is the list of unit + integration tests:
+
+AuthenticationServiceTest#testRegister_Success - Tests that a user can successfully register with valid credentials.
+AuthenticationServiceTest#testRegister_UsernameExists_ThrowsException - Ensures an exception is thrown when the username is already in use.
+AuthenticationServiceTest#testRegister_EmailExists_ThrowsException - Validates exception is raised for duplicate email registration.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeExists - Verifies finding an existing authorization code works correctly.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeNotExists - Ensures null is returned for non-existent code lookup.
+AuthorizationCodeRepositoryIntegrationTest#testFindAllByUserAndClient - Checks retrieval of all codes for a given user and client.
+AuthorizationServiceTest#testProcessAuthorization_NoClientInSession_InvalidSession - Confirms authorization fails when client is missing from session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeMethodInSession_InvalidSession - Ensures failure when challenge method is missing in session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeInSession_InvalidSession - Verifies authorization fails without a challenge present.
+AuthorizationServiceTest#testProcessAuthorization_NoRedirectUriInSession_InvalidSession - Tests for failure when redirect URI is not in session.
+AuthorizationServiceTest#testProcessAuthorization_CouldNotCreateUniqueCode_InternalError - Checks internal error handling for code generation failure.
+AuthorizationServiceTest#testProcessAuthorization_NoStateInSession_InvalidSession - Ensures state absence in session results in failure.
+AuthorizationServiceTest#testProcessAuthorization_Successful - Tests complete authorization process when session is valid.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidGrantType - Validates error handling for unsupported grant type.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidAuthorizationCode - Tests behavior for invalid authorization code usage.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidClientCredentials - Ensures proper handling of invalid client credentials.
+AuthorizationServiceTest#testGenerateAccessToken_ExpiredCode - Checks failure when using an expired authorization code.
+AuthorizationServiceTest#testGenerateAccessToken_UsedCode - Ensures used code cannot be reused for token generation.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidChallengeCode - Validates behavior for invalid challenge code.
+AuthorizationServiceTest#testGenerateAccessToken_OnlyAccessToken - Confirms only an access token is generated in certain scenarios.
+AuthorizationServiceTest#testGenerateAccessToken_WithRefreshToken - Ensures both access and refresh tokens are generated.
+AuthorizationServiceTest#testGenerateAccessToken_WithIdToken - Checks generation of ID token along with access token.
+AuthorizationServiceTest#testGenerateAccessTokenViaRefreshToken - Tests token refresh mechanism using a refresh token.
+AuthorizationServiceTest#testProcessAuthorization_Successful_WithSecurityContext - Ensures successful authorization with security context present.
+JwtServiceTest#testCreateHexadecimalEncodedRandomBytes - Tests creation of secure random byte sequences in hex format.
+JwtServiceTest#testGenerateAccessToken - Confirms generation of valid JWT access tokens.
+JwtServiceTest#testGenerateIdToken - Validates creation of ID tokens used in OpenID Connect.
+RefreshTokenRepositoryIntegrationTest#testSaveAndFindByCode - Tests saving and retrieving refresh tokens by code.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue - Ensures retrieval of active refresh tokens for a user and client.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue_NoActiveTokens - Confirms null returned when no active tokens are found.
+RefreshTokenServiceTest#testFindByCode_TokenExistsAndActive - Checks retrieval of an active refresh token by its code.
+RefreshTokenServiceTest#testFindByCode_TokenNotFound - Ensures token retrieval fails when token is not found.
+RefreshTokenServiceTest#testFindByCode_TokenInactive - Validates behavior when the token is inactive.
+RefreshTokenServiceTest#testCreateRefreshToken - Tests the creation of a new refresh token.
+RefreshTokenServiceTest#testSaveRefreshToken - Ensures refresh token is saved successfully.
+RefreshTokenServiceTest#testDisableRefreshToken - Tests disabling (deactivation) of a refresh token.
+ScopeRepositoryIntegrationTest#testSaveAndFindByUserAndClient - Tests saving and retrieving scopes for a given user and client.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClientId - Checks retrieval of all scopes by user and client ID.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_NoScopesFound - Ensures empty list is returned when no scopes exist.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_ClientId_NoScopesFound - Ensures null is returned if no client scopes found.
+ScopeServiceTest#testSaveAll_SavesNewScopes - Tests saving of multiple new scope entries.
+ScopeServiceTest#testGetAllScopesByUserAndClient - Retrieves all scopes associated with a user and client.
+ScopeServiceTest#testGetAllScopesByUserAndClientId - Retrieves scopes using client ID and user info.
+ScopeServiceTest#testGenerateScope_ValidScope - Validates that valid scopes are generated correctly.
+ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException - Ensures invalid scopes trigger exceptions.
+ScopeServiceTest#testIsScopeValid - Confirms if a scope string is valid.
+ScopeServiceTest#testDeleteAllScopesByUserAndClient - Tests deletion of all scopes for a user and client.
+ClientServiceTest#testFindClientById_ClientExists - Finds a client by ID when it exists.
+ClientServiceTest#testFindClientById_ClientNotFound - Returns null when client is not found.
+ClientServiceTest#testCheckClientSecret_ValidSecret - Verifies correct validation of client secret.
+ClientServiceTest#testCheckClientSecret_InvalidSecret - Ensures invalid secret results in failure.
+ClientServiceTest#testCheckClientSecret_ClientNotFound - Handles secret check when client does not exist.
+ClientServiceTest#testAuthorizeClient_InvalidRedirectUri - Validates behavior for an invalid redirect URI.
+ClientServiceTest#testAuthorizeClient_InvalidResponseType - Ensures invalid response type leads to failure.
+ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest - Handles bad request for OpenID without nonce.
+ClientServiceTest#testAuthorizeClient_InvalidScope - Checks validation failure for incorrect scope values.
+ClientServiceTest#testAuthorizeClient_StoresSessionAttributes - Ensures session data is stored during client authorization.
+ClientServiceTest#testAuthorizeClient_ValidRequest - Verifies full client authorization path for valid request.
+ClientServiceTest#testSaveClient_CompanyNotFound - Fails to save client if company does not exist.
+ClientServiceTest#testSaveClient_Successful - Successfully saves client with correct data.
+RedirectUriRepositoryIntegrationTest#testSaveAndFindById - Saves and retrieves redirect URI by ID.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriExists - Looks up redirect URI that exists.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriNotFound - Handles missing URI gracefully.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_Exists - Verifies URI exists for given client.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_NotExists - Returns false when URI not tied to client.
+RedirectUriServiceTest#testValidate_ValidUriForServerApp - Validates acceptable redirect URI for server app.
+RedirectUriServiceTest#testValidate_InvalidUriWithFragment - Fails validation for URI containing a fragment.
+RedirectUriServiceTest#testValidate_InvalidUriForServerApp - Rejects invalid URI structure for server application.
+RedirectUriServiceTest#testFindByUri_UriExists - Retrieves redirect URI when found.
+RedirectUriServiceTest#testFindByUri_UriNotFound - Returns null for non-existent URI.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_Exists - Confirms if URI is registered for client.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_NotExists - Verifies false for unregistered URI.
+CompanyRepositoryIntegrationTest#testSaveAndFindById - Tests saving and retrieving a company by ID.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyExists - Finds enabled company by username.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyNotFound - Returns null when no company matches.
+CompanyServiceTest#testLoadUserByUsername_CompanyExists - Loads user details from company when user exists.
+CompanyServiceTest#testLoadUserByUsername_CompanyNotFound - Returns exception when user is missing.
+CompanyServiceTest#testSaveCompany_Success - Successfully saves new company.
+UserServiceTest#testGetAllowedScopes_Success - Gets all scopes user is allowed to access.
+UserServiceTest#testGetAllowedScopesPerClient_Success - Gets allowed scopes for a user per client.
+UserServiceTest#testLoadUserByUsername_UserFound - Loads user details by username.
+UserServiceTest#testLoadUserByUsername_UserNotFound - Throws exception when user is missing.
+UserServiceTest#testRevokeClientPermissions_Success - Revokes access permissions for a client.
+UserServiceTest#testRevokeClientPermissions_ClientNotFound - Handles permission revoke when client not found.
+
+Here are the regression tests that must also be included:
+
+1. User Access & Roles
+1.1. Access owner/pet pages as an anonymous user (should redirect or fail)
+1.2. Access vet list without authentication (should succeed – public)
+1.3. Attempt to access admin-only pages without admin role (should be forbidden)
+1.4. Authenticate as a valid user and access their data
+1.5. Attempt login with invalid credentials (should fail)
+2. Owner Registration & Management
+2.1. Successfully register a new pet owner via form
+2.2. Submit the registration form with missing fields (e.g., no telephone)
+2.3. Submit invalid data formats (e.g., non-numeric phone)
+2.4. Try to update an owner with mismatched form ID (should fail)
+2.5. Ensure duplicate owners are handled properly
+3. Pet Management
+3.1. Add a new pet to an existing owner
+3.2. Add a pet with missing fields (e.g., no name/type)
+3.3. Update pet details (name, type, birthdate)
+3.4. Try to edit a non-existent pet (should 404)
+3.5. Add pet with a future birthdate (should fail validation)
+4. Visit Scheduling
+4.1. Add a visit to an existing pet
+4.2. Attempt to add a visit with missing date or description
+4.3. Ensure visits are linked to the correct pet
+4.4. Add multiple visits and verify chronological ordering
+4.5. Add a visit with excessively long description (test limits)
+5. Vet Listing and Specialties
+5.1. View vet list in HTML (UI)
+5.2. Retrieve vet list in JSON format via /vets endpoint
+5.3. Ensure each vet entry includes valid specialties
+5.4. Test vet list pagination behavior
+5.5. Attempt to fetch vets via malformed URL (expect 400 or 404)
+6. Internationalization
+6.1. Verify default locale strings appear in UI
+6.2. Switch locale via query param (?lang=fr) and check translations
+6.3. Check fallback behavior for missing translation keys
+6.4. Ensure no hardcoded UI text remains untranslated
+7. Exception Handling
+7.1. Trigger known crash endpoint (/oups) and check HTML response
+7.2. Trigger /oups and check JSON error structure
+7.3. Trigger exception with HTML header (verify correct error template)
+7.4. Check that unauthorized form submissions do not expose stack traces
+8. Data Validation & Integrity
+8.1. Reject form submissions with invalid characters (XSS test)
+8.2. Prevent pet duplication (same name/type/date under same owner)
+8.3. Ensure no SQL injection is possible via owner name or pet fields
+8.4. Submit 100+ visits for a pet to test scalability and integrity
+9. API/Controller Behavior
+9.1. Return correct status codes (200 for success, 302 for redirects, etc.)
+9.2. Verify model attributes are set for each controller method
+9.3. Check that all forms include CSRF tokens
+9.4. Send malformed POST data and ensure 400 is returned
+10. Database & Transaction Consistency
+10.1. Ensure DB rollback after failed insert (e.g., missing required fields)
+10.2. Delete a pet and confirm related visits are deleted or orphaned properly
+10.3. Simulate DB disconnect (e.g., drop connection) and ensure graceful fallback
+10.4. Validate that owner and pet data stay consistent across updates
+
+🔹 Response:
+AuthenticationServiceTest#testRegister_Success
+AuthenticationServiceTest#testRegister_UsernameExists_ThrowsException
+AuthenticationServiceTest#testRegister_EmailExists_ThrowsException
+AuthorizationServiceTest#testProcessAuthorization_Successful
+AuthorizationServiceTest#testGenerateAccessToken_OnlyAccessToken
+AuthorizationServiceTest#testGenerateAccessToken_WithRefreshToken
+AuthorizationServiceTest#testGenerateAccessToken_WithIdToken
+AuthorizationServiceTest#testGenerateAccessTokenViaRefreshToken
+AuthorizationServiceTest#testProcessAuthorization_Successful_WithSecurityContext
+JwtServiceTest#testGenerateAccessToken
+JwtServiceTest#testGenerateIdToken
+RefreshTokenServiceTest#testCreateRefreshToken
+RefreshTokenServiceTest#testSaveRefreshToken
+RefreshTokenServiceTest#testDisableRefreshToken
+ClientServiceTest#testAuthorizeClient_ValidRequest
+ClientServiceTest#testSaveClient_Successful
+CompanyServiceTest#testSaveCompany_Success
+UserServiceTest#testGetAllowedScopes_Success
+UserServiceTest#testGetAllowedScopesPerClient_Success
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeExists
+AuthorizationCodeRepositoryIntegrationTest#testFindAllByUserAndClient
+AuthorizationServiceTest#testProcessAuthorization_NoClientInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeMethodInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoRedirectUriInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_CouldNotCreateUniqueCode_InternalError
+AuthorizationServiceTest#testProcessAuthorization_NoStateInSession_InvalidSession
+AuthorizationServiceTest#testGenerateAccessToken_InvalidGrantType
+AuthorizationServiceTest#testGenerateAccessToken_InvalidAuthorizationCode
+AuthorizationServiceTest#testGenerateAccessToken_InvalidClientCredentials
+AuthorizationServiceTest#testGenerateAccessToken_ExpiredCode
+AuthorizationServiceTest#testGenerateAccessToken_UsedCode
+AuthorizationServiceTest#testGenerateAccessToken_InvalidChallengeCode
+RefreshTokenRepositoryIntegrationTest#testSaveAndFindByCode
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue_NoActiveTokens
+RefreshTokenServiceTest#testFindByCode_TokenExistsAndActive
+RefreshTokenServiceTest#testFindByCode_TokenNotFound
+RefreshTokenServiceTest#testFindByCode_TokenInactive
+ScopeRepositoryIntegrationTest#testSaveAndFindByUserAndClient
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClientId
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_NoScopesFound
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_ClientId_NoScopesFound
+ScopeServiceTest#testSaveAll_SavesNewScopes
+ScopeServiceTest#testGetAllScopesByUserAndClient
+ScopeServiceTest#testGetAllScopesByUserAndClientId
+ScopeServiceTest#testGenerateScope_ValidScope
+ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException
+ScopeServiceTest#testIsScopeValid
+ScopeServiceTest#testDeleteAllScopesByUserAndClient
+ClientServiceTest#testFindClientById_ClientExists
+ClientServiceTest#testFindClientById_ClientNotFound
+ClientServiceTest#testCheckClientSecret_ValidSecret
+ClientServiceTest#testCheckClientSecret_InvalidSecret
+ClientServiceTest#testCheckClientSecret_ClientNotFound
+ClientServiceTest#testAuthorizeClient_InvalidRedirectUri
+ClientServiceTest#testAuthorizeClient_InvalidResponseType
+ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest
+ClientServiceTest#testAuthorizeClient_InvalidScope
+ClientServiceTest#testAuthorizeClient_StoresSessionAttributes
+ClientServiceTest#testSaveClient_CompanyNotFound
+RedirectUriRepositoryIntegrationTest#testSaveAndFindById
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriExists
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriNotFound
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_Exists
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_NotExists
+RedirectUriServiceTest#testValidate_ValidUriForServerApp
+RedirectUriServiceTest#testValidate_InvalidUriWithFragment
+RedirectUriServiceTest#testValidate_InvalidUriForServerApp
+RedirectUriServiceTest#testFindByUri_UriExists
+RedirectUriServiceTest#testFindByUri_UriNotFound
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_Exists
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_NotExists
+CompanyRepositoryIntegrationTest#testSaveAndFindById
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyExists
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyNotFound
+CompanyServiceTest#testLoadUserByUsername_CompanyExists
+CompanyServiceTest#testLoadUserByUsername_CompanyNotFound
+UserServiceTest#testLoadUserByUsername_UserFound
+UserServiceTest#testLoadUserByUsername_UserNotFound
+UserServiceTest#testRevokeClientPermissions_Success
+UserServiceTest#testRevokeClientPermissions_ClientNotFound
+JwtServiceTest#testCreateHexadecimalEncodedRandomBytes
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeNotExists
+
+
+
+=== STRATEGY #2 - Focus on test cases that seem to cover large code regions based on naming. ===
+
+🔹 Prompt:
+You are a test optimization assistant.
+
+Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative code coverage.
+
+Each test is in the format:
+ClassName#testMethod - short description
+
+⚙️ Input Parameters:
+- Total number of tests: 84
+- You must return exactly 84 test names.
+- All returned test names must come from the provided list.
+- Do NOT add, remove, rename, or duplicate any tests.
+
+⚠️ Important Instruction:
+You must reorder exactly the test names I provide. Do not add anything. Do not change anything.
+Just return the same test names in a better order to get higher line coverage.
+
+🚫 Strict Format Rules:
+- DO NOT include:
+  • Descriptions
+  • Explanations or comments
+  • Markdown (e.g., **bold**, code)
+  • Category headings
+  • Numbering, bullets, or blank lines
+
+✅ Output format:
+AuthenticationServiceTest#testRegister_Success  
+JwtServiceTest#testGenerateAccessToken
+
+🧠 Strategy: Focus on test cases that seem to cover large code regions based on naming.
+
+🔹 User input:
+Now I will give you the full test list.
+
+Here is the list of unit + integration tests:
+
+AuthenticationServiceTest#testRegister_Success - Tests that a user can successfully register with valid credentials.
+AuthenticationServiceTest#testRegister_UsernameExists_ThrowsException - Ensures an exception is thrown when the username is already in use.
+AuthenticationServiceTest#testRegister_EmailExists_ThrowsException - Validates exception is raised for duplicate email registration.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeExists - Verifies finding an existing authorization code works correctly.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeNotExists - Ensures null is returned for non-existent code lookup.
+AuthorizationCodeRepositoryIntegrationTest#testFindAllByUserAndClient - Checks retrieval of all codes for a given user and client.
+AuthorizationServiceTest#testProcessAuthorization_NoClientInSession_InvalidSession - Confirms authorization fails when client is missing from session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeMethodInSession_InvalidSession - Ensures failure when challenge method is missing in session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeInSession_InvalidSession - Verifies authorization fails without a challenge present.
+AuthorizationServiceTest#testProcessAuthorization_NoRedirectUriInSession_InvalidSession - Tests for failure when redirect URI is not in session.
+AuthorizationServiceTest#testProcessAuthorization_CouldNotCreateUniqueCode_InternalError - Checks internal error handling for code generation failure.
+AuthorizationServiceTest#testProcessAuthorization_NoStateInSession_InvalidSession - Ensures state absence in session results in failure.
+AuthorizationServiceTest#testProcessAuthorization_Successful - Tests complete authorization process when session is valid.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidGrantType - Validates error handling for unsupported grant type.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidAuthorizationCode - Tests behavior for invalid authorization code usage.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidClientCredentials - Ensures proper handling of invalid client credentials.
+AuthorizationServiceTest#testGenerateAccessToken_ExpiredCode - Checks failure when using an expired authorization code.
+AuthorizationServiceTest#testGenerateAccessToken_UsedCode - Ensures used code cannot be reused for token generation.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidChallengeCode - Validates behavior for invalid challenge code.
+AuthorizationServiceTest#testGenerateAccessToken_OnlyAccessToken - Confirms only an access token is generated in certain scenarios.
+AuthorizationServiceTest#testGenerateAccessToken_WithRefreshToken - Ensures both access and refresh tokens are generated.
+AuthorizationServiceTest#testGenerateAccessToken_WithIdToken - Checks generation of ID token along with access token.
+AuthorizationServiceTest#testGenerateAccessTokenViaRefreshToken - Tests token refresh mechanism using a refresh token.
+AuthorizationServiceTest#testProcessAuthorization_Successful_WithSecurityContext - Ensures successful authorization with security context present.
+JwtServiceTest#testCreateHexadecimalEncodedRandomBytes - Tests creation of secure random byte sequences in hex format.
+JwtServiceTest#testGenerateAccessToken - Confirms generation of valid JWT access tokens.
+JwtServiceTest#testGenerateIdToken - Validates creation of ID tokens used in OpenID Connect.
+RefreshTokenRepositoryIntegrationTest#testSaveAndFindByCode - Tests saving and retrieving refresh tokens by code.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue - Ensures retrieval of active refresh tokens for a user and client.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue_NoActiveTokens - Confirms null returned when no active tokens are found.
+RefreshTokenServiceTest#testFindByCode_TokenExistsAndActive - Checks retrieval of an active refresh token by its code.
+RefreshTokenServiceTest#testFindByCode_TokenNotFound - Ensures token retrieval fails when token is not found.
+RefreshTokenServiceTest#testFindByCode_TokenInactive - Validates behavior when the token is inactive.
+RefreshTokenServiceTest#testCreateRefreshToken - Tests the creation of a new refresh token.
+RefreshTokenServiceTest#testSaveRefreshToken - Ensures refresh token is saved successfully.
+RefreshTokenServiceTest#testDisableRefreshToken - Tests disabling (deactivation) of a refresh token.
+ScopeRepositoryIntegrationTest#testSaveAndFindByUserAndClient - Tests saving and retrieving scopes for a given user and client.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClientId - Checks retrieval of all scopes by user and client ID.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_NoScopesFound - Ensures empty list is returned when no scopes exist.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_ClientId_NoScopesFound - Ensures null is returned if no client scopes found.
+ScopeServiceTest#testSaveAll_SavesNewScopes - Tests saving of multiple new scope entries.
+ScopeServiceTest#testGetAllScopesByUserAndClient - Retrieves all scopes associated with a user and client.
+ScopeServiceTest#testGetAllScopesByUserAndClientId - Retrieves scopes using client ID and user info.
+ScopeServiceTest#testGenerateScope_ValidScope - Validates that valid scopes are generated correctly.
+ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException - Ensures invalid scopes trigger exceptions.
+ScopeServiceTest#testIsScopeValid - Confirms if a scope string is valid.
+ScopeServiceTest#testDeleteAllScopesByUserAndClient - Tests deletion of all scopes for a user and client.
+ClientServiceTest#testFindClientById_ClientExists - Finds a client by ID when it exists.
+ClientServiceTest#testFindClientById_ClientNotFound - Returns null when client is not found.
+ClientServiceTest#testCheckClientSecret_ValidSecret - Verifies correct validation of client secret.
+ClientServiceTest#testCheckClientSecret_InvalidSecret - Ensures invalid secret results in failure.
+ClientServiceTest#testCheckClientSecret_ClientNotFound - Handles secret check when client does not exist.
+ClientServiceTest#testAuthorizeClient_InvalidRedirectUri - Validates behavior for an invalid redirect URI.
+ClientServiceTest#testAuthorizeClient_InvalidResponseType - Ensures invalid response type leads to failure.
+ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest - Handles bad request for OpenID without nonce.
+ClientServiceTest#testAuthorizeClient_InvalidScope - Checks validation failure for incorrect scope values.
+ClientServiceTest#testAuthorizeClient_StoresSessionAttributes - Ensures session data is stored during client authorization.
+ClientServiceTest#testAuthorizeClient_ValidRequest - Verifies full client authorization path for valid request.
+ClientServiceTest#testSaveClient_CompanyNotFound - Fails to save client if company does not exist.
+ClientServiceTest#testSaveClient_Successful - Successfully saves client with correct data.
+RedirectUriRepositoryIntegrationTest#testSaveAndFindById - Saves and retrieves redirect URI by ID.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriExists - Looks up redirect URI that exists.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriNotFound - Handles missing URI gracefully.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_Exists - Verifies URI exists for given client.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_NotExists - Returns false when URI not tied to client.
+RedirectUriServiceTest#testValidate_ValidUriForServerApp - Validates acceptable redirect URI for server app.
+RedirectUriServiceTest#testValidate_InvalidUriWithFragment - Fails validation for URI containing a fragment.
+RedirectUriServiceTest#testValidate_InvalidUriForServerApp - Rejects invalid URI structure for server application.
+RedirectUriServiceTest#testFindByUri_UriExists - Retrieves redirect URI when found.
+RedirectUriServiceTest#testFindByUri_UriNotFound - Returns null for non-existent URI.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_Exists - Confirms if URI is registered for client.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_NotExists - Verifies false for unregistered URI.
+CompanyRepositoryIntegrationTest#testSaveAndFindById - Tests saving and retrieving a company by ID.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyExists - Finds enabled company by username.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyNotFound - Returns null when no company matches.
+CompanyServiceTest#testLoadUserByUsername_CompanyExists - Loads user details from company when user exists.
+CompanyServiceTest#testLoadUserByUsername_CompanyNotFound - Returns exception when user is missing.
+CompanyServiceTest#testSaveCompany_Success - Successfully saves new company.
+UserServiceTest#testGetAllowedScopes_Success - Gets all scopes user is allowed to access.
+UserServiceTest#testGetAllowedScopesPerClient_Success - Gets allowed scopes for a user per client.
+UserServiceTest#testLoadUserByUsername_UserFound - Loads user details by username.
+UserServiceTest#testLoadUserByUsername_UserNotFound - Throws exception when user is missing.
+UserServiceTest#testRevokeClientPermissions_Success - Revokes access permissions for a client.
+UserServiceTest#testRevokeClientPermissions_ClientNotFound - Handles permission revoke when client not found.
+
+Here are the regression tests that must also be included:
+
+1. User Access & Roles
+1.1. Access owner/pet pages as an anonymous user (should redirect or fail)
+1.2. Access vet list without authentication (should succeed – public)
+1.3. Attempt to access admin-only pages without admin role (should be forbidden)
+1.4. Authenticate as a valid user and access their data
+1.5. Attempt login with invalid credentials (should fail)
+2. Owner Registration & Management
+2.1. Successfully register a new pet owner via form
+2.2. Submit the registration form with missing fields (e.g., no telephone)
+2.3. Submit invalid data formats (e.g., non-numeric phone)
+2.4. Try to update an owner with mismatched form ID (should fail)
+2.5. Ensure duplicate owners are handled properly
+3. Pet Management
+3.1. Add a new pet to an existing owner
+3.2. Add a pet with missing fields (e.g., no name/type)
+3.3. Update pet details (name, type, birthdate)
+3.4. Try to edit a non-existent pet (should 404)
+3.5. Add pet with a future birthdate (should fail validation)
+4. Visit Scheduling
+4.1. Add a visit to an existing pet
+4.2. Attempt to add a visit with missing date or description
+4.3. Ensure visits are linked to the correct pet
+4.4. Add multiple visits and verify chronological ordering
+4.5. Add a visit with excessively long description (test limits)
+5. Vet Listing and Specialties
+5.1. View vet list in HTML (UI)
+5.2. Retrieve vet list in JSON format via /vets endpoint
+5.3. Ensure each vet entry includes valid specialties
+5.4. Test vet list pagination behavior
+5.5. Attempt to fetch vets via malformed URL (expect 400 or 404)
+6. Internationalization
+6.1. Verify default locale strings appear in UI
+6.2. Switch locale via query param (?lang=fr) and check translations
+6.3. Check fallback behavior for missing translation keys
+6.4. Ensure no hardcoded UI text remains untranslated
+7. Exception Handling
+7.1. Trigger known crash endpoint (/oups) and check HTML response
+7.2. Trigger /oups and check JSON error structure
+7.3. Trigger exception with HTML header (verify correct error template)
+7.4. Check that unauthorized form submissions do not expose stack traces
+8. Data Validation & Integrity
+8.1. Reject form submissions with invalid characters (XSS test)
+8.2. Prevent pet duplication (same name/type/date under same owner)
+8.3. Ensure no SQL injection is possible via owner name or pet fields
+8.4. Submit 100+ visits for a pet to test scalability and integrity
+9. API/Controller Behavior
+9.1. Return correct status codes (200 for success, 302 for redirects, etc.)
+9.2. Verify model attributes are set for each controller method
+9.3. Check that all forms include CSRF tokens
+9.4. Send malformed POST data and ensure 400 is returned
+10. Database & Transaction Consistency
+10.1. Ensure DB rollback after failed insert (e.g., missing required fields)
+10.2. Delete a pet and confirm related visits are deleted or orphaned properly
+10.3. Simulate DB disconnect (e.g., drop connection) and ensure graceful fallback
+10.4. Validate that owner and pet data stay consistent across updates
+
+🔹 Response:
+AuthenticationServiceTest#testRegister_Success
+AuthenticationServiceTest#testRegister_UsernameExists_ThrowsException
+AuthenticationServiceTest#testRegister_EmailExists_ThrowsException
+AuthorizationServiceTest#testProcessAuthorization_Successful
+AuthorizationServiceTest#testProcessAuthorization_Successful_WithSecurityContext
+AuthorizationServiceTest#testGenerateAccessToken_OnlyAccessToken
+AuthorizationServiceTest#testGenerateAccessToken_WithRefreshToken
+AuthorizationServiceTest#testGenerateAccessToken_WithIdToken
+AuthorizationServiceTest#testGenerateAccessTokenViaRefreshToken
+AuthorizationServiceTest#testGenerateAccessToken_InvalidGrantType
+AuthorizationServiceTest#testGenerateAccessToken_InvalidAuthorizationCode
+AuthorizationServiceTest#testGenerateAccessToken_InvalidClientCredentials
+AuthorizationServiceTest#testGenerateAccessToken_ExpiredCode
+AuthorizationServiceTest#testGenerateAccessToken_UsedCode
+AuthorizationServiceTest#testGenerateAccessToken_InvalidChallengeCode
+JwtServiceTest#testGenerateAccessToken
+JwtServiceTest#testGenerateIdToken
+JwtServiceTest#testCreateHexadecimalEncodedRandomBytes
+RefreshTokenServiceTest#testCreateRefreshToken
+RefreshTokenServiceTest#testSaveRefreshToken
+RefreshTokenServiceTest#testDisableRefreshToken
+RefreshTokenServiceTest#testFindByCode_TokenExistsAndActive
+RefreshTokenServiceTest#testFindByCode_TokenNotFound
+RefreshTokenServiceTest#testFindByCode_TokenInactive
+ScopeServiceTest#testSaveAll_SavesNewScopes
+ScopeServiceTest#testGenerateScope_ValidScope
+ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException
+ScopeServiceTest#testIsScopeValid
+ScopeServiceTest#testDeleteAllScopesByUserAndClient
+ScopeServiceTest#testGetAllScopesByUserAndClient
+ScopeServiceTest#testGetAllScopesByUserAndClientId
+ClientServiceTest#testFindClientById_ClientExists
+ClientServiceTest#testFindClientById_ClientNotFound
+ClientServiceTest#testCheckClientSecret_ValidSecret
+ClientServiceTest#testCheckClientSecret_InvalidSecret
+ClientServiceTest#testCheckClientSecret_ClientNotFound
+ClientServiceTest#testAuthorizeClient_ValidRequest
+ClientServiceTest#testAuthorizeClient_StoresSessionAttributes
+ClientServiceTest#testAuthorizeClient_InvalidRedirectUri
+ClientServiceTest#testAuthorizeClient_InvalidResponseType
+ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest
+ClientServiceTest#testAuthorizeClient_InvalidScope
+ClientServiceTest#testSaveClient_Successful
+ClientServiceTest#testSaveClient_CompanyNotFound
+RedirectUriServiceTest#testValidate_ValidUriForServerApp
+RedirectUriServiceTest#testValidate_InvalidUriWithFragment
+RedirectUriServiceTest#testValidate_InvalidUriForServerApp
+RedirectUriServiceTest#testFindByUri_UriExists
+RedirectUriServiceTest#testFindByUri_UriNotFound
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_Exists
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_NotExists
+CompanyServiceTest#testLoadUserByUsername_CompanyExists
+CompanyServiceTest#testLoadUserByUsername_CompanyNotFound
+CompanyServiceTest#testSaveCompany_Success
+UserServiceTest#testLoadUserByUsername_UserFound
+UserServiceTest#testLoadUserByUsername_UserNotFound
+UserServiceTest#testGetAllowedScopes_Success
+UserServiceTest#testGetAllowedScopesPerClient_Success
+UserServiceTest#testRevokeClientPermissions_Success
+UserServiceTest#testRevokeClientPermissions_ClientNotFound
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeExists
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeNotExists
+AuthorizationCodeRepositoryIntegrationTest#testFindAllByUserAndClient
+RefreshTokenRepositoryIntegrationTest#testSaveAndFindByCode
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue_NoActiveTokens
+ScopeRepositoryIntegrationTest#testSaveAndFindByUserAndClient
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClientId
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_NoScopesFound
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_ClientId_NoScopesFound
+RedirectUriRepositoryIntegrationTest#testSaveAndFindById
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriExists
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriNotFound
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_Exists
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_NotExists
+CompanyRepositoryIntegrationTest#testSaveAndFindById
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyExists
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyNotFound
+AuthorizationServiceTest#testProcessAuthorization_NoClientInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeMethodInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoRedirectUriInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_CouldNotCreateUniqueCode_InternalError
+AuthorizationServiceTest#testProcessAuthorization_NoStateInSession_InvalidSession
+
+
+=== STRATEGY #3 - Maximize early diversity across different modules or classes. ===
+
+🔹 Prompt:
+You are a test optimization assistant.
+
+Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative code coverage.
+
+Each test is in the format:
+ClassName#testMethod - short description
+
+⚙️ Input Parameters:
+- Total number of tests: 84
+- You must return exactly 84 test names.
+- All returned test names must come from the provided list.
+- Do NOT add, remove, rename, or duplicate any tests.
+
+⚠️ Important Instruction:
+You must reorder exactly the test names I provide. Do not add anything. Do not change anything.
+Just return the same test names in a better order to get higher line coverage.
+
+🚫 Strict Format Rules:
+- DO NOT include:
+  • Descriptions
+  • Explanations or comments
+  • Markdown (e.g., **bold**, code)
+  • Category headings
+  • Numbering, bullets, or blank lines
+
+✅ Output format:
+AuthenticationServiceTest#testRegister_Success  
+JwtServiceTest#testGenerateAccessToken
+
+🧠 Strategy: Maximize early diversity across different modules or classes.
+
+🔹 User input:
+Now I will give you the full test list.
+
+Here is the list of unit + integration tests:
+
+AuthenticationServiceTest#testRegister_Success - Tests that a user can successfully register with valid credentials.
+AuthenticationServiceTest#testRegister_UsernameExists_ThrowsException - Ensures an exception is thrown when the username is already in use.
+AuthenticationServiceTest#testRegister_EmailExists_ThrowsException - Validates exception is raised for duplicate email registration.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeExists - Verifies finding an existing authorization code works correctly.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeNotExists - Ensures null is returned for non-existent code lookup.
+AuthorizationCodeRepositoryIntegrationTest#testFindAllByUserAndClient - Checks retrieval of all codes for a given user and client.
+AuthorizationServiceTest#testProcessAuthorization_NoClientInSession_InvalidSession - Confirms authorization fails when client is missing from session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeMethodInSession_InvalidSession - Ensures failure when challenge method is missing in session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeInSession_InvalidSession - Verifies authorization fails without a challenge present.
+AuthorizationServiceTest#testProcessAuthorization_NoRedirectUriInSession_InvalidSession - Tests for failure when redirect URI is not in session.
+AuthorizationServiceTest#testProcessAuthorization_CouldNotCreateUniqueCode_InternalError - Checks internal error handling for code generation failure.
+AuthorizationServiceTest#testProcessAuthorization_NoStateInSession_InvalidSession - Ensures state absence in session results in failure.
+AuthorizationServiceTest#testProcessAuthorization_Successful - Tests complete authorization process when session is valid.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidGrantType - Validates error handling for unsupported grant type.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidAuthorizationCode - Tests behavior for invalid authorization code usage.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidClientCredentials - Ensures proper handling of invalid client credentials.
+AuthorizationServiceTest#testGenerateAccessToken_ExpiredCode - Checks failure when using an expired authorization code.
+AuthorizationServiceTest#testGenerateAccessToken_UsedCode - Ensures used code cannot be reused for token generation.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidChallengeCode - Validates behavior for invalid challenge code.
+AuthorizationServiceTest#testGenerateAccessToken_OnlyAccessToken - Confirms only an access token is generated in certain scenarios.
+AuthorizationServiceTest#testGenerateAccessToken_WithRefreshToken - Ensures both access and refresh tokens are generated.
+AuthorizationServiceTest#testGenerateAccessToken_WithIdToken - Checks generation of ID token along with access token.
+AuthorizationServiceTest#testGenerateAccessTokenViaRefreshToken - Tests token refresh mechanism using a refresh token.
+AuthorizationServiceTest#testProcessAuthorization_Successful_WithSecurityContext - Ensures successful authorization with security context present.
+JwtServiceTest#testCreateHexadecimalEncodedRandomBytes - Tests creation of secure random byte sequences in hex format.
+JwtServiceTest#testGenerateAccessToken - Confirms generation of valid JWT access tokens.
+JwtServiceTest#testGenerateIdToken - Validates creation of ID tokens used in OpenID Connect.
+RefreshTokenRepositoryIntegrationTest#testSaveAndFindByCode - Tests saving and retrieving refresh tokens by code.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue - Ensures retrieval of active refresh tokens for a user and client.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue_NoActiveTokens - Confirms null returned when no active tokens are found.
+RefreshTokenServiceTest#testFindByCode_TokenExistsAndActive - Checks retrieval of an active refresh token by its code.
+RefreshTokenServiceTest#testFindByCode_TokenNotFound - Ensures token retrieval fails when token is not found.
+RefreshTokenServiceTest#testFindByCode_TokenInactive - Validates behavior when the token is inactive.
+RefreshTokenServiceTest#testCreateRefreshToken - Tests the creation of a new refresh token.
+RefreshTokenServiceTest#testSaveRefreshToken - Ensures refresh token is saved successfully.
+RefreshTokenServiceTest#testDisableRefreshToken - Tests disabling (deactivation) of a refresh token.
+ScopeRepositoryIntegrationTest#testSaveAndFindByUserAndClient - Tests saving and retrieving scopes for a given user and client.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClientId - Checks retrieval of all scopes by user and client ID.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_NoScopesFound - Ensures empty list is returned when no scopes exist.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_ClientId_NoScopesFound - Ensures null is returned if no client scopes found.
+ScopeServiceTest#testSaveAll_SavesNewScopes - Tests saving of multiple new scope entries.
+ScopeServiceTest#testGetAllScopesByUserAndClient - Retrieves all scopes associated with a user and client.
+ScopeServiceTest#testGetAllScopesByUserAndClientId - Retrieves scopes using client ID and user info.
+ScopeServiceTest#testGenerateScope_ValidScope - Validates that valid scopes are generated correctly.
+ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException - Ensures invalid scopes trigger exceptions.
+ScopeServiceTest#testIsScopeValid - Confirms if a scope string is valid.
+ScopeServiceTest#testDeleteAllScopesByUserAndClient - Tests deletion of all scopes for a user and client.
+ClientServiceTest#testFindClientById_ClientExists - Finds a client by ID when it exists.
+ClientServiceTest#testFindClientById_ClientNotFound - Returns null when client is not found.
+ClientServiceTest#testCheckClientSecret_ValidSecret - Verifies correct validation of client secret.
+ClientServiceTest#testCheckClientSecret_InvalidSecret - Ensures invalid secret results in failure.
+ClientServiceTest#testCheckClientSecret_ClientNotFound - Handles secret check when client does not exist.
+ClientServiceTest#testAuthorizeClient_InvalidRedirectUri - Validates behavior for an invalid redirect URI.
+ClientServiceTest#testAuthorizeClient_InvalidResponseType - Ensures invalid response type leads to failure.
+ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest - Handles bad request for OpenID without nonce.
+ClientServiceTest#testAuthorizeClient_InvalidScope - Checks validation failure for incorrect scope values.
+ClientServiceTest#testAuthorizeClient_StoresSessionAttributes - Ensures session data is stored during client authorization.
+ClientServiceTest#testAuthorizeClient_ValidRequest - Verifies full client authorization path for valid request.
+ClientServiceTest#testSaveClient_CompanyNotFound - Fails to save client if company does not exist.
+ClientServiceTest#testSaveClient_Successful - Successfully saves client with correct data.
+RedirectUriRepositoryIntegrationTest#testSaveAndFindById - Saves and retrieves redirect URI by ID.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriExists - Looks up redirect URI that exists.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriNotFound - Handles missing URI gracefully.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_Exists - Verifies URI exists for given client.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_NotExists - Returns false when URI not tied to client.
+RedirectUriServiceTest#testValidate_ValidUriForServerApp - Validates acceptable redirect URI for server app.
+RedirectUriServiceTest#testValidate_InvalidUriWithFragment - Fails validation for URI containing a fragment.
+RedirectUriServiceTest#testValidate_InvalidUriForServerApp - Rejects invalid URI structure for server application.
+RedirectUriServiceTest#testFindByUri_UriExists - Retrieves redirect URI when found.
+RedirectUriServiceTest#testFindByUri_UriNotFound - Returns null for non-existent URI.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_Exists - Confirms if URI is registered for client.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_NotExists - Verifies false for unregistered URI.
+CompanyRepositoryIntegrationTest#testSaveAndFindById - Tests saving and retrieving a company by ID.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyExists - Finds enabled company by username.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyNotFound - Returns null when no company matches.
+CompanyServiceTest#testLoadUserByUsername_CompanyExists - Loads user details from company when user exists.
+CompanyServiceTest#testLoadUserByUsername_CompanyNotFound - Returns exception when user is missing.
+CompanyServiceTest#testSaveCompany_Success - Successfully saves new company.
+UserServiceTest#testGetAllowedScopes_Success - Gets all scopes user is allowed to access.
+UserServiceTest#testGetAllowedScopesPerClient_Success - Gets allowed scopes for a user per client.
+UserServiceTest#testLoadUserByUsername_UserFound - Loads user details by username.
+UserServiceTest#testLoadUserByUsername_UserNotFound - Throws exception when user is missing.
+UserServiceTest#testRevokeClientPermissions_Success - Revokes access permissions for a client.
+UserServiceTest#testRevokeClientPermissions_ClientNotFound - Handles permission revoke when client not found.
+
+Here are the regression tests that must also be included:
+
+1. User Access & Roles
+1.1. Access owner/pet pages as an anonymous user (should redirect or fail)
+1.2. Access vet list without authentication (should succeed – public)
+1.3. Attempt to access admin-only pages without admin role (should be forbidden)
+1.4. Authenticate as a valid user and access their data
+1.5. Attempt login with invalid credentials (should fail)
+2. Owner Registration & Management
+2.1. Successfully register a new pet owner via form
+2.2. Submit the registration form with missing fields (e.g., no telephone)
+2.3. Submit invalid data formats (e.g., non-numeric phone)
+2.4. Try to update an owner with mismatched form ID (should fail)
+2.5. Ensure duplicate owners are handled properly
+3. Pet Management
+3.1. Add a new pet to an existing owner
+3.2. Add a pet with missing fields (e.g., no name/type)
+3.3. Update pet details (name, type, birthdate)
+3.4. Try to edit a non-existent pet (should 404)
+3.5. Add pet with a future birthdate (should fail validation)
+4. Visit Scheduling
+4.1. Add a visit to an existing pet
+4.2. Attempt to add a visit with missing date or description
+4.3. Ensure visits are linked to the correct pet
+4.4. Add multiple visits and verify chronological ordering
+4.5. Add a visit with excessively long description (test limits)
+5. Vet Listing and Specialties
+5.1. View vet list in HTML (UI)
+5.2. Retrieve vet list in JSON format via /vets endpoint
+5.3. Ensure each vet entry includes valid specialties
+5.4. Test vet list pagination behavior
+5.5. Attempt to fetch vets via malformed URL (expect 400 or 404)
+6. Internationalization
+6.1. Verify default locale strings appear in UI
+6.2. Switch locale via query param (?lang=fr) and check translations
+6.3. Check fallback behavior for missing translation keys
+6.4. Ensure no hardcoded UI text remains untranslated
+7. Exception Handling
+7.1. Trigger known crash endpoint (/oups) and check HTML response
+7.2. Trigger /oups and check JSON error structure
+7.3. Trigger exception with HTML header (verify correct error template)
+7.4. Check that unauthorized form submissions do not expose stack traces
+8. Data Validation & Integrity
+8.1. Reject form submissions with invalid characters (XSS test)
+8.2. Prevent pet duplication (same name/type/date under same owner)
+8.3. Ensure no SQL injection is possible via owner name or pet fields
+8.4. Submit 100+ visits for a pet to test scalability and integrity
+9. API/Controller Behavior
+9.1. Return correct status codes (200 for success, 302 for redirects, etc.)
+9.2. Verify model attributes are set for each controller method
+9.3. Check that all forms include CSRF tokens
+9.4. Send malformed POST data and ensure 400 is returned
+10. Database & Transaction Consistency
+10.1. Ensure DB rollback after failed insert (e.g., missing required fields)
+10.2. Delete a pet and confirm related visits are deleted or orphaned properly
+10.3. Simulate DB disconnect (e.g., drop connection) and ensure graceful fallback
+10.4. Validate that owner and pet data stay consistent across updates
+
+🔹 Response:
+AuthenticationServiceTest#testRegister_Success
+AuthenticationServiceTest#testRegister_UsernameExists_ThrowsException
+AuthenticationServiceTest#testRegister_EmailExists_ThrowsException
+AuthorizationServiceTest#testProcessAuthorization_Successful
+AuthorizationServiceTest#testGenerateAccessToken_OnlyAccessToken
+AuthorizationServiceTest#testGenerateAccessToken_WithRefreshToken
+AuthorizationServiceTest#testGenerateAccessToken_WithIdToken
+JwtServiceTest#testGenerateAccessToken
+JwtServiceTest#testCreateHexadecimalEncodedRandomBytes
+JwtServiceTest#testGenerateIdToken
+ClientServiceTest#testAuthorizeClient_ValidRequest
+ClientServiceTest#testFindClientById_ClientExists
+ClientServiceTest#testCheckClientSecret_ValidSecret
+ClientServiceTest#testSaveClient_Successful
+UserServiceTest#testLoadUserByUsername_UserFound
+UserServiceTest#testGetAllowedScopes_Success
+UserServiceTest#testGetAllowedScopesPerClient_Success
+AuthorizationServiceTest#testGenerateAccessTokenViaRefreshToken
+AuthorizationServiceTest#testProcessAuthorization_Successful_WithSecurityContext
+RefreshTokenServiceTest#testCreateRefreshToken
+RefreshTokenServiceTest#testSaveRefreshToken
+RefreshTokenServiceTest#testDisableRefreshToken
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeExists
+AuthorizationCodeRepositoryIntegrationTest#testFindAllByUserAndClient
+ScopeServiceTest#testSaveAll_SavesNewScopes
+ScopeServiceTest#testGetAllScopesByUserAndClient
+ScopeServiceTest#testGenerateScope_ValidScope
+ScopeServiceTest#testIsScopeValid
+RedirectUriServiceTest#testValidate_ValidUriForServerApp
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_Exists
+CompanyServiceTest#testLoadUserByUsername_CompanyExists
+CompanyServiceTest#testSaveCompany_Success
+AuthorizationServiceTest#testProcessAuthorization_NoClientInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeMethodInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoRedirectUriInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_CouldNotCreateUniqueCode_InternalError
+AuthorizationServiceTest#testProcessAuthorization_NoStateInSession_InvalidSession
+AuthorizationServiceTest#testGenerateAccessToken_InvalidGrantType
+AuthorizationServiceTest#testGenerateAccessToken_InvalidAuthorizationCode
+AuthorizationServiceTest#testGenerateAccessToken_InvalidClientCredentials
+AuthorizationServiceTest#testGenerateAccessToken_ExpiredCode
+AuthorizationServiceTest#testGenerateAccessToken_UsedCode
+AuthorizationServiceTest#testGenerateAccessToken_InvalidChallengeCode
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeNotExists
+RefreshTokenRepositoryIntegrationTest#testSaveAndFindByCode
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue_NoActiveTokens
+RefreshTokenServiceTest#testFindByCode_TokenExistsAndActive
+RefreshTokenServiceTest#testFindByCode_TokenNotFound
+RefreshTokenServiceTest#testFindByCode_TokenInactive
+ScopeRepositoryIntegrationTest#testSaveAndFindByUserAndClient
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClientId
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_NoScopesFound
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_ClientId_NoScopesFound
+ScopeServiceTest#testGetAllScopesByUserAndClientId
+ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException
+ScopeServiceTest#testDeleteAllScopesByUserAndClient
+ClientServiceTest#testFindClientById_ClientNotFound
+ClientServiceTest#testCheckClientSecret_InvalidSecret
+ClientServiceTest#testCheckClientSecret_ClientNotFound
+ClientServiceTest#testAuthorizeClient_InvalidRedirectUri
+ClientServiceTest#testAuthorizeClient_InvalidResponseType
+ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest
+ClientServiceTest#testAuthorizeClient_InvalidScope
+ClientServiceTest#testAuthorizeClient_StoresSessionAttributes
+ClientServiceTest#testSaveClient_CompanyNotFound
+RedirectUriRepositoryIntegrationTest#testSaveAndFindById
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriExists
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriNotFound
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_Exists
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_NotExists
+RedirectUriServiceTest#testValidate_InvalidUriWithFragment
+RedirectUriServiceTest#testValidate_InvalidUriForServerApp
+RedirectUriServiceTest#testFindByUri_UriExists
+RedirectUriServiceTest#testFindByUri_UriNotFound
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_NotExists
+CompanyRepositoryIntegrationTest#testSaveAndFindById
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyExists
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyNotFound
+CompanyServiceTest#testLoadUserByUsername_CompanyNotFound
+UserServiceTest#testLoadUserByUsername_UserNotFound
+UserServiceTest#testRevokeClientPermissions_Success
+UserServiceTest#testRevokeClientPermissions_ClientNotFound
+
+
+=== STRATEGY #4 - Alternate between positive/negative or edge/normal test cases. ===
+
+🔹 Prompt:
+You are a test optimization assistant.
+
+Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative code coverage.
+
+Each test is in the format:
+ClassName#testMethod - short description
+
+⚙️ Input Parameters:
+- Total number of tests: 84
+- You must return exactly 84 test names.
+- All returned test names must come from the provided list.
+- Do NOT add, remove, rename, or duplicate any tests.
+
+⚠️ Important Instruction:
+You must reorder exactly the test names I provide. Do not add anything. Do not change anything.
+Just return the same test names in a better order to get higher line coverage.
+
+🚫 Strict Format Rules:
+- DO NOT include:
+  • Descriptions
+  • Explanations or comments
+  • Markdown (e.g., **bold**, code)
+  • Category headings
+  • Numbering, bullets, or blank lines
+
+✅ Output format:
+AuthenticationServiceTest#testRegister_Success  
+JwtServiceTest#testGenerateAccessToken
+
+🧠 Strategy: Alternate between positive/negative or edge/normal test cases.
+
+🔹 User input:
+Now I will give you the full test list.
+
+Here is the list of unit + integration tests:
+
+AuthenticationServiceTest#testRegister_Success - Tests that a user can successfully register with valid credentials.
+AuthenticationServiceTest#testRegister_UsernameExists_ThrowsException - Ensures an exception is thrown when the username is already in use.
+AuthenticationServiceTest#testRegister_EmailExists_ThrowsException - Validates exception is raised for duplicate email registration.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeExists - Verifies finding an existing authorization code works correctly.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeNotExists - Ensures null is returned for non-existent code lookup.
+AuthorizationCodeRepositoryIntegrationTest#testFindAllByUserAndClient - Checks retrieval of all codes for a given user and client.
+AuthorizationServiceTest#testProcessAuthorization_NoClientInSession_InvalidSession - Confirms authorization fails when client is missing from session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeMethodInSession_InvalidSession - Ensures failure when challenge method is missing in session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeInSession_InvalidSession - Verifies authorization fails without a challenge present.
+AuthorizationServiceTest#testProcessAuthorization_NoRedirectUriInSession_InvalidSession - Tests for failure when redirect URI is not in session.
+AuthorizationServiceTest#testProcessAuthorization_CouldNotCreateUniqueCode_InternalError - Checks internal error handling for code generation failure.
+AuthorizationServiceTest#testProcessAuthorization_NoStateInSession_InvalidSession - Ensures state absence in session results in failure.
+AuthorizationServiceTest#testProcessAuthorization_Successful - Tests complete authorization process when session is valid.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidGrantType - Validates error handling for unsupported grant type.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidAuthorizationCode - Tests behavior for invalid authorization code usage.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidClientCredentials - Ensures proper handling of invalid client credentials.
+AuthorizationServiceTest#testGenerateAccessToken_ExpiredCode - Checks failure when using an expired authorization code.
+AuthorizationServiceTest#testGenerateAccessToken_UsedCode - Ensures used code cannot be reused for token generation.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidChallengeCode - Validates behavior for invalid challenge code.
+AuthorizationServiceTest#testGenerateAccessToken_OnlyAccessToken - Confirms only an access token is generated in certain scenarios.
+AuthorizationServiceTest#testGenerateAccessToken_WithRefreshToken - Ensures both access and refresh tokens are generated.
+AuthorizationServiceTest#testGenerateAccessToken_WithIdToken - Checks generation of ID token along with access token.
+AuthorizationServiceTest#testGenerateAccessTokenViaRefreshToken - Tests token refresh mechanism using a refresh token.
+AuthorizationServiceTest#testProcessAuthorization_Successful_WithSecurityContext - Ensures successful authorization with security context present.
+JwtServiceTest#testCreateHexadecimalEncodedRandomBytes - Tests creation of secure random byte sequences in hex format.
+JwtServiceTest#testGenerateAccessToken - Confirms generation of valid JWT access tokens.
+JwtServiceTest#testGenerateIdToken - Validates creation of ID tokens used in OpenID Connect.
+RefreshTokenRepositoryIntegrationTest#testSaveAndFindByCode - Tests saving and retrieving refresh tokens by code.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue - Ensures retrieval of active refresh tokens for a user and client.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue_NoActiveTokens - Confirms null returned when no active tokens are found.
+RefreshTokenServiceTest#testFindByCode_TokenExistsAndActive - Checks retrieval of an active refresh token by its code.
+RefreshTokenServiceTest#testFindByCode_TokenNotFound - Ensures token retrieval fails when token is not found.
+RefreshTokenServiceTest#testFindByCode_TokenInactive - Validates behavior when the token is inactive.
+RefreshTokenServiceTest#testCreateRefreshToken - Tests the creation of a new refresh token.
+RefreshTokenServiceTest#testSaveRefreshToken - Ensures refresh token is saved successfully.
+RefreshTokenServiceTest#testDisableRefreshToken - Tests disabling (deactivation) of a refresh token.
+ScopeRepositoryIntegrationTest#testSaveAndFindByUserAndClient - Tests saving and retrieving scopes for a given user and client.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClientId - Checks retrieval of all scopes by user and client ID.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_NoScopesFound - Ensures empty list is returned when no scopes exist.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_ClientId_NoScopesFound - Ensures null is returned if no client scopes found.
+ScopeServiceTest#testSaveAll_SavesNewScopes - Tests saving of multiple new scope entries.
+ScopeServiceTest#testGetAllScopesByUserAndClient - Retrieves all scopes associated with a user and client.
+ScopeServiceTest#testGetAllScopesByUserAndClientId - Retrieves scopes using client ID and user info.
+ScopeServiceTest#testGenerateScope_ValidScope - Validates that valid scopes are generated correctly.
+ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException - Ensures invalid scopes trigger exceptions.
+ScopeServiceTest#testIsScopeValid - Confirms if a scope string is valid.
+ScopeServiceTest#testDeleteAllScopesByUserAndClient - Tests deletion of all scopes for a user and client.
+ClientServiceTest#testFindClientById_ClientExists - Finds a client by ID when it exists.
+ClientServiceTest#testFindClientById_ClientNotFound - Returns null when client is not found.
+ClientServiceTest#testCheckClientSecret_ValidSecret - Verifies correct validation of client secret.
+ClientServiceTest#testCheckClientSecret_InvalidSecret - Ensures invalid secret results in failure.
+ClientServiceTest#testCheckClientSecret_ClientNotFound - Handles secret check when client does not exist.
+ClientServiceTest#testAuthorizeClient_InvalidRedirectUri - Validates behavior for an invalid redirect URI.
+ClientServiceTest#testAuthorizeClient_InvalidResponseType - Ensures invalid response type leads to failure.
+ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest - Handles bad request for OpenID without nonce.
+ClientServiceTest#testAuthorizeClient_InvalidScope - Checks validation failure for incorrect scope values.
+ClientServiceTest#testAuthorizeClient_StoresSessionAttributes - Ensures session data is stored during client authorization.
+ClientServiceTest#testAuthorizeClient_ValidRequest - Verifies full client authorization path for valid request.
+ClientServiceTest#testSaveClient_CompanyNotFound - Fails to save client if company does not exist.
+ClientServiceTest#testSaveClient_Successful - Successfully saves client with correct data.
+RedirectUriRepositoryIntegrationTest#testSaveAndFindById - Saves and retrieves redirect URI by ID.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriExists - Looks up redirect URI that exists.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriNotFound - Handles missing URI gracefully.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_Exists - Verifies URI exists for given client.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_NotExists - Returns false when URI not tied to client.
+RedirectUriServiceTest#testValidate_ValidUriForServerApp - Validates acceptable redirect URI for server app.
+RedirectUriServiceTest#testValidate_InvalidUriWithFragment - Fails validation for URI containing a fragment.
+RedirectUriServiceTest#testValidate_InvalidUriForServerApp - Rejects invalid URI structure for server application.
+RedirectUriServiceTest#testFindByUri_UriExists - Retrieves redirect URI when found.
+RedirectUriServiceTest#testFindByUri_UriNotFound - Returns null for non-existent URI.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_Exists - Confirms if URI is registered for client.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_NotExists - Verifies false for unregistered URI.
+CompanyRepositoryIntegrationTest#testSaveAndFindById - Tests saving and retrieving a company by ID.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyExists - Finds enabled company by username.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyNotFound - Returns null when no company matches.
+CompanyServiceTest#testLoadUserByUsername_CompanyExists - Loads user details from company when user exists.
+CompanyServiceTest#testLoadUserByUsername_CompanyNotFound - Returns exception when user is missing.
+CompanyServiceTest#testSaveCompany_Success - Successfully saves new company.
+UserServiceTest#testGetAllowedScopes_Success - Gets all scopes user is allowed to access.
+UserServiceTest#testGetAllowedScopesPerClient_Success - Gets allowed scopes for a user per client.
+UserServiceTest#testLoadUserByUsername_UserFound - Loads user details by username.
+UserServiceTest#testLoadUserByUsername_UserNotFound - Throws exception when user is missing.
+UserServiceTest#testRevokeClientPermissions_Success - Revokes access permissions for a client.
+UserServiceTest#testRevokeClientPermissions_ClientNotFound - Handles permission revoke when client not found.
+
+Here are the regression tests that must also be included:
+
+1. User Access & Roles
+1.1. Access owner/pet pages as an anonymous user (should redirect or fail)
+1.2. Access vet list without authentication (should succeed – public)
+1.3. Attempt to access admin-only pages without admin role (should be forbidden)
+1.4. Authenticate as a valid user and access their data
+1.5. Attempt login with invalid credentials (should fail)
+2. Owner Registration & Management
+2.1. Successfully register a new pet owner via form
+2.2. Submit the registration form with missing fields (e.g., no telephone)
+2.3. Submit invalid data formats (e.g., non-numeric phone)
+2.4. Try to update an owner with mismatched form ID (should fail)
+2.5. Ensure duplicate owners are handled properly
+3. Pet Management
+3.1. Add a new pet to an existing owner
+3.2. Add a pet with missing fields (e.g., no name/type)
+3.3. Update pet details (name, type, birthdate)
+3.4. Try to edit a non-existent pet (should 404)
+3.5. Add pet with a future birthdate (should fail validation)
+4. Visit Scheduling
+4.1. Add a visit to an existing pet
+4.2. Attempt to add a visit with missing date or description
+4.3. Ensure visits are linked to the correct pet
+4.4. Add multiple visits and verify chronological ordering
+4.5. Add a visit with excessively long description (test limits)
+5. Vet Listing and Specialties
+5.1. View vet list in HTML (UI)
+5.2. Retrieve vet list in JSON format via /vets endpoint
+5.3. Ensure each vet entry includes valid specialties
+5.4. Test vet list pagination behavior
+5.5. Attempt to fetch vets via malformed URL (expect 400 or 404)
+6. Internationalization
+6.1. Verify default locale strings appear in UI
+6.2. Switch locale via query param (?lang=fr) and check translations
+6.3. Check fallback behavior for missing translation keys
+6.4. Ensure no hardcoded UI text remains untranslated
+7. Exception Handling
+7.1. Trigger known crash endpoint (/oups) and check HTML response
+7.2. Trigger /oups and check JSON error structure
+7.3. Trigger exception with HTML header (verify correct error template)
+7.4. Check that unauthorized form submissions do not expose stack traces
+8. Data Validation & Integrity
+8.1. Reject form submissions with invalid characters (XSS test)
+8.2. Prevent pet duplication (same name/type/date under same owner)
+8.3. Ensure no SQL injection is possible via owner name or pet fields
+8.4. Submit 100+ visits for a pet to test scalability and integrity
+9. API/Controller Behavior
+9.1. Return correct status codes (200 for success, 302 for redirects, etc.)
+9.2. Verify model attributes are set for each controller method
+9.3. Check that all forms include CSRF tokens
+9.4. Send malformed POST data and ensure 400 is returned
+10. Database & Transaction Consistency
+10.1. Ensure DB rollback after failed insert (e.g., missing required fields)
+10.2. Delete a pet and confirm related visits are deleted or orphaned properly
+10.3. Simulate DB disconnect (e.g., drop connection) and ensure graceful fallback
+10.4. Validate that owner and pet data stay consistent across updates
+
+🔹 Response:
+AuthenticationServiceTest#testRegister_Success
+AuthenticationServiceTest#testRegister_UsernameExists_ThrowsException
+AuthenticationServiceTest#testRegister_EmailExists_ThrowsException
+AuthorizationServiceTest#testProcessAuthorization_Successful
+AuthorizationServiceTest#testProcessAuthorization_NoClientInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeMethodInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoRedirectUriInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_CouldNotCreateUniqueCode_InternalError
+AuthorizationServiceTest#testProcessAuthorization_NoStateInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_Successful_WithSecurityContext
+AuthorizationServiceTest#testGenerateAccessToken_InvalidGrantType
+AuthorizationServiceTest#testGenerateAccessToken_InvalidAuthorizationCode
+AuthorizationServiceTest#testGenerateAccessToken_InvalidClientCredentials
+AuthorizationServiceTest#testGenerateAccessToken_ExpiredCode
+AuthorizationServiceTest#testGenerateAccessToken_UsedCode
+AuthorizationServiceTest#testGenerateAccessToken_InvalidChallengeCode
+AuthorizationServiceTest#testGenerateAccessToken_OnlyAccessToken
+AuthorizationServiceTest#testGenerateAccessToken_WithRefreshToken
+AuthorizationServiceTest#testGenerateAccessToken_WithIdToken
+AuthorizationServiceTest#testGenerateAccessTokenViaRefreshToken
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeExists
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeNotExists
+AuthorizationCodeRepositoryIntegrationTest#testFindAllByUserAndClient
+JwtServiceTest#testCreateHexadecimalEncodedRandomBytes
+JwtServiceTest#testGenerateAccessToken
+JwtServiceTest#testGenerateIdToken
+RefreshTokenRepositoryIntegrationTest#testSaveAndFindByCode
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue_NoActiveTokens
+RefreshTokenServiceTest#testFindByCode_TokenExistsAndActive
+RefreshTokenServiceTest#testFindByCode_TokenNotFound
+RefreshTokenServiceTest#testFindByCode_TokenInactive
+RefreshTokenServiceTest#testCreateRefreshToken
+RefreshTokenServiceTest#testSaveRefreshToken
+RefreshTokenServiceTest#testDisableRefreshToken
+ScopeRepositoryIntegrationTest#testSaveAndFindByUserAndClient
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClientId
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_NoScopesFound
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_ClientId_NoScopesFound
+ScopeServiceTest#testSaveAll_SavesNewScopes
+ScopeServiceTest#testGetAllScopesByUserAndClient
+ScopeServiceTest#testGetAllScopesByUserAndClientId
+ScopeServiceTest#testGenerateScope_ValidScope
+ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException
+ScopeServiceTest#testIsScopeValid
+ScopeServiceTest#testDeleteAllScopesByUserAndClient
+ClientServiceTest#testFindClientById_ClientExists
+ClientServiceTest#testFindClientById_ClientNotFound
+ClientServiceTest#testCheckClientSecret_ValidSecret
+ClientServiceTest#testCheckClientSecret_InvalidSecret
+ClientServiceTest#testCheckClientSecret_ClientNotFound
+ClientServiceTest#testAuthorizeClient_InvalidRedirectUri
+ClientServiceTest#testAuthorizeClient_InvalidResponseType
+ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest
+ClientServiceTest#testAuthorizeClient_InvalidScope
+ClientServiceTest#testAuthorizeClient_StoresSessionAttributes
+ClientServiceTest#testAuthorizeClient_ValidRequest
+ClientServiceTest#testSaveClient_CompanyNotFound
+ClientServiceTest#testSaveClient_Successful
+RedirectUriRepositoryIntegrationTest#testSaveAndFindById
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriExists
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriNotFound
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_Exists
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_NotExists
+RedirectUriServiceTest#testValidate_ValidUriForServerApp
+RedirectUriServiceTest#testValidate_InvalidUriWithFragment
+RedirectUriServiceTest#testValidate_InvalidUriForServerApp
+RedirectUriServiceTest#testFindByUri_UriExists
+RedirectUriServiceTest#testFindByUri_UriNotFound
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_Exists
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_NotExists
+CompanyRepositoryIntegrationTest#testSaveAndFindById
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyExists
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyNotFound
+CompanyServiceTest#testLoadUserByUsername_CompanyExists
+CompanyServiceTest#testLoadUserByUsername_CompanyNotFound
+CompanyServiceTest#testSaveCompany_Success
+UserServiceTest#testGetAllowedScopes_Success
+UserServiceTest#testGetAllowedScopesPerClient_Success
+UserServiceTest#testLoadUserByUsername_UserFound
+UserServiceTest#testLoadUserByUsername_UserNotFound
+UserServiceTest#testRevokeClientPermissions_Success
+UserServiceTest#testRevokeClientPermissions_ClientNotFound
+
+
+=== STRATEGY #5 - Distribute regression test cases evenly rather than grouping them. ===
+
+🔹 Prompt:
+You are a test optimization assistant.
+
+Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative code coverage.
+
+Each test is in the format:
+ClassName#testMethod - short description
+
+⚙️ Input Parameters:
+- Total number of tests: 84
+- You must return exactly 84 test names.
+- All returned test names must come from the provided list.
+- Do NOT add, remove, rename, or duplicate any tests.
+
+⚠️ Important Instruction:
+You must reorder exactly the test names I provide. Do not add anything. Do not change anything.
+Just return the same test names in a better order to get higher line coverage.
+
+🚫 Strict Format Rules:
+- DO NOT include:
+  • Descriptions
+  • Explanations or comments
+  • Markdown (e.g., **bold**, code)
+  • Category headings
+  • Numbering, bullets, or blank lines
+
+✅ Output format:
+AuthenticationServiceTest#testRegister_Success  
+JwtServiceTest#testGenerateAccessToken
+
+🧠 Strategy: Distribute regression test cases evenly rather than grouping them.
+
+🔹 User input:
+Now I will give you the full test list.
+
+Here is the list of unit + integration tests:
+
+AuthenticationServiceTest#testRegister_Success - Tests that a user can successfully register with valid credentials.
+AuthenticationServiceTest#testRegister_UsernameExists_ThrowsException - Ensures an exception is thrown when the username is already in use.
+AuthenticationServiceTest#testRegister_EmailExists_ThrowsException - Validates exception is raised for duplicate email registration.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeExists - Verifies finding an existing authorization code works correctly.
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeNotExists - Ensures null is returned for non-existent code lookup.
+AuthorizationCodeRepositoryIntegrationTest#testFindAllByUserAndClient - Checks retrieval of all codes for a given user and client.
+AuthorizationServiceTest#testProcessAuthorization_NoClientInSession_InvalidSession - Confirms authorization fails when client is missing from session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeMethodInSession_InvalidSession - Ensures failure when challenge method is missing in session.
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeInSession_InvalidSession - Verifies authorization fails without a challenge present.
+AuthorizationServiceTest#testProcessAuthorization_NoRedirectUriInSession_InvalidSession - Tests for failure when redirect URI is not in session.
+AuthorizationServiceTest#testProcessAuthorization_CouldNotCreateUniqueCode_InternalError - Checks internal error handling for code generation failure.
+AuthorizationServiceTest#testProcessAuthorization_NoStateInSession_InvalidSession - Ensures state absence in session results in failure.
+AuthorizationServiceTest#testProcessAuthorization_Successful - Tests complete authorization process when session is valid.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidGrantType - Validates error handling for unsupported grant type.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidAuthorizationCode - Tests behavior for invalid authorization code usage.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidClientCredentials - Ensures proper handling of invalid client credentials.
+AuthorizationServiceTest#testGenerateAccessToken_ExpiredCode - Checks failure when using an expired authorization code.
+AuthorizationServiceTest#testGenerateAccessToken_UsedCode - Ensures used code cannot be reused for token generation.
+AuthorizationServiceTest#testGenerateAccessToken_InvalidChallengeCode - Validates behavior for invalid challenge code.
+AuthorizationServiceTest#testGenerateAccessToken_OnlyAccessToken - Confirms only an access token is generated in certain scenarios.
+AuthorizationServiceTest#testGenerateAccessToken_WithRefreshToken - Ensures both access and refresh tokens are generated.
+AuthorizationServiceTest#testGenerateAccessToken_WithIdToken - Checks generation of ID token along with access token.
+AuthorizationServiceTest#testGenerateAccessTokenViaRefreshToken - Tests token refresh mechanism using a refresh token.
+AuthorizationServiceTest#testProcessAuthorization_Successful_WithSecurityContext - Ensures successful authorization with security context present.
+JwtServiceTest#testCreateHexadecimalEncodedRandomBytes - Tests creation of secure random byte sequences in hex format.
+JwtServiceTest#testGenerateAccessToken - Confirms generation of valid JWT access tokens.
+JwtServiceTest#testGenerateIdToken - Validates creation of ID tokens used in OpenID Connect.
+RefreshTokenRepositoryIntegrationTest#testSaveAndFindByCode - Tests saving and retrieving refresh tokens by code.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue - Ensures retrieval of active refresh tokens for a user and client.
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue_NoActiveTokens - Confirms null returned when no active tokens are found.
+RefreshTokenServiceTest#testFindByCode_TokenExistsAndActive - Checks retrieval of an active refresh token by its code.
+RefreshTokenServiceTest#testFindByCode_TokenNotFound - Ensures token retrieval fails when token is not found.
+RefreshTokenServiceTest#testFindByCode_TokenInactive - Validates behavior when the token is inactive.
+RefreshTokenServiceTest#testCreateRefreshToken - Tests the creation of a new refresh token.
+RefreshTokenServiceTest#testSaveRefreshToken - Ensures refresh token is saved successfully.
+RefreshTokenServiceTest#testDisableRefreshToken - Tests disabling (deactivation) of a refresh token.
+ScopeRepositoryIntegrationTest#testSaveAndFindByUserAndClient - Tests saving and retrieving scopes for a given user and client.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClientId - Checks retrieval of all scopes by user and client ID.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_NoScopesFound - Ensures empty list is returned when no scopes exist.
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_ClientId_NoScopesFound - Ensures null is returned if no client scopes found.
+ScopeServiceTest#testSaveAll_SavesNewScopes - Tests saving of multiple new scope entries.
+ScopeServiceTest#testGetAllScopesByUserAndClient - Retrieves all scopes associated with a user and client.
+ScopeServiceTest#testGetAllScopesByUserAndClientId - Retrieves scopes using client ID and user info.
+ScopeServiceTest#testGenerateScope_ValidScope - Validates that valid scopes are generated correctly.
+ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException - Ensures invalid scopes trigger exceptions.
+ScopeServiceTest#testIsScopeValid - Confirms if a scope string is valid.
+ScopeServiceTest#testDeleteAllScopesByUserAndClient - Tests deletion of all scopes for a user and client.
+ClientServiceTest#testFindClientById_ClientExists - Finds a client by ID when it exists.
+ClientServiceTest#testFindClientById_ClientNotFound - Returns null when client is not found.
+ClientServiceTest#testCheckClientSecret_ValidSecret - Verifies correct validation of client secret.
+ClientServiceTest#testCheckClientSecret_InvalidSecret - Ensures invalid secret results in failure.
+ClientServiceTest#testCheckClientSecret_ClientNotFound - Handles secret check when client does not exist.
+ClientServiceTest#testAuthorizeClient_InvalidRedirectUri - Validates behavior for an invalid redirect URI.
+ClientServiceTest#testAuthorizeClient_InvalidResponseType - Ensures invalid response type leads to failure.
+ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest - Handles bad request for OpenID without nonce.
+ClientServiceTest#testAuthorizeClient_InvalidScope - Checks validation failure for incorrect scope values.
+ClientServiceTest#testAuthorizeClient_StoresSessionAttributes - Ensures session data is stored during client authorization.
+ClientServiceTest#testAuthorizeClient_ValidRequest - Verifies full client authorization path for valid request.
+ClientServiceTest#testSaveClient_CompanyNotFound - Fails to save client if company does not exist.
+ClientServiceTest#testSaveClient_Successful - Successfully saves client with correct data.
+RedirectUriRepositoryIntegrationTest#testSaveAndFindById - Saves and retrieves redirect URI by ID.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriExists - Looks up redirect URI that exists.
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriNotFound - Handles missing URI gracefully.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_Exists - Verifies URI exists for given client.
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_NotExists - Returns false when URI not tied to client.
+RedirectUriServiceTest#testValidate_ValidUriForServerApp - Validates acceptable redirect URI for server app.
+RedirectUriServiceTest#testValidate_InvalidUriWithFragment - Fails validation for URI containing a fragment.
+RedirectUriServiceTest#testValidate_InvalidUriForServerApp - Rejects invalid URI structure for server application.
+RedirectUriServiceTest#testFindByUri_UriExists - Retrieves redirect URI when found.
+RedirectUriServiceTest#testFindByUri_UriNotFound - Returns null for non-existent URI.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_Exists - Confirms if URI is registered for client.
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_NotExists - Verifies false for unregistered URI.
+CompanyRepositoryIntegrationTest#testSaveAndFindById - Tests saving and retrieving a company by ID.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyExists - Finds enabled company by username.
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyNotFound - Returns null when no company matches.
+CompanyServiceTest#testLoadUserByUsername_CompanyExists - Loads user details from company when user exists.
+CompanyServiceTest#testLoadUserByUsername_CompanyNotFound - Returns exception when user is missing.
+CompanyServiceTest#testSaveCompany_Success - Successfully saves new company.
+UserServiceTest#testGetAllowedScopes_Success - Gets all scopes user is allowed to access.
+UserServiceTest#testGetAllowedScopesPerClient_Success - Gets allowed scopes for a user per client.
+UserServiceTest#testLoadUserByUsername_UserFound - Loads user details by username.
+UserServiceTest#testLoadUserByUsername_UserNotFound - Throws exception when user is missing.
+UserServiceTest#testRevokeClientPermissions_Success - Revokes access permissions for a client.
+UserServiceTest#testRevokeClientPermissions_ClientNotFound - Handles permission revoke when client not found.
+
+Here are the regression tests that must also be included:
+
+1. User Access & Roles
+1.1. Access owner/pet pages as an anonymous user (should redirect or fail)
+1.2. Access vet list without authentication (should succeed – public)
+1.3. Attempt to access admin-only pages without admin role (should be forbidden)
+1.4. Authenticate as a valid user and access their data
+1.5. Attempt login with invalid credentials (should fail)
+2. Owner Registration & Management
+2.1. Successfully register a new pet owner via form
+2.2. Submit the registration form with missing fields (e.g., no telephone)
+2.3. Submit invalid data formats (e.g., non-numeric phone)
+2.4. Try to update an owner with mismatched form ID (should fail)
+2.5. Ensure duplicate owners are handled properly
+3. Pet Management
+3.1. Add a new pet to an existing owner
+3.2. Add a pet with missing fields (e.g., no name/type)
+3.3. Update pet details (name, type, birthdate)
+3.4. Try to edit a non-existent pet (should 404)
+3.5. Add pet with a future birthdate (should fail validation)
+4. Visit Scheduling
+4.1. Add a visit to an existing pet
+4.2. Attempt to add a visit with missing date or description
+4.3. Ensure visits are linked to the correct pet
+4.4. Add multiple visits and verify chronological ordering
+4.5. Add a visit with excessively long description (test limits)
+5. Vet Listing and Specialties
+5.1. View vet list in HTML (UI)
+5.2. Retrieve vet list in JSON format via /vets endpoint
+5.3. Ensure each vet entry includes valid specialties
+5.4. Test vet list pagination behavior
+5.5. Attempt to fetch vets via malformed URL (expect 400 or 404)
+6. Internationalization
+6.1. Verify default locale strings appear in UI
+6.2. Switch locale via query param (?lang=fr) and check translations
+6.3. Check fallback behavior for missing translation keys
+6.4. Ensure no hardcoded UI text remains untranslated
+7. Exception Handling
+7.1. Trigger known crash endpoint (/oups) and check HTML response
+7.2. Trigger /oups and check JSON error structure
+7.3. Trigger exception with HTML header (verify correct error template)
+7.4. Check that unauthorized form submissions do not expose stack traces
+8. Data Validation & Integrity
+8.1. Reject form submissions with invalid characters (XSS test)
+8.2. Prevent pet duplication (same name/type/date under same owner)
+8.3. Ensure no SQL injection is possible via owner name or pet fields
+8.4. Submit 100+ visits for a pet to test scalability and integrity
+9. API/Controller Behavior
+9.1. Return correct status codes (200 for success, 302 for redirects, etc.)
+9.2. Verify model attributes are set for each controller method
+9.3. Check that all forms include CSRF tokens
+9.4. Send malformed POST data and ensure 400 is returned
+10. Database & Transaction Consistency
+10.1. Ensure DB rollback after failed insert (e.g., missing required fields)
+10.2. Delete a pet and confirm related visits are deleted or orphaned properly
+10.3. Simulate DB disconnect (e.g., drop connection) and ensure graceful fallback
+10.4. Validate that owner and pet data stay consistent across updates
+
+🔹 Response:
+AuthenticationServiceTest#testRegister_Success  
+AuthenticationServiceTest#testRegister_UsernameExists_ThrowsException
+AuthorizationServiceTest#testProcessAuthorization_NoClientInSession_InvalidSession
+AuthenticationServiceTest#testRegister_EmailExists_ThrowsException
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeMethodInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_NoChallengeInSession_InvalidSession
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeExists
+AuthorizationServiceTest#testProcessAuthorization_NoRedirectUriInSession_InvalidSession
+AuthorizationCodeRepositoryIntegrationTest#testFindByCode_CodeNotExists
+AuthorizationServiceTest#testProcessAuthorization_CouldNotCreateUniqueCode_InternalError
+AuthorizationCodeRepositoryIntegrationTest#testFindAllByUserAndClient
+AuthorizationServiceTest#testProcessAuthorization_NoStateInSession_InvalidSession
+AuthorizationServiceTest#testProcessAuthorization_Successful
+AuthorizationServiceTest#testGenerateAccessToken_InvalidGrantType
+AuthorizationServiceTest#testGenerateAccessToken_InvalidAuthorizationCode
+AuthorizationServiceTest#testGenerateAccessToken_InvalidClientCredentials
+AuthorizationServiceTest#testGenerateAccessToken_ExpiredCode
+AuthorizationServiceTest#testGenerateAccessToken_UsedCode
+AuthorizationServiceTest#testGenerateAccessToken_InvalidChallengeCode
+AuthorizationServiceTest#testGenerateAccessToken_OnlyAccessToken
+AuthorizationServiceTest#testGenerateAccessToken_WithRefreshToken
+AuthorizationServiceTest#testGenerateAccessToken_WithIdToken
+AuthorizationServiceTest#testGenerateAccessTokenViaRefreshToken
+AuthorizationServiceTest#testProcessAuthorization_Successful_WithSecurityContext
+JwtServiceTest#testCreateHexadecimalEncodedRandomBytes
+JwtServiceTest#testGenerateAccessToken
+JwtServiceTest#testGenerateIdToken
+RefreshTokenRepositoryIntegrationTest#testSaveAndFindByCode
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue
+RefreshTokenRepositoryIntegrationTest#testFindByUserAndClientAndActiveTrue_NoActiveTokens
+RefreshTokenServiceTest#testFindByCode_TokenExistsAndActive
+RefreshTokenServiceTest#testFindByCode_TokenNotFound
+RefreshTokenServiceTest#testFindByCode_TokenInactive
+RefreshTokenServiceTest#testCreateRefreshToken
+RefreshTokenServiceTest#testSaveRefreshToken
+RefreshTokenServiceTest#testDisableRefreshToken
+ScopeRepositoryIntegrationTest#testSaveAndFindByUserAndClient
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClientId
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_NoScopesFound
+ScopeRepositoryIntegrationTest#testFindAllByUserAndClient_ClientId_NoScopesFound
+ScopeServiceTest#testSaveAll_SavesNewScopes
+ScopeServiceTest#testGetAllScopesByUserAndClient
+ScopeServiceTest#testGetAllScopesByUserAndClientId
+ScopeServiceTest#testGenerateScope_ValidScope
+ScopeServiceTest#testGenerateScope_InvalidScopeThrowsException
+ScopeServiceTest#testIsScopeValid
+ScopeServiceTest#testDeleteAllScopesByUserAndClient
+ClientServiceTest#testFindClientById_ClientExists
+ClientServiceTest#testFindClientById_ClientNotFound
+ClientServiceTest#testCheckClientSecret_ValidSecret
+ClientServiceTest#testCheckClientSecret_InvalidSecret
+ClientServiceTest#testCheckClientSecret_ClientNotFound
+ClientServiceTest#testAuthorizeClient_InvalidRedirectUri
+ClientServiceTest#testAuthorizeClient_InvalidResponseType
+ClientServiceTest#testAuthorizeClient_OpenIdScopeButNoNonce_BadRequest
+ClientServiceTest#testAuthorizeClient_InvalidScope
+ClientServiceTest#testAuthorizeClient_StoresSessionAttributes
+ClientServiceTest#testAuthorizeClient_ValidRequest
+ClientServiceTest#testSaveClient_CompanyNotFound
+ClientServiceTest#testSaveClient_Successful
+RedirectUriRepositoryIntegrationTest#testSaveAndFindById
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriExists
+RedirectUriRepositoryIntegrationTest#testFindByUri_UriNotFound
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_Exists
+RedirectUriRepositoryIntegrationTest#testExistsByUriAndClient_ClientId_NotExists
+RedirectUriServiceTest#testValidate_ValidUriForServerApp
+RedirectUriServiceTest#testValidate_InvalidUriWithFragment
+RedirectUriServiceTest#testValidate_InvalidUriForServerApp
+RedirectUriServiceTest#testFindByUri_UriExists
+RedirectUriServiceTest#testFindByUri_UriNotFound
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_Exists
+RedirectUriServiceTest#testIsRedirectUriRegisteredByClient_NotExists
+CompanyRepositoryIntegrationTest#testSaveAndFindById
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyExists
+CompanyRepositoryIntegrationTest#testFindByUsernameAndEnabledTrue_CompanyNotFound
+CompanyServiceTest#testLoadUserByUsername_CompanyExists
+CompanyServiceTest#testLoadUserByUsername_CompanyNotFound
+CompanyServiceTest#testSaveCompany_Success
+UserServiceTest#testGetAllowedScopes_Success
+UserServiceTest#testGetAllowedScopesPerClient_Success
+UserServiceTest#testLoadUserByUsername_UserFound
+UserServiceTest#testLoadUserByUsername_UserNotFound
+UserServiceTest#testRevokeClientPermissions_Success
+UserServiceTest#testRevokeClientPermissions_ClientNotFound
+

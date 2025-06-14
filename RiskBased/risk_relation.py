@@ -1,6 +1,14 @@
+# === GEREKLİ KÜTÜPHANELER ===
 import os
+import sys
+import io
 from openai import OpenAI
 from dotenv import load_dotenv
+from langgraph.graph import StateGraph
+import datetime
+from datetime import datetime
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -12,10 +20,28 @@ AGENT2_VARIANTS = [
 ]
 AGENT1_CONFIG = {"model": "gpt-4", "temperature": 0.0, "top_p": 1.0}
 
-INPUT_FILE_ALL = "../all_tests.txt"
-INPUT_FILE_REG = "../regressiontext.txt"
-BASE_OUTPUT_DIR = "final_test_orders"
+INPUT_FILE_ALL = "./Input/all_tests.txt"
+INPUT_FILE_REG = "./Input/regression.txt"
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+RESULT_DIR = f"./RiskBased/full_test_orders/run_{timestamp}"  # eski ./results/ yerine
+os.makedirs(RESULT_DIR, exist_ok=True)
 TOTAL_TOKENS_USED = 0
+
+from typing import TypedDict
+
+class State(TypedDict, total=False):
+    base_risk_order: str
+    unit_tests: str
+    regression_tests: str
+    prompt_type: str
+    config: dict
+    prompt: str
+    risk_result: str
+    validation_status: str
+    approved: bool
+    label: str
+    run_dir: str
+    final_order: str
 
 def create_run_directory(base_dir="final_test_orders"):
     os.makedirs(base_dir, exist_ok=True)
@@ -25,13 +51,6 @@ def create_run_directory(base_dir="final_test_orders"):
     run_dir = os.path.join(base_dir, f"run_{run_number:02d}")
     os.makedirs(run_dir, exist_ok=True)
     return run_dir
-
-def load_tests():
-    with open(INPUT_FILE_ALL, "r", encoding="utf-8") as f:
-        all_lines = [line.strip() for line in f if " - " in line]
-    with open(INPUT_FILE_REG, "r", encoding="utf-8") as f:
-        regression_lines = [line.strip() for line in f if line.strip()]
-    return all_lines, regression_lines
 
 def call_openai(prompt, config):
     messages = [{"role": "user", "content": prompt}]
@@ -43,147 +62,220 @@ def call_openai(prompt, config):
     )
     return response.choices[0].message.content.strip()
 
-def generate_prompts(all_tests, regression_tests, base_risk_order):
-    test_text = "\n".join(all_tests)
-    reg_text = "\n".join(regression_tests)
+def generate_prompts(base_risk_order, unit_tests_str, regression_tests_str):
     shared_intro = (
-        f"All unit tests:\n{test_text}\n\n"
-        f"Regression test cases:\n{reg_text}\n\n"
+        f"All unit tests:\n{unit_tests_str}\n\n"
+        f"Regression test cases:\n{regression_tests_str}\n\n"
         f"Given risk order: {base_risk_order}\n\n"
         f"You must only use module names that exist in the provided unit test list.\n"
         f"Do NOT invent or include module names that do not appear.\n"
-        f"Respond in format: A > B > C > D\n\n"
-        f"After this, list the related modules after each base module in the following format: A: C, B: D"
+        f"You must ensure that all modules in the risk order are present in the unit tests.\n"
+        f"Do not include individual test methods such as TestClass#testMethod. Only list complete module or class names (e.g., ClientServiceTest, JwtServiceTest).\n"
     )
     input_prompt = shared_intro + (
-        "Expand the risk order by inserting related modules immediately after their base modules.\n"
-        "Determine relationships from how unit and regression tests group them.\n"
-        "Example: input 'A > C' must become 'A > C > B > D' if B relates to A and D to C.\n"
-        "Make sure that given cases like A and C in the example are at the beginning in your ordering \n"
-        "And if there are any other services that are not related to A or C at all, they should appear at the end of the list\n"
-    )
-    relation_prompt = shared_intro + (
-        "Expand the risk order by appending modules that commonly appear with risky ones. You need the add related modules after inputs\n"
-        "Use module co-occurrence from unit and regression tests.\n"
-        "Example: input 'A > C' must become 'A > B > C > D' if B relates to A and D to C. A and C have to be first. Also  B need to be before D since A > C and B is related with A.\n"
-        "And if there are any other services that are not related to A or C at all, they should appear at the end of the list\n"
-    )
-    return input_prompt, relation_prompt
+    "Expand the risk order by inserting related test modules after all the base modules are listed.\n"
+    "Base modules (e.g., CompanyServiceTest, ScopeServiceTest) must appear exactly in the input order.\n"
+    "After all base modules, append the directly related test modules in the order of their corresponding base module.\n"
+    "Do not insert any test modules before or in between the base modules.\n"
+    "Modules that are unrelated to any base module must be placed at the end.\n\n"
+    "Example:\n"
+    "Input: A > B > C\n"
+    "Expected: A > B > C > A_related1 > A_related2 > B_related1 > C_related1 > unrelated1 > unrelated2"
+    "After this, list the related modules after each base module in the following format: A: C, B: D, C: E if input is A > B > C.\n"
 
-def evaluate_risks(risk_path, log_path):
-    with open(risk_path, "r", encoding="utf-8") as f:
-        risks = [line.strip() for line in f if ":" in line]
+    )
+
+    relation_prompt = shared_intro + (
+    "Expand the risk order by grouping modules that commonly appear together with the risky input modules.\n"
+    "Input modules such as CompanyServiceTest or ScopeServiceTest must appear at the beginning and in the exact same order.\n"
+    "Related modules like test classes or integration tests must be listed immediately after the corresponding input module.\n"
+    "Do not place unrelated modules between the input modules or their related modules.\n"
+    "Place any unrelated modules at the very end of the risk order.\n\n"
+    "Example:\n"
+    "If the input is A > B > C\n"
+    "The expected output is A > A_related1 > B > B_related1 > C > C_related1 > unrelated1 followed by unrelated modules if any.\n"
+    "After this, list the related modules after each base module in the following format: A: C, B: D, C: E if input is A > B > C.\n"
+
+)
+    return {"input_first": input_prompt, "relation_first": relation_prompt}
+
+def evaluate_risk_order(risk_order_text):
+    print("Evaluating risk order:")
+    print(risk_order_text)
     prompt = (
         "You are a validation assistant.\n"
-        "Below are risk orders generated by another AI.\n"
-        "Check if they match the intended structure:\n"
-        "- input_first: related modules must follow directly.\n Example: input 'A > C' must become 'A > C > B > D' if B relates to A and D to C."
-        "- relation_first: related modules appended but logical.\n\n Example: input 'A > C' must become 'A > B > C > D' if B relates to A and D to C. A and C have to be first. Also  B need to be before D since A > C and B is related with A."
-        "Validate each. If all good, respond ONLY: OK\n"
-        "If not, explain briefly.\n\n" + "\n".join(risks)
+        "Below is a risk order generated by another AI.\n"
+        "Check if it matches the intended structure:\n"
+        "There are possible risk orders:\n"
+        "If the risk order format is A > B > C, it is OK\n"
+        "If good, respond ONLY: OK\n\n"
+        f"{risk_order_text}"
     )
-    print("risks:\n", risks)
     result = call_openai(prompt, AGENT1_CONFIG)
-    print("validation agent result\n", result)
-    with open(log_path, "a", encoding="utf-8") as log:
-        log.write("[Agent1 Evaluation]\n")
-        log.write(result + "\n")
-    return result.strip() == "OK"
+    result = result.strip()
+    is_ok = result.upper() == "OK"
+    # Log non-OK cases for traceability
+    if not is_ok:
+        with open("process.txt", "a", encoding="utf-8") as log_file:
+            log_file.write("===== Invalid risk order detected =====\n")
+            log_file.write(risk_order_text + "\n")
+            log_file.write("Validator response: " + result + "\n\n")
+    print("Validation result:", result)
+    return result, is_ok
 
-def run_agent2_and_save_orders(prompts, run_dir, process_log_path):
-    all_tests, _ = load_tests()
-    risk_path = os.path.join(run_dir, "all_risk_orders.txt")
-    with open(risk_path, "w", encoding="utf-8") as f, \
-        open(process_log_path, "a", encoding="utf-8") as process_log:
-        print("run_agent2_and_save_orders")
-        for label, prompt in prompts:
-            for cfg in AGENT2_VARIANTS:
-                tag = f"{label}_temp{cfg['temperature']}_top{cfg['top_p']}"
-                result = call_openai(prompt, cfg)
-                print("prompt:", prompt)
-                print("result:", result)
-                f.write(f"{tag}: {result}\n")
-                process_log.write(f"[Agent2] Generated risk order {tag}: {result}\n")
+# === LANGGRAPH NODES ===
+def agent1_generate(state):
+    prompt_type = state["prompt_type"]
+    prompts = generate_prompts(state["base_risk_order"], state["unit_tests"], state["regression_tests"])
+    return {"prompt": prompts[prompt_type], **state}
 
-def run_agent3_if_approved(run_dir, all_tests):
-    test_names = [line.split(" - ")[0].strip() for line in all_tests]
-    with open(os.path.join(run_dir, "all_risk_orders.txt"), "r", encoding="utf-8") as f:
-        for line in f:
-            if ":" not in line: continue
-            label, risk_order = line.split(":", 1)
-            test_prompt = (
-                f"You are a test optimization assistant.\n\n"
-                f"Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative risk mitigation based on the following module risk order:\n"
-                f"{risk_order.strip()}\n\n"
-                f"Each test is in the format:\nClassName#testMethod - short description\n\n"
-                f"⚙️ Input Parameters:\n"
-                f"- Total number of tests: {len(test_names)}\n"
-                f"- You must return exactly {len(test_names)} test names.\n"
-                f"- All returned test names must come from the provided list.\n"
-                f"- Do NOT add, remove, rename, or duplicate any tests.\n\n"
-                f"⚠️ Important Instruction:\n"
-                f"You must reorder exactly the test names I provide. Do not add anything. Do not change anything.\n"
-                f"Just return the same test names in a better order to mitigate higher-risk modules earlier.\n\n"
-                f"✅ Output format:\n"
-                f"{chr(10).join(test_names)}"
-            )
-            result = call_openai(test_prompt, AGENT1_CONFIG)
-            with open(os.path.join(run_dir, f"tests_{label.strip()}.txt"), "w", encoding="utf-8") as out:
-                out.write(result.strip())
+def agent2_expand(state):
+    result = call_openai(state["prompt"], state["config"])
+    return {"risk_result": result, **state}
 
-def main():
-    global TOTAL_TOKENS_USED
-    all_tests, regression_tests = load_tests()
+def agent1_validate(state):
+    validation, ok = evaluate_risk_order(state["risk_result"])
+    return {"validation_status": validation, "approved": ok, **state}
+
+
+def agent3_sort(state):
+    test_names = [line.split(" - ")[0].strip() for line in state["unit_tests"].split("\n") if line.strip()]
+    reorder_prompt = (
+        f"You are a test optimization assistant.\n\n"
+        f"Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative risk mitigation based on the following module risk order:\n"
+        f"{state['risk_result'].strip()}\n\n"
+        f"Each test is in the format:\nClassName#testMethod - short description\n\n"
+        f"⚙️ Input Parameters:\n"
+        f"- Total number of tests: {len(test_names)}\n"
+        f"- You must return exactly {len(test_names)} test names.\n"
+        f"- All returned test names must come from the provided list.\n"
+        f"- Do NOT add, remove, rename, or duplicate any tests.\n\n"
+        f"✅ Output format:\n"
+        f"{chr(10).join(test_names)}"
+    )
+    final_order = call_openai(reorder_prompt, AGENT1_CONFIG)
+    label = state["label"]
+    output_path = os.path.join(state["run_dir"], f"tests_{label}.txt")
+    with open(output_path, "w", encoding="utf-8") as out:
+        out.write(final_order.strip())
+    return {"final_order": final_order, **state}
+
+def build_graph():
+    builder = StateGraph(state_schema=State)
+    builder.add_node("PromptGenerator", agent1_generate)
+    builder.add_node("RiskExpander", agent2_expand)
+    builder.add_node("Validator", agent1_validate)
+    builder.add_node("FinalSorter", agent3_sort)
+
+    builder.set_entry_point("PromptGenerator")
+    builder.add_edge("PromptGenerator", "RiskExpander")
+    builder.add_edge("RiskExpander", "Validator")
+    builder.add_conditional_edges("Validator", lambda state: "FinalSorter" if state["approved"] else "RiskExpander")
+    return builder.compile()
+
+from collections import defaultdict
+
+def generate_combined_risk_file(risk_file_dir="."):
+    risk_files = [
+        "tests_input_first_v1_temp0.3_top1.0.txt",
+        "tests_input_first_v2_temp0.7_top0.9.txt",
+        "tests_input_first_v3_temp1.0_top0.85.txt",
+        "tests_relation_first_v1_temp0.3_top1.0.txt",
+        "tests_relation_first_v2_temp0.7_top0.9.txt",
+        "tests_relation_first_v3_temp1.0_top0.85.txt"
+    ]
+    
+    module_ranks = defaultdict(list)
+
+    for fname in risk_files:
+        path = os.path.join(risk_file_dir, fname)
+        if not os.path.exists(path):
+            print(f"⚠️ File not found: {path}")
+            continue
+        with open(path, "r", encoding="utf-8") as f:
+            lines = [line.strip() for line in f if line.strip()]
+            for idx, module in enumerate(lines):
+                module_ranks[module].append(idx)
+
+    # Ortalamasını al
+    average_ranking = {
+        module: sum(positions) / len(positions)
+        for module, positions in module_ranks.items()
+    }
+
+    # Sırala
+    sorted_modules = sorted(average_ranking.items(), key=lambda x: x[1])
+
+    # combined_risk.txt dosyasına yaz
+    output_path = os.path.join(risk_file_dir, "combined_risk.txt")
+    with open(output_path, "w", encoding="utf-8") as f:
+        for module, avg_pos in sorted_modules:
+            f.write(f"{module}\n")
+
+    print(f"✅ combined_risk.txt saved to {output_path}")
+
+
+# === ORİJİNAL full_run() HİÇ DEĞİŞMEDEN AŞAĞIDA KALACAK ===
+# === ORİJİNAL full_run() ===
+def full_run():
+    with open(INPUT_FILE_ALL, "r", encoding="utf-8") as f:
+        unit_tests_str = f.read()
+    with open(INPUT_FILE_REG, "r", encoding="utf-8") as f:
+        regression_tests_str = f.read()
 
     valid_modules = {
-    line.split("#")[0].replace("Test", "").strip()
-    for line in all_tests
-}
-
+        line.split("#")[0].strip()
+        for line in unit_tests_str.splitlines() if line.strip()
+    }
 
     while True:
-        base_risk_order = input("Enter base risk order (e.g., A > B > C) or type 'all' to list available modules: ").strip()
+        print("Enter base risk order (e.g., A > B > C) or 'all': ", flush=True)
+        base_risk_order = input().strip()
         if base_risk_order.lower() == "all":
-            print("\n✅ Available modules:")
-            print(", ".join(sorted(valid_modules)))
-            print()
+            print("\nModules:", ", ".join(sorted(valid_modules)), "\n", flush=True)
             continue
         input_modules = [x.strip() for x in base_risk_order.split(">") if x.strip()]
         missing = [mod for mod in input_modules if mod not in valid_modules]
         if missing:
-            print("❌ Invalid input. The following modules are not found in all_tests.txt:")
-            print(", ".join(missing))
-            print("Please enter a valid risk order using only existing modules.\n")
+            print("Invalid modules:", ", ".join(missing), flush=True)
             continue
-        else:
-            break
+        break
 
-    run_dir = create_run_directory(BASE_OUTPUT_DIR)
-    process_log = os.path.join(run_dir, "process.txt")
+    run_dir = RESULT_DIR
+    process_log_path = os.path.join(run_dir, "process.txt")
+    all_risks_path = os.path.join(run_dir, "all_risk_orders.txt")
+    graph = build_graph()
+    graph = graph.with_config({"recursion_limit": 50})
 
-    with open(process_log, "w", encoding="utf-8") as f:
-        f.write("=== PROCESS LOG ===\n")
+    with open(process_log_path, "w", encoding="utf-8") as log:
+        log.write(f"Run started at {datetime.now()}\n")
 
-    while True:
-        input_prompt, relation_prompt = generate_prompts(all_tests, regression_tests, base_risk_order)
-        prompts = [("input_first", input_prompt), ("relation_first", relation_prompt)]
+    prompts = generate_prompts(base_risk_order, unit_tests_str, regression_tests_str)
 
-        with open(process_log, "a", encoding="utf-8") as log:
-            log.write("Generating risk orders with Agent2...\n")
-        run_agent2_and_save_orders(prompts, run_dir, process_log)
+    with open(all_risks_path, "w", encoding="utf-8") as risk_file:
+        for prompt_type, prompt_text in prompts.items():
+            for cfg in AGENT2_VARIANTS:
+                tag = f"{prompt_type}_{cfg['id']}_temp{cfg['temperature']}_top{cfg['top_p']}"
+                state = {
+                    "base_risk_order": base_risk_order,
+                    "unit_tests": unit_tests_str,
+                    "regression_tests": regression_tests_str,
+                    "prompt_type": prompt_type,
+                    "config": cfg,
+                    "run_dir": run_dir,
+                    "label": tag,
+                }
+                print(f"⏳ Running prompt: {tag}", flush=True)
+                result = graph.invoke(state)
+                with open(process_log_path, "a", encoding="utf-8") as log:
+                    log.write(f"[{tag}] Validation: {result['validation_status']}\n")
+                risk_file.write(f"{tag}: {result['risk_result']}\n")
 
-        with open(process_log, "a", encoding="utf-8") as log:
-            log.write("Evaluating risk orders with Agent1...\n")
-        ok = evaluate_risks(os.path.join(run_dir, "all_risk_orders.txt"), process_log)
+    generate_combined_risk_file(run_dir)
+    print("✅ Full run completed.", flush=True)
 
-        if ok:
-            with open(process_log, "a", encoding="utf-8") as log:
-                log.write("Agent1 approved risk orders. Proceeding to Agent3.\n")
-            run_agent3_if_approved(run_dir, all_tests)
-            break
-        else:
-            with open(process_log, "a", encoding="utf-8") as log:
-                log.write("Agent1 rejected risk orders. Looping back with updated prompts.\n")
+
+
 
 if __name__ == "__main__":
-    main()
+    full_run()

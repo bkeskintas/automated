@@ -1,0 +1,1085 @@
+
+=== STRATEGY #1 - Prioritize tests with the most important terms based on TF-IDF scores. ===
+
+🔹 Prompt:
+You are a test optimization assistant.
+
+Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative code coverage.
+
+Each test is in the format:
+ClassName#testMethod - short description
+
+⚙️ Input Parameters:
+- Total number of tests: 58
+- You must return exactly 58 test names.
+- All returned test names must come from the provided list.
+- Do NOT add, remove, rename, or duplicate any tests.
+
+⚠️ Important Instruction:
+You must reorder exactly the test names I provide. Do not add anything. Do not change anything.
+Just return the same test names in a better order to get higher line coverage.
+
+🚫 Strict Format Rules:
+- DO NOT include:
+  • Descriptions
+  • Explanations or comments
+  • Markdown (e.g., **bold**, code)
+  • Category headings
+  • Numbering, bullets, or blank lines
+
+✅ Output format:
+AuthenticationServiceTest#testRegister_Success  
+JwtServiceTest#testGenerateAccessToken
+
+🧠 Strategy: Prioritize tests with the most important terms based on TF-IDF scores.
+
+🔹 User input:
+Now I will give you the full test list.
+
+Here is the list of unit + integration tests:
+
+MySqlIntegrationTests#testFindAll – Tests that all veterinarians can be retrieved from the database. The second call confirms that results are served from cache.
+MySqlIntegrationTests#testOwnerDetails – Sends an HTTP GET request to retrieve details for owner with ID 1 and verifies that the response status is 200 OK.
+PetClinicIntegrationTests#testFindAll – Tests retrieval of all veterinarians from the repository and confirms that the second call uses cache for improved performance.
+PetClinicIntegrationTests#testOwnerDetails – Sends an HTTP GET request to /owners/1 and verifies that the owner's details are successfully returned with status code 200 (OK).
+PostgresIntegrationTests#testFindAll – Tests retrieval of all veterinarians from the repository when using the PostgreSQL profile. Confirms caching by calling the method twice.
+PostgresIntegrationTests#testOwnerDetails – Sends an HTTP GET request to /owners/1 and checks that the endpoint responds with HTTP 200 OK, validating proper integration with PostgreSQL backend.
+ValidatorTests#shouldNotValidateWhenFirstNameEmpty – Verifies that a Person object with an empty firstName field fails validation, and the correct constraint violation message ("must not be blank") is returned.
+OwnerControllerTests#testInitCreationForm – Sends a GET request to /owners/new to initialize the owner creation form and verifies that the correct view and model attributes are present.
+OwnerControllerTests#testProcessCreationFormSuccess – Sends a POST request with valid owner data to /owners/new and verifies that the form submission is successful with a 3xx redirect.
+OwnerControllerTests#testProcessCreationFormHasErrors – Submits a POST request with missing required fields (address, telephone) and ensures validation errors are returned for those fields.
+OwnerControllerTests#testInitFindForm – Checks that the owner search form at /owners/find initializes correctly with the required model attributes and view.
+OwnerControllerTests#testProcessFindFormSuccess – Simulates searching owners and returns multiple results, verifying that the owners list view is rendered successfully.
+OwnerControllerTests#testProcessFindFormByLastName – Searches for an owner by last name and verifies that the system redirects to that specific owner’s detail page.
+OwnerControllerTests#testProcessFindFormNoOwnersFound – Searches with an unknown last name and expects a field error message for lastName indicating no results were found.
+OwnerControllerTests#testInitUpdateOwnerForm – Sends a GET request to edit an existing owner and checks that the form is pre-filled with correct data.
+OwnerControllerTests#testProcessUpdateOwnerFormSuccess – Sends a POST request with valid updated owner data and expects a redirect to the owner’s detail page.
+OwnerControllerTests#testProcessUpdateOwnerFormUnchangedSuccess – Submits an update form without changes and confirms it still redirects successfully.
+OwnerControllerTests#testProcessUpdateOwnerFormHasErrors – Submits invalid data (empty address and telephone) and verifies that validation errors are returned and the form is reloaded.
+OwnerControllerTests#testShowOwner – Sends a GET request to show an owner's details and verifies that all expected properties and nested data (e.g. pets, visits) are correctly returned.
+OwnerControllerTests#testProcessUpdateOwnerFormWithIdMismatch – Simulates a mismatch between the owner ID in the path and the submitted owner object and verifies that it redirects back to the edit form with an error flash message.
+PetControllerTests#testInitCreationForm – Sends a GET request to start creating a new pet for an owner, and ensures the correct form view and model attributes are returned.
+PetControllerTests#testProcessCreationFormSuccess – Posts valid data for creating a pet and expects a redirect to the owner's detail page.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithBlankName – Submits a form with a blank name field and checks for validation errors.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithDuplicateName – Attempts to create a pet with a name that already exists and ensures a duplicate name validation error occurs.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithMissingPetType – Omits the pet type during creation and verifies a required field error for type.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithInvalidBirthDate – Provides a future date as the birth date and ensures a validation error is triggered for invalid date format.
+PetControllerTests.ProcessCreationFormHasErrors#testInitUpdateForm – Loads the update form for an existing pet and verifies that the view and model attribute (pet) are correctly set.
+PetControllerTests#testProcessUpdateFormSuccess – Sends a valid update request for a pet and checks for successful redirection.
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithInvalidBirthDate – Submits an update with a wrongly formatted birth date and ensures a validation error is shown.
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithBlankName – Sends an update request with a blank name and confirms that validation for the name field fails.
+PetTypeFormatterTests#testPrint – Tests that the print() method returns the correct pet type name as a string for display purposes.
+PetTypeFormatterTests#shouldParse – Verifies that a valid pet type string (e.g., "Bird") is correctly parsed into a PetType object.
+PetTypeFormatterTests#shouldThrowParseException – Ensures that an unknown pet type string (e.g., "Fish") results in a ParseException.
+PetValidatorTests#testValidate – Validates a fully populated Pet object and confirms that no validation errors are raised.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetName – Tests that an empty pet name triggers a validation error on the name field.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetType – Ensures that a null pet type is flagged as a validation error.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidBirthDate – Verifies that a missing birth date results in a validation error on the birthDate field.
+VisitControllerTests#testInitNewVisitForm – Sends a GET request to initialize the form for creating a new visit and checks that the appropriate view is rendered.
+VisitControllerTests#testProcessNewVisitFormSuccess – Posts valid visit data and verifies that the system processes it successfully and redirects to the owner's detail page.
+VisitControllerTests#testProcessNewVisitFormHasErrors – Submits a visit form with missing required fields (e.g., description) and confirms that validation errors occur and the form view is reloaded.
+ClinicServiceTests#shouldFindOwnersByLastName – Tests the ability to retrieve owners from the database using a partial last name match, and verifies that no results are returned for nonexistent matches.
+ClinicServiceTests#shouldFindSingleOwnerWithPet – Verifies that a specific owner with ID 1 exists, has one pet, and that the pet has a valid and expected pet type ("cat").
+ClinicServiceTests#shouldInsertOwner – Inserts a new owner into the database, verifies ID generation, and confirms that the new owner count increases as expected.
+ClinicServiceTests#shouldUpdateOwner – Updates an existing owner's last name and verifies that the change is correctly persisted to the database.
+ClinicServiceTests#shouldFindAllPetTypes – Ensures that the system can retrieve all pet types, and verifies specific entries such as "cat" and "snake" by ID.
+ClinicServiceTests#shouldInsertPetIntoDatabaseAndGenerateId – Adds a new pet to an existing owner and confirms the pet is saved correctly with a generated ID.
+ClinicServiceTests#shouldUpdatePetName – Changes the name of an existing pet, saves the update, and verifies the name is updated in the database.
+ClinicServiceTests#shouldFindVets – Retrieves all veterinarians and verifies one of them has the expected last name and specialties ("dentistry" and "surgery").
+ClinicServiceTests#shouldAddNewVisitForPet – Adds a new visit to an existing pet and ensures the visit is saved with a valid ID and the visit count increases.
+ClinicServiceTests#shouldFindVisitsByPetId – Retrieves the list of visits for a pet and confirms the number and contents of the visits, including that the visit date is not null
+CrashControllerIntegrationTests#testTriggerExceptionJson – Sends a GET request to /oups expecting a JSON error response, and asserts that the response includes HTTP 500 with keys like timestamp, status, error, and the expected exception message.
+CrashControllerIntegrationTests#testTriggerExceptionHtml – Sends a GET request to /oups with Accept: text/html header, checks that the response returns a custom HTML error page (not the default Whitelabel error page) with informative content describing the exception.
+CrashControllerTests#testTriggerException – Unit test for CrashController that verifies calling triggerException() throws a RuntimeException with a message explaining it was triggered for demonstration purposes.
+I18nPropertiesSyncTest#checkNonInternationalizedStrings – Scans .java and .html files (excluding tests) to ensure there are no hardcoded, non-internationalized strings in HTML templates. Fails if such strings are found.
+I18nPropertiesSyncTest#checkI18nPropertyFilesAreInSync – Compares all localized messages_*.properties files against the base messages.properties file to ensure all translation keys exist in each file. Fails if any keys are missing.
+VetControllerTests#testShowVetListHtml – Sends a GET request to /vets.html?page=1 and verifies that the vet list HTML view (vets/vetList) is correctly rendered with the expected model attribute listVets.
+VetControllerTests#testShowResourcesVetList – Sends a GET request to /vets with Accept: application/json and checks that the returned JSON contains a list of vets, including the vet with ID 1.
+VetTests#testSerialization – Tests that a Vet object can be serialized and deserialized correctly, and ensures that its firstName, lastName, and id values remain unchanged after deserialization.
+
+Here are the regression tests that must also be included:
+
+1. User Access & Roles
+1.1. Access owner/pet pages as an anonymous user (should redirect or fail)
+1.2. Access vet list without authentication (should succeed – public)
+1.3. Attempt to access admin-only pages without admin role (should be forbidden)
+1.4. Authenticate as a valid user and access their data
+1.5. Attempt login with invalid credentials (should fail)
+2. Owner Registration & Management
+2.1. Successfully register a new pet owner via form
+2.2. Submit the registration form with missing fields (e.g., no telephone)
+2.3. Submit invalid data formats (e.g., non-numeric phone)
+2.4. Try to update an owner with mismatched form ID (should fail)
+2.5. Ensure duplicate owners are handled properly
+3. Pet Management
+3.1. Add a new pet to an existing owner
+3.2. Add a pet with missing fields (e.g., no name/type)
+3.3. Update pet details (name, type, birthdate)
+3.4. Try to edit a non-existent pet (should 404)
+3.5. Add pet with a future birthdate (should fail validation)
+4. Visit Scheduling
+4.1. Add a visit to an existing pet
+4.2. Attempt to add a visit with missing date or description
+4.3. Ensure visits are linked to the correct pet
+4.4. Add multiple visits and verify chronological ordering
+4.5. Add a visit with excessively long description (test limits)
+5. Vet Listing and Specialties
+5.1. View vet list in HTML (UI)
+5.2. Retrieve vet list in JSON format via /vets endpoint
+5.3. Ensure each vet entry includes valid specialties
+5.4. Test vet list pagination behavior
+5.5. Attempt to fetch vets via malformed URL (expect 400 or 404)
+6. Internationalization
+6.1. Verify default locale strings appear in UI
+6.2. Switch locale via query param (?lang=fr) and check translations
+6.3. Check fallback behavior for missing translation keys
+6.4. Ensure no hardcoded UI text remains untranslated
+7. Exception Handling
+7.1. Trigger known crash endpoint (/oups) and check HTML response
+7.2. Trigger /oups and check JSON error structure
+7.3. Trigger exception with HTML header (verify correct error template)
+7.4. Check that unauthorized form submissions do not expose stack traces
+8. Data Validation & Integrity
+8.1. Reject form submissions with invalid characters (XSS test)
+8.2. Prevent pet duplication (same name/type/date under same owner)
+8.3. Ensure no SQL injection is possible via owner name or pet fields
+8.4. Submit 100+ visits for a pet to test scalability and integrity
+9. API/Controller Behavior
+9.1. Return correct status codes (200 for success, 302 for redirects, etc.)
+9.2. Verify model attributes are set for each controller method
+9.3. Check that all forms include CSRF tokens
+9.4. Send malformed POST data and ensure 400 is returned
+10. Database & Transaction Consistency
+10.1. Ensure DB rollback after failed insert (e.g., missing required fields)
+10.2. Delete a pet and confirm related visits are deleted or orphaned properly
+10.3. Simulate DB disconnect (e.g., drop connection) and ensure graceful fallback
+10.4. Validate that owner and pet data stay consistent across updates
+
+🔹 Response:
+MySqlIntegrationTests#testFindAll
+MySqlIntegrationTests#testOwnerDetails
+PetClinicIntegrationTests#testFindAll
+PetClinicIntegrationTests#testOwnerDetails
+PostgresIntegrationTests#testFindAll
+PostgresIntegrationTests#testOwnerDetails
+ValidatorTests#shouldNotValidateWhenFirstNameEmpty
+OwnerControllerTests#testInitCreationForm
+OwnerControllerTests#testProcessCreationFormSuccess
+OwnerControllerTests#testProcessCreationFormHasErrors
+OwnerControllerTests#testInitFindForm
+OwnerControllerTests#testProcessFindFormSuccess
+OwnerControllerTests#testProcessFindFormByLastName
+OwnerControllerTests#testProcessFindFormNoOwnersFound
+OwnerControllerTests#testInitUpdateOwnerForm
+OwnerControllerTests#testProcessUpdateOwnerFormSuccess
+OwnerControllerTests#testProcessUpdateOwnerFormUnchangedSuccess
+OwnerControllerTests#testProcessUpdateOwnerFormHasErrors
+OwnerControllerTests#testShowOwner
+OwnerControllerTests#testProcessUpdateOwnerFormWithIdMismatch
+PetControllerTests#testInitCreationForm
+PetControllerTests#testProcessCreationFormSuccess
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithBlankName
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithDuplicateName
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithMissingPetType
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithInvalidBirthDate
+PetControllerTests.ProcessCreationFormHasErrors#testInitUpdateForm
+PetControllerTests#testProcessUpdateFormSuccess
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithInvalidBirthDate
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithBlankName
+PetTypeFormatterTests#testPrint
+PetTypeFormatterTests#shouldParse
+PetTypeFormatterTests#shouldThrowParseException
+PetValidatorTests#testValidate
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetName
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetType
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidBirthDate
+VisitControllerTests#testInitNewVisitForm
+VisitControllerTests#testProcessNewVisitFormSuccess
+VisitControllerTests#testProcessNewVisitFormHasErrors
+ClinicServiceTests#shouldFindOwnersByLastName
+ClinicServiceTests#shouldFindSingleOwnerWithPet
+ClinicServiceTests#shouldInsertOwner
+ClinicServiceTests#shouldUpdateOwner
+ClinicServiceTests#shouldFindAllPetTypes
+ClinicServiceTests#shouldInsertPetIntoDatabaseAndGenerateId
+ClinicServiceTests#shouldUpdatePetName
+ClinicServiceTests#shouldFindVets
+ClinicServiceTests#shouldAddNewVisitForPet
+ClinicServiceTests#shouldFindVisitsByPetId
+CrashControllerIntegrationTests#testTriggerExceptionJson
+CrashControllerIntegrationTests#testTriggerExceptionHtml
+CrashControllerTests#testTriggerException
+I18nPropertiesSyncTest#checkNonInternationalizedStrings
+I18nPropertiesSyncTest#checkI18nPropertyFilesAreInSync
+VetControllerTests#testShowVetListHtml
+VetControllerTests#testShowResourcesVetList
+VetTests#testSerialization
+
+
+=== STRATEGY #2 - Focus on test cases that seem to cover large code regions based on naming. ===
+
+🔹 Prompt:
+You are a test optimization assistant.
+
+Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative code coverage.
+
+Each test is in the format:
+ClassName#testMethod - short description
+
+⚙️ Input Parameters:
+- Total number of tests: 58
+- You must return exactly 58 test names.
+- All returned test names must come from the provided list.
+- Do NOT add, remove, rename, or duplicate any tests.
+
+⚠️ Important Instruction:
+You must reorder exactly the test names I provide. Do not add anything. Do not change anything.
+Just return the same test names in a better order to get higher line coverage.
+
+🚫 Strict Format Rules:
+- DO NOT include:
+  • Descriptions
+  • Explanations or comments
+  • Markdown (e.g., **bold**, code)
+  • Category headings
+  • Numbering, bullets, or blank lines
+
+✅ Output format:
+AuthenticationServiceTest#testRegister_Success  
+JwtServiceTest#testGenerateAccessToken
+
+🧠 Strategy: Focus on test cases that seem to cover large code regions based on naming.
+
+🔹 User input:
+Now I will give you the full test list.
+
+Here is the list of unit + integration tests:
+
+MySqlIntegrationTests#testFindAll – Tests that all veterinarians can be retrieved from the database. The second call confirms that results are served from cache.
+MySqlIntegrationTests#testOwnerDetails – Sends an HTTP GET request to retrieve details for owner with ID 1 and verifies that the response status is 200 OK.
+PetClinicIntegrationTests#testFindAll – Tests retrieval of all veterinarians from the repository and confirms that the second call uses cache for improved performance.
+PetClinicIntegrationTests#testOwnerDetails – Sends an HTTP GET request to /owners/1 and verifies that the owner's details are successfully returned with status code 200 (OK).
+PostgresIntegrationTests#testFindAll – Tests retrieval of all veterinarians from the repository when using the PostgreSQL profile. Confirms caching by calling the method twice.
+PostgresIntegrationTests#testOwnerDetails – Sends an HTTP GET request to /owners/1 and checks that the endpoint responds with HTTP 200 OK, validating proper integration with PostgreSQL backend.
+ValidatorTests#shouldNotValidateWhenFirstNameEmpty – Verifies that a Person object with an empty firstName field fails validation, and the correct constraint violation message ("must not be blank") is returned.
+OwnerControllerTests#testInitCreationForm – Sends a GET request to /owners/new to initialize the owner creation form and verifies that the correct view and model attributes are present.
+OwnerControllerTests#testProcessCreationFormSuccess – Sends a POST request with valid owner data to /owners/new and verifies that the form submission is successful with a 3xx redirect.
+OwnerControllerTests#testProcessCreationFormHasErrors – Submits a POST request with missing required fields (address, telephone) and ensures validation errors are returned for those fields.
+OwnerControllerTests#testInitFindForm – Checks that the owner search form at /owners/find initializes correctly with the required model attributes and view.
+OwnerControllerTests#testProcessFindFormSuccess – Simulates searching owners and returns multiple results, verifying that the owners list view is rendered successfully.
+OwnerControllerTests#testProcessFindFormByLastName – Searches for an owner by last name and verifies that the system redirects to that specific owner’s detail page.
+OwnerControllerTests#testProcessFindFormNoOwnersFound – Searches with an unknown last name and expects a field error message for lastName indicating no results were found.
+OwnerControllerTests#testInitUpdateOwnerForm – Sends a GET request to edit an existing owner and checks that the form is pre-filled with correct data.
+OwnerControllerTests#testProcessUpdateOwnerFormSuccess – Sends a POST request with valid updated owner data and expects a redirect to the owner’s detail page.
+OwnerControllerTests#testProcessUpdateOwnerFormUnchangedSuccess – Submits an update form without changes and confirms it still redirects successfully.
+OwnerControllerTests#testProcessUpdateOwnerFormHasErrors – Submits invalid data (empty address and telephone) and verifies that validation errors are returned and the form is reloaded.
+OwnerControllerTests#testShowOwner – Sends a GET request to show an owner's details and verifies that all expected properties and nested data (e.g. pets, visits) are correctly returned.
+OwnerControllerTests#testProcessUpdateOwnerFormWithIdMismatch – Simulates a mismatch between the owner ID in the path and the submitted owner object and verifies that it redirects back to the edit form with an error flash message.
+PetControllerTests#testInitCreationForm – Sends a GET request to start creating a new pet for an owner, and ensures the correct form view and model attributes are returned.
+PetControllerTests#testProcessCreationFormSuccess – Posts valid data for creating a pet and expects a redirect to the owner's detail page.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithBlankName – Submits a form with a blank name field and checks for validation errors.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithDuplicateName – Attempts to create a pet with a name that already exists and ensures a duplicate name validation error occurs.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithMissingPetType – Omits the pet type during creation and verifies a required field error for type.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithInvalidBirthDate – Provides a future date as the birth date and ensures a validation error is triggered for invalid date format.
+PetControllerTests.ProcessCreationFormHasErrors#testInitUpdateForm – Loads the update form for an existing pet and verifies that the view and model attribute (pet) are correctly set.
+PetControllerTests#testProcessUpdateFormSuccess – Sends a valid update request for a pet and checks for successful redirection.
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithInvalidBirthDate – Submits an update with a wrongly formatted birth date and ensures a validation error is shown.
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithBlankName – Sends an update request with a blank name and confirms that validation for the name field fails.
+PetTypeFormatterTests#testPrint – Tests that the print() method returns the correct pet type name as a string for display purposes.
+PetTypeFormatterTests#shouldParse – Verifies that a valid pet type string (e.g., "Bird") is correctly parsed into a PetType object.
+PetTypeFormatterTests#shouldThrowParseException – Ensures that an unknown pet type string (e.g., "Fish") results in a ParseException.
+PetValidatorTests#testValidate – Validates a fully populated Pet object and confirms that no validation errors are raised.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetName – Tests that an empty pet name triggers a validation error on the name field.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetType – Ensures that a null pet type is flagged as a validation error.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidBirthDate – Verifies that a missing birth date results in a validation error on the birthDate field.
+VisitControllerTests#testInitNewVisitForm – Sends a GET request to initialize the form for creating a new visit and checks that the appropriate view is rendered.
+VisitControllerTests#testProcessNewVisitFormSuccess – Posts valid visit data and verifies that the system processes it successfully and redirects to the owner's detail page.
+VisitControllerTests#testProcessNewVisitFormHasErrors – Submits a visit form with missing required fields (e.g., description) and confirms that validation errors occur and the form view is reloaded.
+ClinicServiceTests#shouldFindOwnersByLastName – Tests the ability to retrieve owners from the database using a partial last name match, and verifies that no results are returned for nonexistent matches.
+ClinicServiceTests#shouldFindSingleOwnerWithPet – Verifies that a specific owner with ID 1 exists, has one pet, and that the pet has a valid and expected pet type ("cat").
+ClinicServiceTests#shouldInsertOwner – Inserts a new owner into the database, verifies ID generation, and confirms that the new owner count increases as expected.
+ClinicServiceTests#shouldUpdateOwner – Updates an existing owner's last name and verifies that the change is correctly persisted to the database.
+ClinicServiceTests#shouldFindAllPetTypes – Ensures that the system can retrieve all pet types, and verifies specific entries such as "cat" and "snake" by ID.
+ClinicServiceTests#shouldInsertPetIntoDatabaseAndGenerateId – Adds a new pet to an existing owner and confirms the pet is saved correctly with a generated ID.
+ClinicServiceTests#shouldUpdatePetName – Changes the name of an existing pet, saves the update, and verifies the name is updated in the database.
+ClinicServiceTests#shouldFindVets – Retrieves all veterinarians and verifies one of them has the expected last name and specialties ("dentistry" and "surgery").
+ClinicServiceTests#shouldAddNewVisitForPet – Adds a new visit to an existing pet and ensures the visit is saved with a valid ID and the visit count increases.
+ClinicServiceTests#shouldFindVisitsByPetId – Retrieves the list of visits for a pet and confirms the number and contents of the visits, including that the visit date is not null
+CrashControllerIntegrationTests#testTriggerExceptionJson – Sends a GET request to /oups expecting a JSON error response, and asserts that the response includes HTTP 500 with keys like timestamp, status, error, and the expected exception message.
+CrashControllerIntegrationTests#testTriggerExceptionHtml – Sends a GET request to /oups with Accept: text/html header, checks that the response returns a custom HTML error page (not the default Whitelabel error page) with informative content describing the exception.
+CrashControllerTests#testTriggerException – Unit test for CrashController that verifies calling triggerException() throws a RuntimeException with a message explaining it was triggered for demonstration purposes.
+I18nPropertiesSyncTest#checkNonInternationalizedStrings – Scans .java and .html files (excluding tests) to ensure there are no hardcoded, non-internationalized strings in HTML templates. Fails if such strings are found.
+I18nPropertiesSyncTest#checkI18nPropertyFilesAreInSync – Compares all localized messages_*.properties files against the base messages.properties file to ensure all translation keys exist in each file. Fails if any keys are missing.
+VetControllerTests#testShowVetListHtml – Sends a GET request to /vets.html?page=1 and verifies that the vet list HTML view (vets/vetList) is correctly rendered with the expected model attribute listVets.
+VetControllerTests#testShowResourcesVetList – Sends a GET request to /vets with Accept: application/json and checks that the returned JSON contains a list of vets, including the vet with ID 1.
+VetTests#testSerialization – Tests that a Vet object can be serialized and deserialized correctly, and ensures that its firstName, lastName, and id values remain unchanged after deserialization.
+
+Here are the regression tests that must also be included:
+
+1. User Access & Roles
+1.1. Access owner/pet pages as an anonymous user (should redirect or fail)
+1.2. Access vet list without authentication (should succeed – public)
+1.3. Attempt to access admin-only pages without admin role (should be forbidden)
+1.4. Authenticate as a valid user and access their data
+1.5. Attempt login with invalid credentials (should fail)
+2. Owner Registration & Management
+2.1. Successfully register a new pet owner via form
+2.2. Submit the registration form with missing fields (e.g., no telephone)
+2.3. Submit invalid data formats (e.g., non-numeric phone)
+2.4. Try to update an owner with mismatched form ID (should fail)
+2.5. Ensure duplicate owners are handled properly
+3. Pet Management
+3.1. Add a new pet to an existing owner
+3.2. Add a pet with missing fields (e.g., no name/type)
+3.3. Update pet details (name, type, birthdate)
+3.4. Try to edit a non-existent pet (should 404)
+3.5. Add pet with a future birthdate (should fail validation)
+4. Visit Scheduling
+4.1. Add a visit to an existing pet
+4.2. Attempt to add a visit with missing date or description
+4.3. Ensure visits are linked to the correct pet
+4.4. Add multiple visits and verify chronological ordering
+4.5. Add a visit with excessively long description (test limits)
+5. Vet Listing and Specialties
+5.1. View vet list in HTML (UI)
+5.2. Retrieve vet list in JSON format via /vets endpoint
+5.3. Ensure each vet entry includes valid specialties
+5.4. Test vet list pagination behavior
+5.5. Attempt to fetch vets via malformed URL (expect 400 or 404)
+6. Internationalization
+6.1. Verify default locale strings appear in UI
+6.2. Switch locale via query param (?lang=fr) and check translations
+6.3. Check fallback behavior for missing translation keys
+6.4. Ensure no hardcoded UI text remains untranslated
+7. Exception Handling
+7.1. Trigger known crash endpoint (/oups) and check HTML response
+7.2. Trigger /oups and check JSON error structure
+7.3. Trigger exception with HTML header (verify correct error template)
+7.4. Check that unauthorized form submissions do not expose stack traces
+8. Data Validation & Integrity
+8.1. Reject form submissions with invalid characters (XSS test)
+8.2. Prevent pet duplication (same name/type/date under same owner)
+8.3. Ensure no SQL injection is possible via owner name or pet fields
+8.4. Submit 100+ visits for a pet to test scalability and integrity
+9. API/Controller Behavior
+9.1. Return correct status codes (200 for success, 302 for redirects, etc.)
+9.2. Verify model attributes are set for each controller method
+9.3. Check that all forms include CSRF tokens
+9.4. Send malformed POST data and ensure 400 is returned
+10. Database & Transaction Consistency
+10.1. Ensure DB rollback after failed insert (e.g., missing required fields)
+10.2. Delete a pet and confirm related visits are deleted or orphaned properly
+10.3. Simulate DB disconnect (e.g., drop connection) and ensure graceful fallback
+10.4. Validate that owner and pet data stay consistent across updates
+
+🔹 Response:
+PetClinicIntegrationTests#testFindAll
+PetClinicIntegrationTests#testOwnerDetails
+MySqlIntegrationTests#testFindAll
+MySqlIntegrationTests#testOwnerDetails
+PostgresIntegrationTests#testFindAll
+PostgresIntegrationTests#testOwnerDetails
+CrashControllerIntegrationTests#testTriggerExceptionJson
+CrashControllerIntegrationTests#testTriggerExceptionHtml
+CrashControllerTests#testTriggerException
+OwnerControllerTests#testInitCreationForm
+OwnerControllerTests#testProcessCreationFormSuccess
+OwnerControllerTests#testProcessCreationFormHasErrors
+OwnerControllerTests#testInitFindForm
+OwnerControllerTests#testProcessFindFormSuccess
+OwnerControllerTests#testProcessFindFormByLastName
+OwnerControllerTests#testProcessFindFormNoOwnersFound
+OwnerControllerTests#testInitUpdateOwnerForm
+OwnerControllerTests#testProcessUpdateOwnerFormSuccess
+OwnerControllerTests#testProcessUpdateOwnerFormUnchangedSuccess
+OwnerControllerTests#testProcessUpdateOwnerFormHasErrors
+OwnerControllerTests#testShowOwner
+OwnerControllerTests#testProcessUpdateOwnerFormWithIdMismatch
+PetControllerTests#testInitCreationForm
+PetControllerTests#testProcessCreationFormSuccess
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithBlankName
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithDuplicateName
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithMissingPetType
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithInvalidBirthDate
+PetControllerTests.ProcessCreationFormHasErrors#testInitUpdateForm
+PetControllerTests#testProcessUpdateFormSuccess
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithInvalidBirthDate
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithBlankName
+PetTypeFormatterTests#testPrint
+PetTypeFormatterTests#shouldParse
+PetTypeFormatterTests#shouldThrowParseException
+PetValidatorTests#testValidate
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetName
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetType
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidBirthDate
+ValidatorTests#shouldNotValidateWhenFirstNameEmpty
+VisitControllerTests#testInitNewVisitForm
+VisitControllerTests#testProcessNewVisitFormSuccess
+VisitControllerTests#testProcessNewVisitFormHasErrors
+ClinicServiceTests#shouldFindOwnersByLastName
+ClinicServiceTests#shouldFindSingleOwnerWithPet
+ClinicServiceTests#shouldInsertOwner
+ClinicServiceTests#shouldUpdateOwner
+ClinicServiceTests#shouldFindAllPetTypes
+ClinicServiceTests#shouldInsertPetIntoDatabaseAndGenerateId
+ClinicServiceTests#shouldUpdatePetName
+ClinicServiceTests#shouldFindVets
+ClinicServiceTests#shouldAddNewVisitForPet
+ClinicServiceTests#shouldFindVisitsByPetId
+I18nPropertiesSyncTest#checkNonInternationalizedStrings
+I18nPropertiesSyncTest#checkI18nPropertyFilesAreInSync
+VetControllerTests#testShowVetListHtml
+VetControllerTests#testShowResourcesVetList
+VetTests#testSerialization
+
+
+=== STRATEGY #3 - Maximize early diversity across different modules or classes. ===
+
+🔹 Prompt:
+You are a test optimization assistant.
+
+Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative code coverage.
+
+Each test is in the format:
+ClassName#testMethod - short description
+
+⚙️ Input Parameters:
+- Total number of tests: 58
+- You must return exactly 58 test names.
+- All returned test names must come from the provided list.
+- Do NOT add, remove, rename, or duplicate any tests.
+
+⚠️ Important Instruction:
+You must reorder exactly the test names I provide. Do not add anything. Do not change anything.
+Just return the same test names in a better order to get higher line coverage.
+
+🚫 Strict Format Rules:
+- DO NOT include:
+  • Descriptions
+  • Explanations or comments
+  • Markdown (e.g., **bold**, code)
+  • Category headings
+  • Numbering, bullets, or blank lines
+
+✅ Output format:
+AuthenticationServiceTest#testRegister_Success  
+JwtServiceTest#testGenerateAccessToken
+
+🧠 Strategy: Maximize early diversity across different modules or classes.
+
+🔹 User input:
+Now I will give you the full test list.
+
+Here is the list of unit + integration tests:
+
+MySqlIntegrationTests#testFindAll – Tests that all veterinarians can be retrieved from the database. The second call confirms that results are served from cache.
+MySqlIntegrationTests#testOwnerDetails – Sends an HTTP GET request to retrieve details for owner with ID 1 and verifies that the response status is 200 OK.
+PetClinicIntegrationTests#testFindAll – Tests retrieval of all veterinarians from the repository and confirms that the second call uses cache for improved performance.
+PetClinicIntegrationTests#testOwnerDetails – Sends an HTTP GET request to /owners/1 and verifies that the owner's details are successfully returned with status code 200 (OK).
+PostgresIntegrationTests#testFindAll – Tests retrieval of all veterinarians from the repository when using the PostgreSQL profile. Confirms caching by calling the method twice.
+PostgresIntegrationTests#testOwnerDetails – Sends an HTTP GET request to /owners/1 and checks that the endpoint responds with HTTP 200 OK, validating proper integration with PostgreSQL backend.
+ValidatorTests#shouldNotValidateWhenFirstNameEmpty – Verifies that a Person object with an empty firstName field fails validation, and the correct constraint violation message ("must not be blank") is returned.
+OwnerControllerTests#testInitCreationForm – Sends a GET request to /owners/new to initialize the owner creation form and verifies that the correct view and model attributes are present.
+OwnerControllerTests#testProcessCreationFormSuccess – Sends a POST request with valid owner data to /owners/new and verifies that the form submission is successful with a 3xx redirect.
+OwnerControllerTests#testProcessCreationFormHasErrors – Submits a POST request with missing required fields (address, telephone) and ensures validation errors are returned for those fields.
+OwnerControllerTests#testInitFindForm – Checks that the owner search form at /owners/find initializes correctly with the required model attributes and view.
+OwnerControllerTests#testProcessFindFormSuccess – Simulates searching owners and returns multiple results, verifying that the owners list view is rendered successfully.
+OwnerControllerTests#testProcessFindFormByLastName – Searches for an owner by last name and verifies that the system redirects to that specific owner’s detail page.
+OwnerControllerTests#testProcessFindFormNoOwnersFound – Searches with an unknown last name and expects a field error message for lastName indicating no results were found.
+OwnerControllerTests#testInitUpdateOwnerForm – Sends a GET request to edit an existing owner and checks that the form is pre-filled with correct data.
+OwnerControllerTests#testProcessUpdateOwnerFormSuccess – Sends a POST request with valid updated owner data and expects a redirect to the owner’s detail page.
+OwnerControllerTests#testProcessUpdateOwnerFormUnchangedSuccess – Submits an update form without changes and confirms it still redirects successfully.
+OwnerControllerTests#testProcessUpdateOwnerFormHasErrors – Submits invalid data (empty address and telephone) and verifies that validation errors are returned and the form is reloaded.
+OwnerControllerTests#testShowOwner – Sends a GET request to show an owner's details and verifies that all expected properties and nested data (e.g. pets, visits) are correctly returned.
+OwnerControllerTests#testProcessUpdateOwnerFormWithIdMismatch – Simulates a mismatch between the owner ID in the path and the submitted owner object and verifies that it redirects back to the edit form with an error flash message.
+PetControllerTests#testInitCreationForm – Sends a GET request to start creating a new pet for an owner, and ensures the correct form view and model attributes are returned.
+PetControllerTests#testProcessCreationFormSuccess – Posts valid data for creating a pet and expects a redirect to the owner's detail page.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithBlankName – Submits a form with a blank name field and checks for validation errors.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithDuplicateName – Attempts to create a pet with a name that already exists and ensures a duplicate name validation error occurs.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithMissingPetType – Omits the pet type during creation and verifies a required field error for type.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithInvalidBirthDate – Provides a future date as the birth date and ensures a validation error is triggered for invalid date format.
+PetControllerTests.ProcessCreationFormHasErrors#testInitUpdateForm – Loads the update form for an existing pet and verifies that the view and model attribute (pet) are correctly set.
+PetControllerTests#testProcessUpdateFormSuccess – Sends a valid update request for a pet and checks for successful redirection.
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithInvalidBirthDate – Submits an update with a wrongly formatted birth date and ensures a validation error is shown.
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithBlankName – Sends an update request with a blank name and confirms that validation for the name field fails.
+PetTypeFormatterTests#testPrint – Tests that the print() method returns the correct pet type name as a string for display purposes.
+PetTypeFormatterTests#shouldParse – Verifies that a valid pet type string (e.g., "Bird") is correctly parsed into a PetType object.
+PetTypeFormatterTests#shouldThrowParseException – Ensures that an unknown pet type string (e.g., "Fish") results in a ParseException.
+PetValidatorTests#testValidate – Validates a fully populated Pet object and confirms that no validation errors are raised.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetName – Tests that an empty pet name triggers a validation error on the name field.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetType – Ensures that a null pet type is flagged as a validation error.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidBirthDate – Verifies that a missing birth date results in a validation error on the birthDate field.
+VisitControllerTests#testInitNewVisitForm – Sends a GET request to initialize the form for creating a new visit and checks that the appropriate view is rendered.
+VisitControllerTests#testProcessNewVisitFormSuccess – Posts valid visit data and verifies that the system processes it successfully and redirects to the owner's detail page.
+VisitControllerTests#testProcessNewVisitFormHasErrors – Submits a visit form with missing required fields (e.g., description) and confirms that validation errors occur and the form view is reloaded.
+ClinicServiceTests#shouldFindOwnersByLastName – Tests the ability to retrieve owners from the database using a partial last name match, and verifies that no results are returned for nonexistent matches.
+ClinicServiceTests#shouldFindSingleOwnerWithPet – Verifies that a specific owner with ID 1 exists, has one pet, and that the pet has a valid and expected pet type ("cat").
+ClinicServiceTests#shouldInsertOwner – Inserts a new owner into the database, verifies ID generation, and confirms that the new owner count increases as expected.
+ClinicServiceTests#shouldUpdateOwner – Updates an existing owner's last name and verifies that the change is correctly persisted to the database.
+ClinicServiceTests#shouldFindAllPetTypes – Ensures that the system can retrieve all pet types, and verifies specific entries such as "cat" and "snake" by ID.
+ClinicServiceTests#shouldInsertPetIntoDatabaseAndGenerateId – Adds a new pet to an existing owner and confirms the pet is saved correctly with a generated ID.
+ClinicServiceTests#shouldUpdatePetName – Changes the name of an existing pet, saves the update, and verifies the name is updated in the database.
+ClinicServiceTests#shouldFindVets – Retrieves all veterinarians and verifies one of them has the expected last name and specialties ("dentistry" and "surgery").
+ClinicServiceTests#shouldAddNewVisitForPet – Adds a new visit to an existing pet and ensures the visit is saved with a valid ID and the visit count increases.
+ClinicServiceTests#shouldFindVisitsByPetId – Retrieves the list of visits for a pet and confirms the number and contents of the visits, including that the visit date is not null
+CrashControllerIntegrationTests#testTriggerExceptionJson – Sends a GET request to /oups expecting a JSON error response, and asserts that the response includes HTTP 500 with keys like timestamp, status, error, and the expected exception message.
+CrashControllerIntegrationTests#testTriggerExceptionHtml – Sends a GET request to /oups with Accept: text/html header, checks that the response returns a custom HTML error page (not the default Whitelabel error page) with informative content describing the exception.
+CrashControllerTests#testTriggerException – Unit test for CrashController that verifies calling triggerException() throws a RuntimeException with a message explaining it was triggered for demonstration purposes.
+I18nPropertiesSyncTest#checkNonInternationalizedStrings – Scans .java and .html files (excluding tests) to ensure there are no hardcoded, non-internationalized strings in HTML templates. Fails if such strings are found.
+I18nPropertiesSyncTest#checkI18nPropertyFilesAreInSync – Compares all localized messages_*.properties files against the base messages.properties file to ensure all translation keys exist in each file. Fails if any keys are missing.
+VetControllerTests#testShowVetListHtml – Sends a GET request to /vets.html?page=1 and verifies that the vet list HTML view (vets/vetList) is correctly rendered with the expected model attribute listVets.
+VetControllerTests#testShowResourcesVetList – Sends a GET request to /vets with Accept: application/json and checks that the returned JSON contains a list of vets, including the vet with ID 1.
+VetTests#testSerialization – Tests that a Vet object can be serialized and deserialized correctly, and ensures that its firstName, lastName, and id values remain unchanged after deserialization.
+
+Here are the regression tests that must also be included:
+
+1. User Access & Roles
+1.1. Access owner/pet pages as an anonymous user (should redirect or fail)
+1.2. Access vet list without authentication (should succeed – public)
+1.3. Attempt to access admin-only pages without admin role (should be forbidden)
+1.4. Authenticate as a valid user and access their data
+1.5. Attempt login with invalid credentials (should fail)
+2. Owner Registration & Management
+2.1. Successfully register a new pet owner via form
+2.2. Submit the registration form with missing fields (e.g., no telephone)
+2.3. Submit invalid data formats (e.g., non-numeric phone)
+2.4. Try to update an owner with mismatched form ID (should fail)
+2.5. Ensure duplicate owners are handled properly
+3. Pet Management
+3.1. Add a new pet to an existing owner
+3.2. Add a pet with missing fields (e.g., no name/type)
+3.3. Update pet details (name, type, birthdate)
+3.4. Try to edit a non-existent pet (should 404)
+3.5. Add pet with a future birthdate (should fail validation)
+4. Visit Scheduling
+4.1. Add a visit to an existing pet
+4.2. Attempt to add a visit with missing date or description
+4.3. Ensure visits are linked to the correct pet
+4.4. Add multiple visits and verify chronological ordering
+4.5. Add a visit with excessively long description (test limits)
+5. Vet Listing and Specialties
+5.1. View vet list in HTML (UI)
+5.2. Retrieve vet list in JSON format via /vets endpoint
+5.3. Ensure each vet entry includes valid specialties
+5.4. Test vet list pagination behavior
+5.5. Attempt to fetch vets via malformed URL (expect 400 or 404)
+6. Internationalization
+6.1. Verify default locale strings appear in UI
+6.2. Switch locale via query param (?lang=fr) and check translations
+6.3. Check fallback behavior for missing translation keys
+6.4. Ensure no hardcoded UI text remains untranslated
+7. Exception Handling
+7.1. Trigger known crash endpoint (/oups) and check HTML response
+7.2. Trigger /oups and check JSON error structure
+7.3. Trigger exception with HTML header (verify correct error template)
+7.4. Check that unauthorized form submissions do not expose stack traces
+8. Data Validation & Integrity
+8.1. Reject form submissions with invalid characters (XSS test)
+8.2. Prevent pet duplication (same name/type/date under same owner)
+8.3. Ensure no SQL injection is possible via owner name or pet fields
+8.4. Submit 100+ visits for a pet to test scalability and integrity
+9. API/Controller Behavior
+9.1. Return correct status codes (200 for success, 302 for redirects, etc.)
+9.2. Verify model attributes are set for each controller method
+9.3. Check that all forms include CSRF tokens
+9.4. Send malformed POST data and ensure 400 is returned
+10. Database & Transaction Consistency
+10.1. Ensure DB rollback after failed insert (e.g., missing required fields)
+10.2. Delete a pet and confirm related visits are deleted or orphaned properly
+10.3. Simulate DB disconnect (e.g., drop connection) and ensure graceful fallback
+10.4. Validate that owner and pet data stay consistent across updates
+
+🔹 Response:
+PetClinicIntegrationTests#testFindAll
+MySqlIntegrationTests#testFindAll
+PostgresIntegrationTests#testFindAll
+OwnerControllerTests#testInitCreationForm
+OwnerControllerTests#testProcessCreationFormSuccess
+PetControllerTests#testInitCreationForm
+PetControllerTests#testProcessCreationFormSuccess
+VisitControllerTests#testInitNewVisitForm
+VisitControllerTests#testProcessNewVisitFormSuccess
+ClinicServiceTests#shouldFindOwnersByLastName
+ClinicServiceTests#shouldInsertOwner
+ClinicServiceTests#shouldInsertPetIntoDatabaseAndGenerateId
+ClinicServiceTests#shouldAddNewVisitForPet
+OwnerControllerTests#testInitFindForm
+OwnerControllerTests#testProcessFindFormSuccess
+OwnerControllerTests#testShowOwner
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithBlankName
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithDuplicateName
+VisitControllerTests#testProcessNewVisitFormHasErrors
+ClinicServiceTests#shouldFindSingleOwnerWithPet
+ClinicServiceTests#shouldUpdateOwner
+ClinicServiceTests#shouldUpdatePetName
+PetClinicIntegrationTests#testOwnerDetails
+MySqlIntegrationTests#testOwnerDetails
+PostgresIntegrationTests#testOwnerDetails
+OwnerControllerTests#testProcessCreationFormHasErrors
+OwnerControllerTests#testProcessFindFormByLastName
+OwnerControllerTests#testProcessFindFormNoOwnersFound
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithMissingPetType
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithInvalidBirthDate
+ClinicServiceTests#shouldFindAllPetTypes
+ClinicServiceTests#shouldFindVets
+ClinicServiceTests#shouldFindVisitsByPetId
+OwnerControllerTests#testInitUpdateOwnerForm
+OwnerControllerTests#testProcessUpdateOwnerFormSuccess
+PetControllerTests.ProcessCreationFormHasErrors#testInitUpdateForm
+PetControllerTests#testProcessUpdateFormSuccess
+OwnerControllerTests#testProcessUpdateOwnerFormUnchangedSuccess
+OwnerControllerTests#testProcessUpdateOwnerFormHasErrors
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithInvalidBirthDate
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithBlankName
+OwnerControllerTests#testProcessUpdateOwnerFormWithIdMismatch
+ValidatorTests#shouldNotValidateWhenFirstNameEmpty
+PetValidatorTests#testValidate
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetName
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetType
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidBirthDate
+PetTypeFormatterTests#testPrint
+PetTypeFormatterTests#shouldParse
+PetTypeFormatterTests#shouldThrowParseException
+CrashControllerIntegrationTests#testTriggerExceptionJson
+CrashControllerIntegrationTests#testTriggerExceptionHtml
+CrashControllerTests#testTriggerException
+I18nPropertiesSyncTest#checkNonInternationalizedStrings
+I18nPropertiesSyncTest#checkI18nPropertyFilesAreInSync
+VetControllerTests#testShowVetListHtml
+VetControllerTests#testShowResourcesVetList
+VetTests#testSerialization
+
+
+=== STRATEGY #4 - Alternate between positive/negative or edge/normal test cases. ===
+
+🔹 Prompt:
+You are a test optimization assistant.
+
+Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative code coverage.
+
+Each test is in the format:
+ClassName#testMethod - short description
+
+⚙️ Input Parameters:
+- Total number of tests: 58
+- You must return exactly 58 test names.
+- All returned test names must come from the provided list.
+- Do NOT add, remove, rename, or duplicate any tests.
+
+⚠️ Important Instruction:
+You must reorder exactly the test names I provide. Do not add anything. Do not change anything.
+Just return the same test names in a better order to get higher line coverage.
+
+🚫 Strict Format Rules:
+- DO NOT include:
+  • Descriptions
+  • Explanations or comments
+  • Markdown (e.g., **bold**, code)
+  • Category headings
+  • Numbering, bullets, or blank lines
+
+✅ Output format:
+AuthenticationServiceTest#testRegister_Success  
+JwtServiceTest#testGenerateAccessToken
+
+🧠 Strategy: Alternate between positive/negative or edge/normal test cases.
+
+🔹 User input:
+Now I will give you the full test list.
+
+Here is the list of unit + integration tests:
+
+MySqlIntegrationTests#testFindAll – Tests that all veterinarians can be retrieved from the database. The second call confirms that results are served from cache.
+MySqlIntegrationTests#testOwnerDetails – Sends an HTTP GET request to retrieve details for owner with ID 1 and verifies that the response status is 200 OK.
+PetClinicIntegrationTests#testFindAll – Tests retrieval of all veterinarians from the repository and confirms that the second call uses cache for improved performance.
+PetClinicIntegrationTests#testOwnerDetails – Sends an HTTP GET request to /owners/1 and verifies that the owner's details are successfully returned with status code 200 (OK).
+PostgresIntegrationTests#testFindAll – Tests retrieval of all veterinarians from the repository when using the PostgreSQL profile. Confirms caching by calling the method twice.
+PostgresIntegrationTests#testOwnerDetails – Sends an HTTP GET request to /owners/1 and checks that the endpoint responds with HTTP 200 OK, validating proper integration with PostgreSQL backend.
+ValidatorTests#shouldNotValidateWhenFirstNameEmpty – Verifies that a Person object with an empty firstName field fails validation, and the correct constraint violation message ("must not be blank") is returned.
+OwnerControllerTests#testInitCreationForm – Sends a GET request to /owners/new to initialize the owner creation form and verifies that the correct view and model attributes are present.
+OwnerControllerTests#testProcessCreationFormSuccess – Sends a POST request with valid owner data to /owners/new and verifies that the form submission is successful with a 3xx redirect.
+OwnerControllerTests#testProcessCreationFormHasErrors – Submits a POST request with missing required fields (address, telephone) and ensures validation errors are returned for those fields.
+OwnerControllerTests#testInitFindForm – Checks that the owner search form at /owners/find initializes correctly with the required model attributes and view.
+OwnerControllerTests#testProcessFindFormSuccess – Simulates searching owners and returns multiple results, verifying that the owners list view is rendered successfully.
+OwnerControllerTests#testProcessFindFormByLastName – Searches for an owner by last name and verifies that the system redirects to that specific owner’s detail page.
+OwnerControllerTests#testProcessFindFormNoOwnersFound – Searches with an unknown last name and expects a field error message for lastName indicating no results were found.
+OwnerControllerTests#testInitUpdateOwnerForm – Sends a GET request to edit an existing owner and checks that the form is pre-filled with correct data.
+OwnerControllerTests#testProcessUpdateOwnerFormSuccess – Sends a POST request with valid updated owner data and expects a redirect to the owner’s detail page.
+OwnerControllerTests#testProcessUpdateOwnerFormUnchangedSuccess – Submits an update form without changes and confirms it still redirects successfully.
+OwnerControllerTests#testProcessUpdateOwnerFormHasErrors – Submits invalid data (empty address and telephone) and verifies that validation errors are returned and the form is reloaded.
+OwnerControllerTests#testShowOwner – Sends a GET request to show an owner's details and verifies that all expected properties and nested data (e.g. pets, visits) are correctly returned.
+OwnerControllerTests#testProcessUpdateOwnerFormWithIdMismatch – Simulates a mismatch between the owner ID in the path and the submitted owner object and verifies that it redirects back to the edit form with an error flash message.
+PetControllerTests#testInitCreationForm – Sends a GET request to start creating a new pet for an owner, and ensures the correct form view and model attributes are returned.
+PetControllerTests#testProcessCreationFormSuccess – Posts valid data for creating a pet and expects a redirect to the owner's detail page.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithBlankName – Submits a form with a blank name field and checks for validation errors.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithDuplicateName – Attempts to create a pet with a name that already exists and ensures a duplicate name validation error occurs.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithMissingPetType – Omits the pet type during creation and verifies a required field error for type.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithInvalidBirthDate – Provides a future date as the birth date and ensures a validation error is triggered for invalid date format.
+PetControllerTests.ProcessCreationFormHasErrors#testInitUpdateForm – Loads the update form for an existing pet and verifies that the view and model attribute (pet) are correctly set.
+PetControllerTests#testProcessUpdateFormSuccess – Sends a valid update request for a pet and checks for successful redirection.
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithInvalidBirthDate – Submits an update with a wrongly formatted birth date and ensures a validation error is shown.
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithBlankName – Sends an update request with a blank name and confirms that validation for the name field fails.
+PetTypeFormatterTests#testPrint – Tests that the print() method returns the correct pet type name as a string for display purposes.
+PetTypeFormatterTests#shouldParse – Verifies that a valid pet type string (e.g., "Bird") is correctly parsed into a PetType object.
+PetTypeFormatterTests#shouldThrowParseException – Ensures that an unknown pet type string (e.g., "Fish") results in a ParseException.
+PetValidatorTests#testValidate – Validates a fully populated Pet object and confirms that no validation errors are raised.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetName – Tests that an empty pet name triggers a validation error on the name field.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetType – Ensures that a null pet type is flagged as a validation error.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidBirthDate – Verifies that a missing birth date results in a validation error on the birthDate field.
+VisitControllerTests#testInitNewVisitForm – Sends a GET request to initialize the form for creating a new visit and checks that the appropriate view is rendered.
+VisitControllerTests#testProcessNewVisitFormSuccess – Posts valid visit data and verifies that the system processes it successfully and redirects to the owner's detail page.
+VisitControllerTests#testProcessNewVisitFormHasErrors – Submits a visit form with missing required fields (e.g., description) and confirms that validation errors occur and the form view is reloaded.
+ClinicServiceTests#shouldFindOwnersByLastName – Tests the ability to retrieve owners from the database using a partial last name match, and verifies that no results are returned for nonexistent matches.
+ClinicServiceTests#shouldFindSingleOwnerWithPet – Verifies that a specific owner with ID 1 exists, has one pet, and that the pet has a valid and expected pet type ("cat").
+ClinicServiceTests#shouldInsertOwner – Inserts a new owner into the database, verifies ID generation, and confirms that the new owner count increases as expected.
+ClinicServiceTests#shouldUpdateOwner – Updates an existing owner's last name and verifies that the change is correctly persisted to the database.
+ClinicServiceTests#shouldFindAllPetTypes – Ensures that the system can retrieve all pet types, and verifies specific entries such as "cat" and "snake" by ID.
+ClinicServiceTests#shouldInsertPetIntoDatabaseAndGenerateId – Adds a new pet to an existing owner and confirms the pet is saved correctly with a generated ID.
+ClinicServiceTests#shouldUpdatePetName – Changes the name of an existing pet, saves the update, and verifies the name is updated in the database.
+ClinicServiceTests#shouldFindVets – Retrieves all veterinarians and verifies one of them has the expected last name and specialties ("dentistry" and "surgery").
+ClinicServiceTests#shouldAddNewVisitForPet – Adds a new visit to an existing pet and ensures the visit is saved with a valid ID and the visit count increases.
+ClinicServiceTests#shouldFindVisitsByPetId – Retrieves the list of visits for a pet and confirms the number and contents of the visits, including that the visit date is not null
+CrashControllerIntegrationTests#testTriggerExceptionJson – Sends a GET request to /oups expecting a JSON error response, and asserts that the response includes HTTP 500 with keys like timestamp, status, error, and the expected exception message.
+CrashControllerIntegrationTests#testTriggerExceptionHtml – Sends a GET request to /oups with Accept: text/html header, checks that the response returns a custom HTML error page (not the default Whitelabel error page) with informative content describing the exception.
+CrashControllerTests#testTriggerException – Unit test for CrashController that verifies calling triggerException() throws a RuntimeException with a message explaining it was triggered for demonstration purposes.
+I18nPropertiesSyncTest#checkNonInternationalizedStrings – Scans .java and .html files (excluding tests) to ensure there are no hardcoded, non-internationalized strings in HTML templates. Fails if such strings are found.
+I18nPropertiesSyncTest#checkI18nPropertyFilesAreInSync – Compares all localized messages_*.properties files against the base messages.properties file to ensure all translation keys exist in each file. Fails if any keys are missing.
+VetControllerTests#testShowVetListHtml – Sends a GET request to /vets.html?page=1 and verifies that the vet list HTML view (vets/vetList) is correctly rendered with the expected model attribute listVets.
+VetControllerTests#testShowResourcesVetList – Sends a GET request to /vets with Accept: application/json and checks that the returned JSON contains a list of vets, including the vet with ID 1.
+VetTests#testSerialization – Tests that a Vet object can be serialized and deserialized correctly, and ensures that its firstName, lastName, and id values remain unchanged after deserialization.
+
+Here are the regression tests that must also be included:
+
+1. User Access & Roles
+1.1. Access owner/pet pages as an anonymous user (should redirect or fail)
+1.2. Access vet list without authentication (should succeed – public)
+1.3. Attempt to access admin-only pages without admin role (should be forbidden)
+1.4. Authenticate as a valid user and access their data
+1.5. Attempt login with invalid credentials (should fail)
+2. Owner Registration & Management
+2.1. Successfully register a new pet owner via form
+2.2. Submit the registration form with missing fields (e.g., no telephone)
+2.3. Submit invalid data formats (e.g., non-numeric phone)
+2.4. Try to update an owner with mismatched form ID (should fail)
+2.5. Ensure duplicate owners are handled properly
+3. Pet Management
+3.1. Add a new pet to an existing owner
+3.2. Add a pet with missing fields (e.g., no name/type)
+3.3. Update pet details (name, type, birthdate)
+3.4. Try to edit a non-existent pet (should 404)
+3.5. Add pet with a future birthdate (should fail validation)
+4. Visit Scheduling
+4.1. Add a visit to an existing pet
+4.2. Attempt to add a visit with missing date or description
+4.3. Ensure visits are linked to the correct pet
+4.4. Add multiple visits and verify chronological ordering
+4.5. Add a visit with excessively long description (test limits)
+5. Vet Listing and Specialties
+5.1. View vet list in HTML (UI)
+5.2. Retrieve vet list in JSON format via /vets endpoint
+5.3. Ensure each vet entry includes valid specialties
+5.4. Test vet list pagination behavior
+5.5. Attempt to fetch vets via malformed URL (expect 400 or 404)
+6. Internationalization
+6.1. Verify default locale strings appear in UI
+6.2. Switch locale via query param (?lang=fr) and check translations
+6.3. Check fallback behavior for missing translation keys
+6.4. Ensure no hardcoded UI text remains untranslated
+7. Exception Handling
+7.1. Trigger known crash endpoint (/oups) and check HTML response
+7.2. Trigger /oups and check JSON error structure
+7.3. Trigger exception with HTML header (verify correct error template)
+7.4. Check that unauthorized form submissions do not expose stack traces
+8. Data Validation & Integrity
+8.1. Reject form submissions with invalid characters (XSS test)
+8.2. Prevent pet duplication (same name/type/date under same owner)
+8.3. Ensure no SQL injection is possible via owner name or pet fields
+8.4. Submit 100+ visits for a pet to test scalability and integrity
+9. API/Controller Behavior
+9.1. Return correct status codes (200 for success, 302 for redirects, etc.)
+9.2. Verify model attributes are set for each controller method
+9.3. Check that all forms include CSRF tokens
+9.4. Send malformed POST data and ensure 400 is returned
+10. Database & Transaction Consistency
+10.1. Ensure DB rollback after failed insert (e.g., missing required fields)
+10.2. Delete a pet and confirm related visits are deleted or orphaned properly
+10.3. Simulate DB disconnect (e.g., drop connection) and ensure graceful fallback
+10.4. Validate that owner and pet data stay consistent across updates
+
+🔹 Response:
+MySqlIntegrationTests#testFindAll
+ValidatorTests#shouldNotValidateWhenFirstNameEmpty
+MySqlIntegrationTests#testOwnerDetails
+OwnerControllerTests#testInitCreationForm
+PetClinicIntegrationTests#testFindAll
+OwnerControllerTests#testProcessCreationFormSuccess
+PetClinicIntegrationTests#testOwnerDetails
+OwnerControllerTests#testProcessCreationFormHasErrors
+PostgresIntegrationTests#testFindAll
+OwnerControllerTests#testInitFindForm
+PostgresIntegrationTests#testOwnerDetails
+OwnerControllerTests#testProcessFindFormSuccess
+OwnerControllerTests#testProcessFindFormByLastName
+PetControllerTests#testInitCreationForm
+OwnerControllerTests#testProcessFindFormNoOwnersFound
+PetControllerTests#testProcessCreationFormSuccess
+OwnerControllerTests#testInitUpdateOwnerForm
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithBlankName
+OwnerControllerTests#testProcessUpdateOwnerFormSuccess
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithDuplicateName
+OwnerControllerTests#testProcessUpdateOwnerFormUnchangedSuccess
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithMissingPetType
+OwnerControllerTests#testProcessUpdateOwnerFormHasErrors
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithInvalidBirthDate
+OwnerControllerTests#testShowOwner
+PetControllerTests.ProcessCreationFormHasErrors#testInitUpdateForm
+OwnerControllerTests#testProcessUpdateOwnerFormWithIdMismatch
+PetControllerTests#testProcessUpdateFormSuccess
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithInvalidBirthDate
+PetTypeFormatterTests#testPrint
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithBlankName
+PetTypeFormatterTests#shouldParse
+VisitControllerTests#testInitNewVisitForm
+PetTypeFormatterTests#shouldThrowParseException
+VisitControllerTests#testProcessNewVisitFormSuccess
+PetValidatorTests#testValidate
+VisitControllerTests#testProcessNewVisitFormHasErrors
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetName
+ClinicServiceTests#shouldFindOwnersByLastName
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetType
+ClinicServiceTests#shouldFindSingleOwnerWithPet
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidBirthDate
+ClinicServiceTests#shouldInsertOwner
+CrashControllerIntegrationTests#testTriggerExceptionJson
+ClinicServiceTests#shouldUpdateOwner
+CrashControllerIntegrationTests#testTriggerExceptionHtml
+ClinicServiceTests#shouldFindAllPetTypes
+CrashControllerTests#testTriggerException
+ClinicServiceTests#shouldInsertPetIntoDatabaseAndGenerateId
+I18nPropertiesSyncTest#checkNonInternationalizedStrings
+ClinicServiceTests#shouldUpdatePetName
+I18nPropertiesSyncTest#checkI18nPropertyFilesAreInSync
+ClinicServiceTests#shouldFindVets
+VetControllerTests#testShowVetListHtml
+ClinicServiceTests#shouldAddNewVisitForPet
+VetControllerTests#testShowResourcesVetList
+ClinicServiceTests#shouldFindVisitsByPetId
+VetTests#testSerialization
+
+
+=== STRATEGY #5 - Distribute regression test cases evenly rather than grouping them. ===
+
+🔹 Prompt:
+You are a test optimization assistant.
+
+Now I will give you regression and unit test cases. Your job is to reorder the test names to maximize early cumulative code coverage.
+
+Each test is in the format:
+ClassName#testMethod - short description
+
+⚙️ Input Parameters:
+- Total number of tests: 58
+- You must return exactly 58 test names.
+- All returned test names must come from the provided list.
+- Do NOT add, remove, rename, or duplicate any tests.
+
+⚠️ Important Instruction:
+You must reorder exactly the test names I provide. Do not add anything. Do not change anything.
+Just return the same test names in a better order to get higher line coverage.
+
+🚫 Strict Format Rules:
+- DO NOT include:
+  • Descriptions
+  • Explanations or comments
+  • Markdown (e.g., **bold**, code)
+  • Category headings
+  • Numbering, bullets, or blank lines
+
+✅ Output format:
+AuthenticationServiceTest#testRegister_Success  
+JwtServiceTest#testGenerateAccessToken
+
+🧠 Strategy: Distribute regression test cases evenly rather than grouping them.
+
+🔹 User input:
+Now I will give you the full test list.
+
+Here is the list of unit + integration tests:
+
+MySqlIntegrationTests#testFindAll – Tests that all veterinarians can be retrieved from the database. The second call confirms that results are served from cache.
+MySqlIntegrationTests#testOwnerDetails – Sends an HTTP GET request to retrieve details for owner with ID 1 and verifies that the response status is 200 OK.
+PetClinicIntegrationTests#testFindAll – Tests retrieval of all veterinarians from the repository and confirms that the second call uses cache for improved performance.
+PetClinicIntegrationTests#testOwnerDetails – Sends an HTTP GET request to /owners/1 and verifies that the owner's details are successfully returned with status code 200 (OK).
+PostgresIntegrationTests#testFindAll – Tests retrieval of all veterinarians from the repository when using the PostgreSQL profile. Confirms caching by calling the method twice.
+PostgresIntegrationTests#testOwnerDetails – Sends an HTTP GET request to /owners/1 and checks that the endpoint responds with HTTP 200 OK, validating proper integration with PostgreSQL backend.
+ValidatorTests#shouldNotValidateWhenFirstNameEmpty – Verifies that a Person object with an empty firstName field fails validation, and the correct constraint violation message ("must not be blank") is returned.
+OwnerControllerTests#testInitCreationForm – Sends a GET request to /owners/new to initialize the owner creation form and verifies that the correct view and model attributes are present.
+OwnerControllerTests#testProcessCreationFormSuccess – Sends a POST request with valid owner data to /owners/new and verifies that the form submission is successful with a 3xx redirect.
+OwnerControllerTests#testProcessCreationFormHasErrors – Submits a POST request with missing required fields (address, telephone) and ensures validation errors are returned for those fields.
+OwnerControllerTests#testInitFindForm – Checks that the owner search form at /owners/find initializes correctly with the required model attributes and view.
+OwnerControllerTests#testProcessFindFormSuccess – Simulates searching owners and returns multiple results, verifying that the owners list view is rendered successfully.
+OwnerControllerTests#testProcessFindFormByLastName – Searches for an owner by last name and verifies that the system redirects to that specific owner’s detail page.
+OwnerControllerTests#testProcessFindFormNoOwnersFound – Searches with an unknown last name and expects a field error message for lastName indicating no results were found.
+OwnerControllerTests#testInitUpdateOwnerForm – Sends a GET request to edit an existing owner and checks that the form is pre-filled with correct data.
+OwnerControllerTests#testProcessUpdateOwnerFormSuccess – Sends a POST request with valid updated owner data and expects a redirect to the owner’s detail page.
+OwnerControllerTests#testProcessUpdateOwnerFormUnchangedSuccess – Submits an update form without changes and confirms it still redirects successfully.
+OwnerControllerTests#testProcessUpdateOwnerFormHasErrors – Submits invalid data (empty address and telephone) and verifies that validation errors are returned and the form is reloaded.
+OwnerControllerTests#testShowOwner – Sends a GET request to show an owner's details and verifies that all expected properties and nested data (e.g. pets, visits) are correctly returned.
+OwnerControllerTests#testProcessUpdateOwnerFormWithIdMismatch – Simulates a mismatch between the owner ID in the path and the submitted owner object and verifies that it redirects back to the edit form with an error flash message.
+PetControllerTests#testInitCreationForm – Sends a GET request to start creating a new pet for an owner, and ensures the correct form view and model attributes are returned.
+PetControllerTests#testProcessCreationFormSuccess – Posts valid data for creating a pet and expects a redirect to the owner's detail page.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithBlankName – Submits a form with a blank name field and checks for validation errors.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithDuplicateName – Attempts to create a pet with a name that already exists and ensures a duplicate name validation error occurs.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithMissingPetType – Omits the pet type during creation and verifies a required field error for type.
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithInvalidBirthDate – Provides a future date as the birth date and ensures a validation error is triggered for invalid date format.
+PetControllerTests.ProcessCreationFormHasErrors#testInitUpdateForm – Loads the update form for an existing pet and verifies that the view and model attribute (pet) are correctly set.
+PetControllerTests#testProcessUpdateFormSuccess – Sends a valid update request for a pet and checks for successful redirection.
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithInvalidBirthDate – Submits an update with a wrongly formatted birth date and ensures a validation error is shown.
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithBlankName – Sends an update request with a blank name and confirms that validation for the name field fails.
+PetTypeFormatterTests#testPrint – Tests that the print() method returns the correct pet type name as a string for display purposes.
+PetTypeFormatterTests#shouldParse – Verifies that a valid pet type string (e.g., "Bird") is correctly parsed into a PetType object.
+PetTypeFormatterTests#shouldThrowParseException – Ensures that an unknown pet type string (e.g., "Fish") results in a ParseException.
+PetValidatorTests#testValidate – Validates a fully populated Pet object and confirms that no validation errors are raised.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetName – Tests that an empty pet name triggers a validation error on the name field.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetType – Ensures that a null pet type is flagged as a validation error.
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidBirthDate – Verifies that a missing birth date results in a validation error on the birthDate field.
+VisitControllerTests#testInitNewVisitForm – Sends a GET request to initialize the form for creating a new visit and checks that the appropriate view is rendered.
+VisitControllerTests#testProcessNewVisitFormSuccess – Posts valid visit data and verifies that the system processes it successfully and redirects to the owner's detail page.
+VisitControllerTests#testProcessNewVisitFormHasErrors – Submits a visit form with missing required fields (e.g., description) and confirms that validation errors occur and the form view is reloaded.
+ClinicServiceTests#shouldFindOwnersByLastName – Tests the ability to retrieve owners from the database using a partial last name match, and verifies that no results are returned for nonexistent matches.
+ClinicServiceTests#shouldFindSingleOwnerWithPet – Verifies that a specific owner with ID 1 exists, has one pet, and that the pet has a valid and expected pet type ("cat").
+ClinicServiceTests#shouldInsertOwner – Inserts a new owner into the database, verifies ID generation, and confirms that the new owner count increases as expected.
+ClinicServiceTests#shouldUpdateOwner – Updates an existing owner's last name and verifies that the change is correctly persisted to the database.
+ClinicServiceTests#shouldFindAllPetTypes – Ensures that the system can retrieve all pet types, and verifies specific entries such as "cat" and "snake" by ID.
+ClinicServiceTests#shouldInsertPetIntoDatabaseAndGenerateId – Adds a new pet to an existing owner and confirms the pet is saved correctly with a generated ID.
+ClinicServiceTests#shouldUpdatePetName – Changes the name of an existing pet, saves the update, and verifies the name is updated in the database.
+ClinicServiceTests#shouldFindVets – Retrieves all veterinarians and verifies one of them has the expected last name and specialties ("dentistry" and "surgery").
+ClinicServiceTests#shouldAddNewVisitForPet – Adds a new visit to an existing pet and ensures the visit is saved with a valid ID and the visit count increases.
+ClinicServiceTests#shouldFindVisitsByPetId – Retrieves the list of visits for a pet and confirms the number and contents of the visits, including that the visit date is not null
+CrashControllerIntegrationTests#testTriggerExceptionJson – Sends a GET request to /oups expecting a JSON error response, and asserts that the response includes HTTP 500 with keys like timestamp, status, error, and the expected exception message.
+CrashControllerIntegrationTests#testTriggerExceptionHtml – Sends a GET request to /oups with Accept: text/html header, checks that the response returns a custom HTML error page (not the default Whitelabel error page) with informative content describing the exception.
+CrashControllerTests#testTriggerException – Unit test for CrashController that verifies calling triggerException() throws a RuntimeException with a message explaining it was triggered for demonstration purposes.
+I18nPropertiesSyncTest#checkNonInternationalizedStrings – Scans .java and .html files (excluding tests) to ensure there are no hardcoded, non-internationalized strings in HTML templates. Fails if such strings are found.
+I18nPropertiesSyncTest#checkI18nPropertyFilesAreInSync – Compares all localized messages_*.properties files against the base messages.properties file to ensure all translation keys exist in each file. Fails if any keys are missing.
+VetControllerTests#testShowVetListHtml – Sends a GET request to /vets.html?page=1 and verifies that the vet list HTML view (vets/vetList) is correctly rendered with the expected model attribute listVets.
+VetControllerTests#testShowResourcesVetList – Sends a GET request to /vets with Accept: application/json and checks that the returned JSON contains a list of vets, including the vet with ID 1.
+VetTests#testSerialization – Tests that a Vet object can be serialized and deserialized correctly, and ensures that its firstName, lastName, and id values remain unchanged after deserialization.
+
+Here are the regression tests that must also be included:
+
+1. User Access & Roles
+1.1. Access owner/pet pages as an anonymous user (should redirect or fail)
+1.2. Access vet list without authentication (should succeed – public)
+1.3. Attempt to access admin-only pages without admin role (should be forbidden)
+1.4. Authenticate as a valid user and access their data
+1.5. Attempt login with invalid credentials (should fail)
+2. Owner Registration & Management
+2.1. Successfully register a new pet owner via form
+2.2. Submit the registration form with missing fields (e.g., no telephone)
+2.3. Submit invalid data formats (e.g., non-numeric phone)
+2.4. Try to update an owner with mismatched form ID (should fail)
+2.5. Ensure duplicate owners are handled properly
+3. Pet Management
+3.1. Add a new pet to an existing owner
+3.2. Add a pet with missing fields (e.g., no name/type)
+3.3. Update pet details (name, type, birthdate)
+3.4. Try to edit a non-existent pet (should 404)
+3.5. Add pet with a future birthdate (should fail validation)
+4. Visit Scheduling
+4.1. Add a visit to an existing pet
+4.2. Attempt to add a visit with missing date or description
+4.3. Ensure visits are linked to the correct pet
+4.4. Add multiple visits and verify chronological ordering
+4.5. Add a visit with excessively long description (test limits)
+5. Vet Listing and Specialties
+5.1. View vet list in HTML (UI)
+5.2. Retrieve vet list in JSON format via /vets endpoint
+5.3. Ensure each vet entry includes valid specialties
+5.4. Test vet list pagination behavior
+5.5. Attempt to fetch vets via malformed URL (expect 400 or 404)
+6. Internationalization
+6.1. Verify default locale strings appear in UI
+6.2. Switch locale via query param (?lang=fr) and check translations
+6.3. Check fallback behavior for missing translation keys
+6.4. Ensure no hardcoded UI text remains untranslated
+7. Exception Handling
+7.1. Trigger known crash endpoint (/oups) and check HTML response
+7.2. Trigger /oups and check JSON error structure
+7.3. Trigger exception with HTML header (verify correct error template)
+7.4. Check that unauthorized form submissions do not expose stack traces
+8. Data Validation & Integrity
+8.1. Reject form submissions with invalid characters (XSS test)
+8.2. Prevent pet duplication (same name/type/date under same owner)
+8.3. Ensure no SQL injection is possible via owner name or pet fields
+8.4. Submit 100+ visits for a pet to test scalability and integrity
+9. API/Controller Behavior
+9.1. Return correct status codes (200 for success, 302 for redirects, etc.)
+9.2. Verify model attributes are set for each controller method
+9.3. Check that all forms include CSRF tokens
+9.4. Send malformed POST data and ensure 400 is returned
+10. Database & Transaction Consistency
+10.1. Ensure DB rollback after failed insert (e.g., missing required fields)
+10.2. Delete a pet and confirm related visits are deleted or orphaned properly
+10.3. Simulate DB disconnect (e.g., drop connection) and ensure graceful fallback
+10.4. Validate that owner and pet data stay consistent across updates
+
+🔹 Response:
+OwnerControllerTests#testInitCreationForm
+OwnerControllerTests#testProcessCreationFormSuccess
+OwnerControllerTests#testProcessCreationFormHasErrors
+PetControllerTests#testInitCreationForm
+PetControllerTests#testProcessCreationFormSuccess
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithBlankName
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithDuplicateName
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithMissingPetType
+PetControllerTests.ProcessCreationFormHasErrors#testProcessCreationFormWithInvalidBirthDate
+OwnerControllerTests#testInitFindForm
+OwnerControllerTests#testProcessFindFormSuccess
+OwnerControllerTests#testProcessFindFormByLastName
+OwnerControllerTests#testProcessFindFormNoOwnersFound
+OwnerControllerTests#testInitUpdateOwnerForm
+OwnerControllerTests#testProcessUpdateOwnerFormSuccess
+OwnerControllerTests#testProcessUpdateOwnerFormUnchangedSuccess
+OwnerControllerTests#testProcessUpdateOwnerFormHasErrors
+OwnerControllerTests#testShowOwner
+OwnerControllerTests#testProcessUpdateOwnerFormWithIdMismatch
+PetControllerTests.ProcessCreationFormHasErrors#testInitUpdateForm
+PetControllerTests#testProcessUpdateFormSuccess
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithInvalidBirthDate
+PetControllerTests.ProcessUpdateFormHasErrors#testProcessUpdateFormWithBlankName
+ValidatorTests#shouldNotValidateWhenFirstNameEmpty
+PetTypeFormatterTests#testPrint
+PetTypeFormatterTests#shouldParse
+PetTypeFormatterTests#shouldThrowParseException
+PetValidatorTests#testValidate
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetName
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidPetType
+PetValidatorTests.ValidateHasErrors#testValidateWithInvalidBirthDate
+VisitControllerTests#testInitNewVisitForm
+VisitControllerTests#testProcessNewVisitFormSuccess
+VisitControllerTests#testProcessNewVisitFormHasErrors
+ClinicServiceTests#shouldFindOwnersByLastName
+ClinicServiceTests#shouldFindSingleOwnerWithPet
+ClinicServiceTests#shouldInsertOwner
+ClinicServiceTests#shouldUpdateOwner
+ClinicServiceTests#shouldFindAllPetTypes
+ClinicServiceTests#shouldInsertPetIntoDatabaseAndGenerateId
+ClinicServiceTests#shouldUpdatePetName
+ClinicServiceTests#shouldFindVets
+ClinicServiceTests#shouldAddNewVisitForPet
+ClinicServiceTests#shouldFindVisitsByPetId
+CrashControllerIntegrationTests#testTriggerExceptionJson
+CrashControllerIntegrationTests#testTriggerExceptionHtml
+CrashControllerTests#testTriggerException
+I18nPropertiesSyncTest#checkNonInternationalizedStrings
+I18nPropertiesSyncTest#checkI18nPropertyFilesAreInSync
+VetControllerTests#testShowVetListHtml
+VetControllerTests#testShowResourcesVetList
+VetTests#testSerialization
+MySqlIntegrationTests#testFindAll
+MySqlIntegrationTests#testOwnerDetails
+PetClinicIntegrationTests#testFindAll
+PetClinicIntegrationTests#testOwnerDetails
+PostgresIntegrationTests#testFindAll
+PostgresIntegrationTests#testOwnerDetails
+

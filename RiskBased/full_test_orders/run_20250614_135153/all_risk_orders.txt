@@ -1,0 +1,3 @@
+input_first_v1_temp0.3_top1.0: Given risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests
+
+Expanded risk order: ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > OwnerControllerTests > PetControllerTests > PetValidatorTests > PetTypeFormatterTests > ValidatorTests > MySqlIntegrationTests > PostgresIntegrationTests > PetClinicIntegrationTests > VetControllerTests > VetTests

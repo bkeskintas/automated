@@ -1,0 +1,6 @@
+
+❌ Strategy #1 - Prioritize tests with the most important terms based on TF-IDF scores. failed after 5 attempts.
+
+❌ Strategy #2 - Focus on test cases that seem to cover large code regions based on naming. failed after 5 attempts.
+
+❌ Strategy #3 - Maximize early diversity across different modules or classes. failed after 5 attempts.

@@ -6,15 +6,14 @@ import json
 import matplotlib.pyplot as plt
 from datetime import datetime
 from tqdm import tqdm
-
-PROJECT_DIR = "../PasswordManagerAPI"
+import sys
+##Runner and Analyzer
+PROJECT_DIR = "./PasswordManagerAPI" #"./spring-petclinic" 
 MVNW = "mvnw.cmd"
 JACOCO_EXEC = os.path.join(PROJECT_DIR, "target", "jacoco.exec")
 JACOCO_XML = os.path.join(PROJECT_DIR, "target", "site", "jacoco", "jacoco.xml")
 
-INPUT_ROOT = "./final_test_orders"
 RUN_BASE_DIR = "./module_coverage_runs"
-
 os.makedirs(RUN_BASE_DIR, exist_ok=True)
 
 def extract_module_wise_coverage(xml_path):
@@ -107,18 +106,27 @@ def run_test_order(test_file, run_dir):
     plt.savefig(os.path.join(STRAT_DIR, "coverage_curve.png"))
     plt.close()
 
-def find_latest_run_dir():
-    candidates = [d for d in os.listdir(INPUT_ROOT) if d.startswith("run_") and os.path.isdir(os.path.join(INPUT_ROOT, d))]
-    if not candidates:
-        raise FileNotFoundError("No run_XX directory found.")
-    return os.path.join(INPUT_ROOT, max(candidates, key=lambda d: int(d.split("_")[1])))
-
 if __name__ == "__main__":
-    latest_run = find_latest_run_dir()
+    if len(sys.argv) < 2:
+        print("Usage: python run_test_orders_from_folder.py <input_folder>")
+        sys.exit(1)
+
+    selected_folder = sys.argv[1]
+
+    if not os.path.isdir(selected_folder):
+        print(f"Error: Provided folder does not exist: {selected_folder}")
+        sys.exit(1)
+
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_dir = os.path.join(RUN_BASE_DIR, f"{os.path.basename(latest_run)}_{timestamp}")
+    output_dir = os.path.join(RUN_BASE_DIR, f"{os.path.basename(selected_folder)}_{timestamp}")
     os.makedirs(output_dir, exist_ok=True)
 
-    txt_files = [f for f in os.listdir(latest_run) if (f.startswith("tests_") or f == "combined_risk.txt") and f.endswith(".txt")]
+    txt_files = [f for f in os.listdir(selected_folder)
+                 if (f.startswith("tests_") or f == "combined_risk.txt") and f.endswith(".txt")]
+
+    if not txt_files:
+        print(f"No valid test files found in {selected_folder}")
+        sys.exit(1)
+
     for file in txt_files:
-        run_test_order(os.path.join(latest_run, file), output_dir)
+        run_test_order(os.path.join(selected_folder, file), output_dir)
