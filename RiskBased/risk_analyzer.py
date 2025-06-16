@@ -8,7 +8,7 @@ from datetime import datetime
 from tqdm import tqdm
 import sys
 ##Runner and Analyzer
-PROJECT_DIR = "./PasswordManagerAPI" #"./spring-petclinic" 
+PROJECT_DIR = "./PasswordManagerAPI"
 MVNW = "mvnw.cmd"
 JACOCO_EXEC = os.path.join(PROJECT_DIR, "target", "jacoco.exec")
 JACOCO_XML = os.path.join(PROJECT_DIR, "target", "site", "jacoco", "jacoco.xml")

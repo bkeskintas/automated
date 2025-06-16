@@ -162,10 +162,18 @@ if __name__ == "__main__":
     base_dir = sys.argv[1]
     os.chdir(base_dir)
 
-    services = extract_base_services("all_risk_orders.txt")
-    if not services:
-        print("Service extraction failed.")
+    if len(sys.argv) < 3:
+        print("Usage: python risk_plot_helper.py <base_folder> \"Service1 > Service2 > Service3\"")
         sys.exit(1)
+
+    base_dir = sys.argv[1]
+    os.chdir(base_dir)
+
+    # Parse service order from string input
+    services_input = sys.argv[2]
+    services = [re.sub(r'Test$', '', s.strip()) for s in services_input.split(">")]
+    print(f"Services to analyze: {services}")
+
 
     all_folders = [f for f in os.listdir(".") if os.path.isdir(f)]
     input_folders = [f for f in all_folders if f.startswith("tests_input")]

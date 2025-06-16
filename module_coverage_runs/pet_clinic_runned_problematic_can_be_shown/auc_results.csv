@@ -1,0 +1,10 @@
+Folder,Service,AUC
+tests_input_first_v1_temp0.3_top1.0,CrashControllerIntegration,54.7170
+tests_input_first_v1_temp0.3_top1.0,PetController,58.0000
+tests_input_first_v1_temp0.3_top1.0,VetController,0.0000
+tests_relation_first_v1_temp0.3_top1.0,CrashControllerIntegration,51.8868
+tests_relation_first_v1_temp0.3_top1.0,PetController,55.0000
+tests_relation_first_v1_temp0.3_top1.0,VetController,0.0000
+combined_risk,CrashControllerIntegration,54.7170
+combined_risk,PetController,58.0000
+combined_risk,VetController,0.0000

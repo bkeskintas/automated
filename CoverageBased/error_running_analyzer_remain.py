@@ -41,7 +41,7 @@ def plot_coverage_curve(progress_dict, output_path):
 
 def run_strategy(args):
     strat_file, strat_name, BASE_RUN_DIR = args
-    PROJECT_DIR = "./PasswordManagerAPI" #"./spring-petclinic" 
+    PROJECT_DIR = "./PasswordManagerAPI"
     MVNW = "mvnw.cmd"
     JACOCO_EXEC = os.path.join(PROJECT_DIR, "target", "jacoco.exec")
     JACOCO_XML = os.path.join(PROJECT_DIR, "target", "site", "jacoco", "jacoco.xml")

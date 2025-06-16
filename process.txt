@@ -7019,3 +7019,447 @@ The expanded risk order would be:
 ClinicServiceTests > CrashControllerIntegrationTests > CrashControllerTests > I18nPropertiesSyncTest > VisitControllerTests > PetControllerTests > OwnerControllerTests > PetClinicIntegrationTests > MySqlIntegrationTests > PostgresIntegrationTests > ValidatorTests > PetTypeFormatterTests > PetValidatorTests > VetControllerTests > VetTests > I18nPropertiesSyncTest
 Validator response: The risk order does not match the intended structure.
 
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given the risk order: UserServiceTest > ClientServiceTest > JwtServiceTest
+
+The expanded risk order is:
+
+UserServiceTest > ClientServiceTest > JwtServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > RefreshTokenServiceTest > ScopeServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the expanded order.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: ClientServiceTest > CompanyServiceTest > ScopeServiceTest
+
+Expanded order: 
+ClientServiceTest > CompanyServiceTest > ScopeServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > JwtServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > UserServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the expanded risk order.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the expanded risk order.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the expanded risk order.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the expanded risk order.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the expanded risk order.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the expanded risk order.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The given risk order does not match the intended structure.
+
+===== Invalid risk order detected =====
+Given risk order: CompanyServiceTest > ScopeServiceTest > JwtServiceTest
+
+Expanded risk order: 
+CompanyServiceTest > ScopeServiceTest > JwtServiceTest > CompanyRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > AuthenticationServiceTest > ClientServiceTest > RedirectUriServiceTest > RefreshTokenServiceTest > UserServiceTest > RedirectUriRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest
+Validator response: The risk order does not match the intended structure.
+

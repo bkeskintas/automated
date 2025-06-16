@@ -1,0 +1,31 @@
+input_first_v1_temp0.3_top1.0: Given the risk order of ScopeServiceTest > UserServiceTest, the expanded test order should be as follows:
+ScopeServiceTest > UserServiceTest > AuthorizationServiceTest > AuthenticationServiceTest > JwtServiceTest > RefreshTokenServiceTest > ClientServiceTest > RedirectUriServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest
+
+input_first_v2_temp0.7_top0.9: Given risk order: ScopeServiceTest > UserServiceTest
+
+Expanded risk order: ScopeServiceTest > UserServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > JwtServiceTest > RefreshTokenServiceTest > ClientServiceTest > RedirectUriServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ScopeRepositoryIntegrationTest > ClientRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest > CompanyRepositoryIntegrationTest.
+input_first_v3_temp1.0_top0.85: Given risk order: ScopeServiceTest > UserServiceTest
+
+Risk Order with Related Modules: ScopeServiceTest > UserServiceTest > ScopeRepositoryIntegrationTest > ClientServiceTest > AuthenticationServiceTest > RefreshTokenServiceTest > JwtServiceTest > AuthorizationServiceTest > RedirectUriServiceTest > CompanyServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenRepositoryIntegrationTest > ClientRepositoryIntegrationTest > CompanyRepositoryIntegrationTest > RedirectUriRepositoryIntegrationTest
+relation_first_v1_temp0.3_top1.0: Risk Order: 
+ScopeServiceTest > ScopeRepositoryIntegrationTest > UserServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > JwtServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ClientServiceTest > ClientRepositoryIntegrationTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > CompanyServiceTest > CompanyRepositoryIntegrationTest > AuthorizationCodeRepositoryIntegrationTest
+
+Related Modules: 
+ScopeServiceTest: ScopeRepositoryIntegrationTest
+UserServiceTest: AuthenticationServiceTest, AuthorizationServiceTest, JwtServiceTest, RefreshTokenServiceTest, RefreshTokenRepositoryIntegrationTest
+ClientServiceTest: ClientRepositoryIntegrationTest, RedirectUriServiceTest, RedirectUriRepositoryIntegrationTest
+CompanyServiceTest: CompanyRepositoryIntegrationTest, AuthorizationCodeRepositoryIntegrationTest
+relation_first_v2_temp0.7_top0.9: Risk order: ScopeServiceTest > ScopeRepositoryIntegrationTest > UserServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > JwtServiceTest > ClientServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > CompanyServiceTest > CompanyRepositoryIntegrationTest > ClientServiceTest
+
+Related Modules:
+ScopeServiceTest: ScopeRepositoryIntegrationTest
+UserServiceTest: AuthenticationServiceTest, AuthorizationServiceTest, AuthorizationCodeRepositoryIntegrationTest, RefreshTokenServiceTest, RefreshTokenRepositoryIntegrationTest, JwtServiceTest
+ClientServiceTest: RedirectUriServiceTest, RedirectUriRepositoryIntegrationTest, CompanyServiceTest, CompanyRepositoryIntegrationTest
+
+Unrelated Modules: ClientServiceTest
+relation_first_v3_temp1.0_top0.85: Risk Order: ScopeServiceTest > ScopeRepositoryIntegrationTest > UserServiceTest > AuthenticationServiceTest > AuthorizationServiceTest > AuthorizationCodeRepositoryIntegrationTest > JwtServiceTest > RefreshTokenServiceTest > RefreshTokenRepositoryIntegrationTest > ClientServiceTest > RedirectUriServiceTest > RedirectUriRepositoryIntegrationTest > CompanyServiceTest > CompanyRepositoryIntegrationTest
+
+ScopeServiceTest Related: ScopeRepositoryIntegrationTest
+UserServiceTest Related: AuthenticationServiceTest, AuthorizationServiceTest, AuthorizationCodeRepositoryIntegrationTest, JwtServiceTest, RefreshTokenServiceTest, RefreshTokenRepositoryIntegrationTest
+ClientServiceTest Related: RedirectUriServiceTest, RedirectUriRepositoryIntegrationTest
+CompanyServiceTest Related: CompanyRepositoryIntegrationTest

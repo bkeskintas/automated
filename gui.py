@@ -131,6 +131,11 @@ class SelectionApp:
         tk.Button(analysis_frame, text="Select Folder", command=self.select_risk_analysis_folder).pack(pady=5)
         tk.Button(analysis_frame, text="Generate Risk Graph", command=self.run_risk_plot_analysis).pack(pady=5)
 
+        # Servis girişi alanı
+        self.service_entry = tk.Entry(self.tab4, width=80)
+        self.service_entry.insert(0, "TokenServiceTests > LoginServiceTests")  # örnek başlangıç değeri
+        self.service_entry.pack(padx=10, pady=5)
+
         # Figure 1 için canvas
         # Üst satır - Comparison ve CSV yan yana
         top_frame = tk.Frame(self.tab4)
@@ -158,29 +163,34 @@ class SelectionApp:
         if not os.path.exists(folder):
             messagebox.showerror("Error", "No valid folder selected.")
             return
-
+    
         script_path = os.path.join(self.risk_path, "risk_plot_helper.py")
         if not os.path.exists(script_path):
             messagebox.showerror("Error", "risk_plot_helper.py not found in RiskBased.")
             return
-
+    
+        services_input = self.service_entry.get().strip()
+        if not services_input:
+            messagebox.showerror("Error", "Please enter the service risk order (e.g., A > B > C).")
+            return
+    
         try:
-            subprocess.run([self.venv_python, script_path, folder], check=True)
-
+            subprocess.run([self.venv_python, script_path, folder, services_input], check=True)
+    
             # === FIGURE 1 ===
             fig1_path = os.path.join(folder, "Figure1.png")
             if os.path.exists(fig1_path):
                 fig1 = Image.open(fig1_path).resize((500, 350), Image.Resampling.LANCZOS)
                 self.risk_final_image = ImageTk.PhotoImage(fig1)
                 self.risk_final_image_canvas.create_image(0, 0, anchor=tk.NW, image=self.risk_final_image)
-
+    
             # === final_comparison.png ===
             compare_path = os.path.join(folder, "final_comparison.png")
             if os.path.exists(compare_path):
                 cmp = Image.open(compare_path).resize((500, 350), Image.Resampling.LANCZOS)
                 self.risk_comparison_image = ImageTk.PhotoImage(cmp)
                 self.risk_compare_image_canvas.create_image(0, 0, anchor=tk.NW, image=self.risk_comparison_image)
-
+    
             # === AUC TABLOSU ===
             auc_csv_path = os.path.join(folder, "auc_results.csv")
             if os.path.exists(auc_csv_path):
@@ -190,11 +200,12 @@ class SelectionApp:
                     self.auc_table.insert(tk.END, content)
             else:
                 self.auc_table.insert(tk.END, "auc_results.csv not found.")
-
+    
         except subprocess.CalledProcessError as e:
             messagebox.showerror("Error", f"Script failed: {e}")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to generate outputs: {str(e)}")
+    
 
 
 
